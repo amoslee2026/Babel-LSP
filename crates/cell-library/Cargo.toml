@@ -1,0 +1,21 @@
+[package]
+name = "thanosLSP-cell"
+description = "标准单元库 Verilog gate-level model 解析索引"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+thanosLSP-core = { workspace = true }
+redb = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tracing = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+tokio = { workspace = true }
+sha2 = "0.10"
+
+[dev-dependencies]
+tempfile = { workspace = true }
+rstest = { workspace = true }

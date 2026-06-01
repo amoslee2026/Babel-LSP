@@ -1,0 +1,21 @@
+[package]
+name = "thanosLSP-sv"
+description = "SystemVerilog/Verilog 语言分析器（slang 驱动）"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+thanosLSP-core = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tracing = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+tokio = { workspace = true }
+regex = "1"
+smol_str = { workspace = true }
+
+tempfile = { workspace = true }
+
+[dev-dependencies]

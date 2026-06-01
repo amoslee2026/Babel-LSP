@@ -1,0 +1,29 @@
+[package]
+name = "thanosLSP-core"
+description = "核心共享层：配置、文档状态、符号类型、诊断、文件存储、项目索引"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+dashmap = { workspace = true }
+ropey = { workspace = true }
+salsa = { workspace = true }
+redb = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { workspace = true }
+tracing-appender = { workspace = true }
+notify = { workspace = true }
+lasso = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+smol_str = { workspace = true }
+tokio = { workspace = true }
+url = { workspace = true }
+glob = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+proptest = { workspace = true }

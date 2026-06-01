@@ -1,0 +1,20 @@
+[package]
+name = "thanosLSP"
+description = "HDL Language Server (VHDL/SV/TCL) — dual LSP + MCP"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "thanosLSP"
+path = "src/main.rs"
+
+[dependencies]
+thanosLSP-core = { workspace = true }
+thanosLSP-lsp = { workspace = true }
+thanosLSP-mcp = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+anyhow = { workspace = true }
+clap = { version = "4", features = ["derive"] }

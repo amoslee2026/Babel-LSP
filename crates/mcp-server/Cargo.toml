@@ -1,0 +1,27 @@
+[package]
+name = "thanosLSP-mcp"
+description = "MCP 协议处理层（rmcp SSE）"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+thanosLSP-core = { workspace = true }
+thanosLSP-sv = { workspace = true }
+thanosLSP-vhdl = { workspace = true }
+thanosLSP-tcl = { workspace = true }
+thanosLSP-lsp = { workspace = true }
+rmcp = { workspace = true }
+tokio = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tracing = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+dashmap = { workspace = true }
+smol_str = { workspace = true }
+url = { workspace = true }
+regex = "1"
+
+[dev-dependencies]
+tempfile = { workspace = true }

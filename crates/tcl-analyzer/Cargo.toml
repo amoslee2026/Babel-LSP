@@ -1,0 +1,20 @@
+[package]
+name = "thanosLSP-tcl"
+description = "TCL 语言分析器（tree-sitter + EDA 命令补全）"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+thanosLSP-core = { workspace = true }
+tree-sitter = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+tracing = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+tokio = { workspace = true }
+
+[dev-dependencies]
+tempfile = { workspace = true }
+proptest = { workspace = true }
