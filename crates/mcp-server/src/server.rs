@@ -1769,7 +1769,7 @@ mod tests {
                 uri: "file:///t.sv".to_string(),
                 line: 0,
                 character: 5,
-            })))
+            }))
             .await;
         let v: serde_json::Value =
             serde_json::from_str(&result).unwrap_or(serde_json::json!([]));
