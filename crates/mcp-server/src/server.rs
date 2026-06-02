@@ -1157,7 +1157,10 @@ pub async fn run_stdio() -> anyhow::Result<()> {
     // 使用 tokio::spawn 隔离 panic（如收到 invalid JSON 时 rmcp 内部 panic 不会终止进程）
     let handle = tokio::spawn(async move {
         match serve_server(server, transport).await {
-            Ok(()) => { tracing::info!("MCP server stopped normally"); }
+            Ok(svc) => {
+                tracing::info!("MCP server started");
+                let _ = svc.waiting().await;
+            }
             Err(e) => { tracing::error!("MCP serve error: {}", e); }
         }
     });
