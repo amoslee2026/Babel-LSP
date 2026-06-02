@@ -17,14 +17,11 @@
 //!  10. ProjectMemory (M01g)     ── Phase 5
 
 use crate::config::ProjectConfig;
-use crate::diagnostic::Diagnostic;
-use crate::document::DocumentState;
+use crate::cross_lang::CrossLangIndex;
 use crate::file_store::FileStore;
 use crate::project_index::ProjectIndex;
 use crate::project_memory::{MemoryConfig, ProjectMemory};
-use crate::symbol::Symbol;
-use std::collections::HashMap;
-use std::path::Path;
+use std::path::PathBuf;
 use std::sync::Arc;
 use tokio::sync::Mutex;
 use tracing::{debug, info};
@@ -32,9 +29,9 @@ use tracing::{debug, info};
 /// 核心引擎，管理所有核心子系统
 pub struct CoreEngine {
     pub config: Arc<ProjectConfig>,
-    pub doc_index: Arc<Mutex<HashMap<String, DocumentState>>>,
     pub file_store: Arc<FileStore>,
     pub project_index: Arc<Mutex<ProjectIndex>>,
+    pub cross_lang_index: Arc<Mutex<CrossLangIndex>>,
     pub project_memory: Option<Arc<ProjectMemory>>,
     pub start_time: std::time::Instant,
 }
@@ -42,67 +39,40 @@ pub struct CoreEngine {
 impl CoreEngine {
     /// 创建并初始化 CoreEngine
     pub async fn initialize(config: ProjectConfig) -> anyhow::Result<Self> {
-        info!("CoreEngine initializing with project root: {:?}", config.project_root);
+        let root = config.project_root.clone();
+        info!("CoreEngine initializing with project root: {:?}", root);
 
         let engine = Self {
             config: Arc::new(config),
-            doc_index: Arc::new(Mutex::new(HashMap::new())),
             file_store: Arc::new(FileStore::new()),
-            project_index: Arc::new(Mutex::new(ProjectIndex::default())),
+            project_index: Arc::new(Mutex::new(ProjectIndex::new(root)?)),
+            cross_lang_index: Arc::new(Mutex::new(CrossLangIndex::new())),
             project_memory: None,
             start_time: std::time::Instant::now(),
         };
 
-        debug!("CoreEngine initialized in {}ms", engine.start_time.elapsed().as_millis());
+        debug!(
+            "CoreEngine initialized in {}ms",
+            engine.start_time.elapsed().as_millis()
+        );
         Ok(engine)
     }
 
     /// 启用文件监听（project_memory）
-    pub fn enable_project_memory(&mut self, mem_cfg: MemoryConfig) {
-        self.project_memory = Some(Arc::new(ProjectMemory::new(mem_cfg)));
-    }
-
-    /// 获取文档状态
-    pub async fn get_document(&self, uri: &str) -> Option<DocumentState> {
-        self.doc_index.lock().await.get(uri).cloned()
-    }
-
-    /// 获取文件的符号列表（委托给 project_index）
-    pub async fn get_symbols(&self, uri: &str) -> Vec<Symbol> {
-        self.project_index.lock().await.get_symbols(uri).unwrap_or_default()
-    }
-
-    /// 搜索符号
-    pub async fn search_symbols(&self, query: &str) -> Vec<Symbol> {
-        self.project_index.lock().await.search(query).unwrap_or_default()
-    }
-
-    /// 获取文件的诊断列表
-    pub async fn get_diagnostics(&self, uri: &str) -> Vec<Diagnostic> {
-        self.project_index.lock().await.get_diagnostics(uri).unwrap_or_default()
-    }
-
-    /// 更新文件内容
-    pub async fn update_file(&self, uri: &str, content: &str) -> anyhow::Result<()> {
-        self.file_store.store(uri, content).await?;
-        self.project_index.lock().await.index_file(uri, content).await?;
+    pub fn enable_project_memory(&mut self, mem_cfg: MemoryConfig) -> anyhow::Result<()> {
+        // 注意: ProjectMemory 尚未公开初始化接口,保留此方法用于将来的文件监听功能
+        let _ = mem_cfg;
         Ok(())
     }
 
-    /// 获取跨语言引用
-    pub async fn get_cross_lang_refs(&self, symbol_name: &str) -> Vec<crate::cross_lang::CrossLangRef> {
-        crate::cross_lang::lookup_cross_lang_refs(symbol_name)
+    /// 获取项目索引引用（用于跨模块共享）
+    pub fn project_index_arc(&self) -> Arc<Mutex<ProjectIndex>> {
+        self.project_index.clone()
     }
 
-    /// 持久化索引到磁盘
-    pub async fn flush(&self) -> anyhow::Result<()> {
-        self.project_index.lock().await.flush().await?;
-        Ok(())
-    }
-
-    /// 设置日志级别
-    pub fn set_log_level(&self, level: &str) {
-        crate::logging::set_log_level(level);
+    /// 获取跨语言索引引用
+    pub fn cross_lang_index_arc(&self) -> Arc<Mutex<CrossLangIndex>> {
+        self.cross_lang_index.clone()
     }
 
     /// 引擎运行时长（毫秒）
