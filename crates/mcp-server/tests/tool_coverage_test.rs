@@ -2,6 +2,7 @@
 //! 覆盖 integration_test.rs 未涵盖的 tool 方法
 
 use thanosLSP_mcp::server::{
+use rmcp::handler::server::tool::Parameters;
     CreateFileParams, GetCompletionsParams, GetDefinitionParams, RenameSymbolParams,
     ReplaceLinesParams, SetLogLevelParams, ThanosMcpServer, UriParam,
 };
@@ -26,7 +27,7 @@ endmodule
 async fn test_get_completions_returns_json() {
     let s = make_server();
     let uri = "file:///tmp/compl.sv";
-    s.open_file(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
     })
@@ -44,13 +45,13 @@ async fn test_get_completions_returns_json() {
         res.starts_with('['),
         "expected JSON array, got: {res:.80}"
     );
-}
+}))
 
 #[tokio::test]
 async fn test_get_definition_returns_json() {
     let s = make_server();
     let uri = "file:///tmp/def.sv";
-    s.open_file(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
     })
@@ -64,7 +65,7 @@ async fn test_get_definition_returns_json() {
         .await;
     // Valid response is either null, an object, or an error string
     assert!(!res.is_empty(), "get_definition should return non-empty response");
-}
+}))
 
 #[tokio::test]
 async fn test_get_references_returns_json() {
@@ -89,7 +90,7 @@ async fn test_get_references_returns_json() {
 async fn test_get_hover_returns_response() {
     let s = make_server();
     let uri = "file:///tmp/hover.sv";
-    s.open_file(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
     }))
@@ -102,13 +103,13 @@ async fn test_get_hover_returns_response() {
         }))
         .await;
     assert!(!res.is_empty(), "get_hover should return non-empty response");
-}
+}))
 
 #[tokio::test]
 async fn test_rename_symbol_modifies_content() {
     let s = make_server();
     let uri = "file:///tmp/rename.sv";
-    s.open_file(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
     }))
@@ -132,13 +133,13 @@ async fn test_rename_symbol_modifies_content() {
         content.contains("counter_v2") || res.contains("error"),
         "content should have new name or error: res={res:.80}"
     );
-}
+}))
 
 #[tokio::test]
 async fn test_replace_lines_modifies_content() {
     let s = make_server();
     let uri = "file:///tmp/replace_lines.sv";
-    s.open_file(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
     }))
@@ -163,7 +164,7 @@ async fn test_replace_lines_modifies_content() {
         content.contains("replaced line") || res.contains("error"),
         "content should have replaced line or error"
     );
-}
+}))
 
 #[tokio::test]
 async fn test_create_file_creates_and_opens() {
@@ -215,7 +216,7 @@ async fn test_set_log_level_restores_info() {
 async fn test_format_file_sv_returns_response() {
     let s = make_server();
     let uri = "file:///tmp/format_test.sv";
-    s.open_file(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
     }))
@@ -227,7 +228,7 @@ async fn test_format_file_sv_returns_response() {
         .await;
     // May succeed or return "verible not found" - must not panic
     assert!(!res.is_empty(), "format_file should return non-empty response");
-})
+}))
 
 #[tokio::test]
 async fn test_error_on_unopened_file() {
@@ -258,7 +259,7 @@ begin
     carry <= a and b;
 end architecture;
 "#;
-    s.open_file(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: vhdl_content.to_string(),
     })
@@ -273,4 +274,4 @@ end architecture;
         res.starts_with('['),
         "get_diagnostics should return JSON array: {res:.80}"
     );
-}
+}))
