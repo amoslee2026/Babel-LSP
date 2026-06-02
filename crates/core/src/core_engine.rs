@@ -21,7 +21,6 @@ use crate::cross_lang::CrossLangIndex;
 use crate::file_store::FileStore;
 use crate::project_index::ProjectIndex;
 use crate::project_memory::{MemoryConfig, ProjectMemory};
-use std::path::PathBuf;
 use std::sync::Arc;
 use tokio::sync::Mutex;
 use tracing::{debug, info};
