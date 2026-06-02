@@ -182,15 +182,25 @@ fn is_sv_keyword(name: &str) -> bool {
 // ─── Server 实现 ─────────────────────────────────────────────────────────────
 
 /// thanosLSP MCP Server
-#[derive(Clone)]
 pub struct ThanosMcpServer {
     state: Arc<tokio::sync::Mutex<MpcState>>,
+    tool_router: rmcp::handler::server::router::tool::ToolRouter<Self>,
+}
+
+impl Clone for ThanosMcpServer {
+    fn clone(&self) -> Self {
+        Self {
+            state: self.state.clone(),
+            tool_router: self.tool_router.clone(),
+        }
+    }
 }
 
 impl ThanosMcpServer {
     pub fn new() -> Self {
         Self {
             state: Arc::new(tokio::sync::Mutex::new(MpcState::new())),
+            tool_router: Self::tool_router(),
         }
     }
 
