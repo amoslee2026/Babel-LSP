@@ -105,9 +105,9 @@ async fn test_synthesizability_detects_issues() {
         .await;
 
     let result = server
-        .check_synthesizability(UriParam {
+        .check_synthesizability(Parameters(UriParam {
             uri: uri.to_string(),
-        })
+        }))
         .await;
     assert!(result.contains("SYN-V"), "expected synth issues: {result}");
     // Should detect initial block, $display, #10, $finish, force

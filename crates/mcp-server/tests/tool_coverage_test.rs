@@ -76,11 +76,11 @@ async fn test_get_references_returns_json() {
     })
     .await;
     let res = s
-        .get_references(GetDefinitionParams {
+        .get_references(Parameters(GetDefinitionParams {
             uri: uri.to_string(),
             line: 0,
             character: 7,
-        })
+        }))
         .await;
     assert!(!res.is_empty(), "get_references should return non-empty response");
 }
@@ -114,11 +114,11 @@ async fn test_rename_symbol_modifies_content() {
     })
     .await;
     let res = s
-        .rename_symbol(RenameSymbolParams {
+        .rename_symbol(Parameters(RenameSymbolParams {
             uri: uri.to_string(),
             old_name: "counter".to_string(),
             new_name: "counter_v2".to_string(),
-        })
+        }))
         .await;
     // Should succeed or report not found - must not panic
     assert!(!res.is_empty(), "rename_symbol should return non-empty response");
