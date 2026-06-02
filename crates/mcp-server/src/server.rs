@@ -347,7 +347,7 @@ impl ThanosMcpServer {
     }
 
     /// 更新文件内容
-    #[tool(description = "Update the full content of an opened file", vis = pub)]
+    #[tool(description = "Update the full content of an opened file")]
     pub async fn update_file(&self, #[tool(aggr)] params: UpdateFileParams) -> String {
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
@@ -372,7 +372,7 @@ impl ThanosMcpServer {
     }
 
     /// 创建新文件（写入磁盘并加载到 file store）
-    #[tool(description = "Create a new file on disk and open it in the file store", vis = pub)]
+    #[tool(description = "Create a new file on disk and open it in the file store")]
     pub async fn create_file(&self, #[tool(aggr)] params: CreateFileParams) -> String {
         use std::path::Path;
         let path = Path::new(&params.path);
@@ -393,7 +393,7 @@ impl ThanosMcpServer {
     }
 
     /// 获取文件的诊断信息（SV综合规则检查）
-    #[tool(description = "Get diagnostics (errors and warnings) for a file", vis = pub)]
+    #[tool(description = "Get diagnostics (errors and warnings) for a file")]
     pub async fn get_diagnostics(&self, #[tool(aggr)] params: UriParam) -> String {
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
@@ -443,7 +443,7 @@ impl ThanosMcpServer {
     }
 
     /// 获取文件的符号列表
-    #[tool(description = "Get all symbols (modules, functions, etc.) in a file", vis = pub)]
+    #[tool(description = "Get all symbols (modules, functions, etc.) in a file")]
     pub async fn get_symbols(&self, #[tool(aggr)] params: UriParam) -> String {
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
@@ -493,7 +493,7 @@ impl ThanosMcpServer {
     }
 
     /// 搜索所有已打开文件的符号
-    #[tool(description = "Search symbols across all open files", vis = pub)]
+    #[tool(description = "Search symbols across all open files")]
     pub async fn search_symbols(&self, #[tool(aggr)] params: SearchSymbolsParams) -> String {
         let state = self.state.lock().await;
         let query_lower = params.query.to_lowercase();
@@ -520,7 +520,7 @@ impl ThanosMcpServer {
     }
 
     /// 代码补全（基于符号表和 SV 关键字）
-    #[tool(description = "Get code completion suggestions at a cursor position", vis = pub)]
+    #[tool(description = "Get code completion suggestions at a cursor position")]
     pub async fn get_completions(&self, #[tool(aggr)] params: GetCompletionsParams) -> String {
         let state = self.state.lock().await;
         let symbols = state
@@ -549,7 +549,7 @@ impl ThanosMcpServer {
     }
 
     /// 跳转到定义
-    #[tool(description = "Find the definition of a symbol at a cursor position", vis = pub)]
+    #[tool(description = "Find the definition of a symbol at a cursor position")]
     pub async fn get_definition(&self, #[tool(aggr)] params: GetDefinitionParams) -> String {
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
@@ -586,7 +586,7 @@ impl ThanosMcpServer {
     }
 
     /// 查找引用
-    #[tool(description = "Find all references to a symbol at a cursor position", vis = pub)]
+    #[tool(description = "Find all references to a symbol at a cursor position")]
     pub async fn get_references(&self, #[tool(aggr)] params: GetDefinitionParams) -> String {
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
@@ -610,7 +610,7 @@ impl ThanosMcpServer {
     }
 
     /// Hover 信息
-    #[tool(description = "Get hover information for a symbol at a cursor position", vis = pub)]
+    #[tool(description = "Get hover information for a symbol at a cursor position")]
     pub async fn get_hover(&self, #[tool(aggr)] params: GetDefinitionParams) -> String {
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
@@ -644,7 +644,7 @@ impl ThanosMcpServer {
     }
 
     /// 格式化文件（verible）
-    #[tool(description = "Format a file using verible-verilog-format (SV/Verilog only)", vis = pub)]
+    #[tool(description = "Format a file using verible-verilog-format (SV/Verilog only)")]
     pub async fn format_file(&self, #[tool(aggr)] params: UriParam) -> String {
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
@@ -675,7 +675,7 @@ impl ThanosMcpServer {
     }
 
     /// 综合性检查（SV RTL 文件）
-    #[tool(description = "Check synthesizability of a SystemVerilog RTL file", vis = pub)]
+    #[tool(description = "Check synthesizability of a SystemVerilog RTL file")]
     pub async fn check_synthesizability(&self, #[tool(aggr)] params: UriParam) -> String {
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
@@ -705,7 +705,7 @@ impl ThanosMcpServer {
     }
 
     /// 搜索文本模式
-    #[tool(description = "Search for a regex pattern in open files", vis = pub)]
+    #[tool(description = "Search for a regex pattern in open files")]
     pub async fn search_for_pattern(&self, #[tool(aggr)] params: SearchPatternParams) -> String {
         let re = match regex::Regex::new(&params.pattern) {
             Ok(r) => r,
@@ -756,7 +756,7 @@ impl ThanosMcpServer {
     }
 
     /// 替换文件内容（字符串替换）
-    #[tool(description = "Replace text in a file (first occurrence)", vis = pub)]
+    #[tool(description = "Replace text in a file (first occurrence)")]
     pub async fn replace_content(&self, #[tool(aggr)] params: ReplaceContentParams) -> String {
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
@@ -783,7 +783,7 @@ impl ThanosMcpServer {
     }
 
     /// 替换指定行范围
-    #[tool(description = "Replace a range of lines in a file", vis = pub)]
+    #[tool(description = "Replace a range of lines in a file")]
     pub async fn replace_lines(&self, #[tool(aggr)] params: ReplaceLinesParams) -> String {
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
@@ -820,7 +820,7 @@ impl ThanosMcpServer {
     }
 
     /// 重命名符号（全文替换）
-    #[tool(description = "Rename a symbol across the file", vis = pub)]
+    #[tool(description = "Rename a symbol across the file")]
     pub async fn rename_symbol(&self, #[tool(aggr)] params: RenameSymbolParams) -> String {
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
@@ -856,7 +856,7 @@ impl ThanosMcpServer {
     }
 
     /// 设置日志级别
-    #[tool(description = "Set the log level (error|warn|info|debug|trace)", vis = pub)]
+    #[tool(description = "Set the log level (error|warn|info|debug|trace)")]
     pub async fn set_log_level(&self, #[tool(aggr)] params: SetLogLevelParams) -> String {
         const VALID: &[&str] = &["error", "warn", "info", "debug", "trace"];
         if !VALID.contains(&params.level.to_lowercase().as_str()) {
@@ -870,8 +870,9 @@ impl ThanosMcpServer {
     }
 
     /// 获取项目记忆（已打开文件列表）
-    #[tool(description = "Get current project context: open files and symbol counts", vis = pub)]
+    #[tool(description = "Get current project context: open files and symbol counts")]
     pub async fn get_project_memory(&self) -> String {
+        let _self: &Self = Box::leak(Box::new(()));
         let state = self.state.lock().await;
         let files: Vec<serde_json::Value> = state
             .file_store
@@ -891,8 +892,9 @@ impl ThanosMcpServer {
     }
 
     /// 列出所有已打开的文件
-    #[tool(description = "List all currently opened files in the server", vis = pub)]
+    #[tool(description = "List all currently opened files in the server")]
     pub async fn list_open_files(&self) -> String {
+        let _self: &Self = Box::leak(Box::new(()));
         let state = self.state.lock().await;
         let files: Vec<serde_json::Value> = state
             .file_store
@@ -917,7 +919,7 @@ impl ThanosMcpServer {
     }
 
     /// 获取文件大纲（符号层次树）
-    #[tool(description = "Get hierarchical outline of symbols in a file (modules with ports, signals, functions as children)", vis = pub)]
+    #[tool(description = "Get hierarchical outline of symbols in a file (modules with ports, signals, functions as children)")]
     pub async fn get_file_outline(&self, #[tool(aggr)] params: UriParam) -> String {
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
@@ -954,7 +956,7 @@ impl ThanosMcpServer {
     }
 
     /// 获取模块实例化层次结构
-    #[tool(description = "Get module instantiation hierarchy (which modules instantiate which submodules)", vis = pub)]
+    #[tool(description = "Get module instantiation hierarchy (which modules instantiate which submodules)")]
     pub async fn get_module_hierarchy(&self, #[tool(aggr)] params: UriParam) -> String {
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
