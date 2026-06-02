@@ -319,8 +319,8 @@ impl ThanosMcpServer {
     }
 
     /// 关闭文件，从 file store 中移除
-    #[tool(description = "Close a file and remove it from the language server's file store", vis = pub)]
-    pub async fn close_file(&self, #[tool(aggr)] params: UriParam) -> String {
+    #[tool(description = "Close a file and remove it from the language server's file store")]
+    pub async fn close_file(&self, #[tool(aggr)] Parameters(params): Parameters<UriParam>) -> String {
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
             Err(e) => return format!("error: invalid URI: {e}"),
