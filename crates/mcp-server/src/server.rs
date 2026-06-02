@@ -2007,7 +2007,7 @@ mod tests {
             }))
             .await;
         let result = server
-            .search_for_pattern(SearchPatternParams {
+            .search_for_pattern(Parameters(SearchPatternParams {
                 pattern: "[invalid_regex".to_string(), // unclosed bracket
                 uri: None,
             }))
