@@ -1,8 +1,8 @@
 //! MCP Server tool coverage 补充测试
 //! 覆盖 integration_test.rs 未涵盖的 tool 方法
 
-use thanosLSP_mcp::server::{
 use rmcp::handler::server::tool::Parameters;
+use thanosLSP_mcp::server::{
     CreateFileParams, GetCompletionsParams, GetDefinitionParams, RenameSymbolParams,
     ReplaceLinesParams, SetLogLevelParams, ThanosMcpServer, UriParam,
 };
