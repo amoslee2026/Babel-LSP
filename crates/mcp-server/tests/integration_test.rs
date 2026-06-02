@@ -137,7 +137,7 @@ async fn test_search_pattern_across_file() {
         }))
         .await;
     assert!(result.contains("assign"), "search: {result}");
-})
+}
 
 #[tokio::test]
 async fn test_replace_content_and_verify() {
