@@ -1324,7 +1324,7 @@ mod tests {
                 uri: "file:///test.sv".to_string(),
                 old_text: "old_name".to_string(),
                 new_text: "new_name".to_string(),
-            })
+            }))
             .await;
         assert_eq!(result, "replaced");
         let content = server
@@ -1348,7 +1348,7 @@ mod tests {
             .search_for_pattern(SearchPatternParams {
                 pattern: "always_ff".to_string(),
                 uri: Some("file:///test.sv".to_string()),
-            })
+            }))
             .await;
         assert!(result.contains("always_ff"), "got: {result}");
     }
@@ -1769,7 +1769,7 @@ mod tests {
                 uri: "file:///t.sv".to_string(),
                 line: 0,
                 character: 5,
-            })
+            }))
             .await;
         let v: serde_json::Value =
             serde_json::from_str(&result).unwrap_or(serde_json::json!([]));
@@ -1793,7 +1793,7 @@ mod tests {
                 uri: "file:///hover_mod.sv".to_string(),
                 line: 0,
                 character: 7,
-            })
+            }))
             .await;
         assert!(!result.is_empty(), "hover on module name should return something");
     }
@@ -1814,7 +1814,7 @@ mod tests {
                 uri: "file:///hover_null.sv".to_string(),
                 line: 0,
                 character: 7, // 'f' in "foo"
-            })
+            }))
             .await;
         assert!(!result.is_empty(), "hover should return a response");
     }
@@ -1832,7 +1832,7 @@ mod tests {
             .search_symbols(Parameters(SearchSymbolsParams {
                 query: "counter".to_string(),
                 uri: None,
-            })
+            }))
             .await;
         let v: serde_json::Value =
             serde_json::from_str(&result).unwrap_or(serde_json::json!([]));
@@ -1866,7 +1866,7 @@ mod tests {
             .search_symbols(Parameters(SearchSymbolsParams {
                 query: "mod".to_string(),
                 uri: Some("file:///fa.sv".to_string()),
-            })
+            }))
             .await;
         let v: serde_json::Value =
             serde_json::from_str(&result).unwrap_or(serde_json::json!([]));
@@ -1884,7 +1884,7 @@ mod tests {
         let result = server
             .set_log_level(Parameters(SetLogLevelParams {
                 level: "invalid_level_xyz".to_string(),
-            })
+            }))
             .await;
         assert!(
             result.contains("error") || result.contains("invalid") || result.contains("unknown"),
@@ -1907,7 +1907,7 @@ mod tests {
                 start_line: 100,
                 end_line: 200,
                 new_text: "// replacement\n".to_string(),
-            })
+            }))
             .await;
         // Must not panic; either error or graceful success
         assert!(!result.is_empty(), "replace_lines out-of-bounds should return a response");
@@ -1928,7 +1928,7 @@ mod tests {
                 uri: "file:///rename_wb.sv".to_string(),
                 old_name: "clk".to_string(),
                 new_name: "sys_clk".to_string(),
-            })
+            }))
             .await;
         let content = server
             .read_file(Parameters(UriParam {
@@ -1955,7 +1955,7 @@ mod tests {
                 uri: "file:///rc_notfound.sv".to_string(),
                 old_text: "nonexistent_text_xyz_abc".to_string(),
                 new_text: "replacement".to_string(),
-            })
+            }))
             .await;
         assert!(
             result.contains("error") || result.contains("not found"),
@@ -2010,7 +2010,7 @@ mod tests {
             .search_for_pattern(SearchPatternParams {
                 pattern: "[invalid_regex".to_string(), // unclosed bracket
                 uri: None,
-            })
+            }))
             .await;
         assert!(
             result.contains("error") || result.contains("invalid"),
@@ -2038,7 +2038,7 @@ mod tests {
             .search_for_pattern(SearchPatternParams {
                 pattern: "endmodule".to_string(),
                 uri: None,
-            })
+            }))
             .await;
         assert!(
             result.contains("endmodule"),
@@ -2060,7 +2060,7 @@ mod tests {
         let result = server
             .get_file_outline(Parameters(UriParam {
                 uri: "file:///outline.sv".to_string(),
-            })
+            }))
             .await;
         assert!(!result.contains("error"), "get_file_outline should not error: {result}");
         let v: serde_json::Value =
@@ -2080,7 +2080,7 @@ mod tests {
         let result = server
             .get_module_hierarchy(Parameters(UriParam {
                 uri: "file:///hier.sv".to_string(),
-            })
+            }))
             .await;
         assert!(
             !result.contains("error"),
@@ -2103,7 +2103,7 @@ mod tests {
         let result = server
             .get_module_hierarchy(Parameters(UriParam {
                 uri: "file:///leaf.sv".to_string(),
-            })
+            }))
             .await;
         let v: serde_json::Value =
             serde_json::from_str(&result).unwrap_or(serde_json::json!(null));
@@ -2118,7 +2118,7 @@ mod tests {
         let result = server
             .get_file_outline(Parameters(UriParam {
                 uri: "!!!not_a_uri".to_string(),
-            })
+            }))
             .await;
         assert!(result.contains("error"), "invalid URI should return error: {result}");
     }
@@ -2129,7 +2129,7 @@ mod tests {
         let result = server
             .get_module_hierarchy(Parameters(UriParam {
                 uri: "!!!not_a_uri".to_string(),
-            })
+            }))
             .await;
         assert!(result.contains("error"), "invalid URI should return error: {result}");
     }
@@ -2140,7 +2140,7 @@ mod tests {
         let result = server
             .get_module_hierarchy(Parameters(UriParam {
                 uri: "file:///never_opened.sv".to_string(),
-            })
+            }))
             .await;
         assert!(result.contains("error"), "not-open file should return error: {result}");
     }
@@ -2157,7 +2157,7 @@ mod tests {
         let result = server
             .get_file_outline(Parameters(UriParam {
                 uri: "file:///test.tcl".to_string(),
-            })
+            }))
             .await;
         assert!(
             result.contains("error"),
@@ -2173,7 +2173,7 @@ mod tests {
         let result = server
             .check_synthesizability(Parameters(UriParam {
                 uri: "file:///not_opened.sv".to_string(),
-            })
+            }))
             .await;
         assert!(!result.is_empty(), "check_synthesizability should return a response");
         // Should either say no issues or return JSON diagnostics — not panic
@@ -2191,7 +2191,7 @@ mod tests {
             .update_file(Parameters(UpdateFileParams {
                 uri: "file:///update_new.sv".to_string(),
                 content: "module new_file;\nendmodule".to_string(),
-            })
+            }))
             .await;
         // Must not panic; returns some response
         assert!(!result.is_empty(), "update_file should return a response");
