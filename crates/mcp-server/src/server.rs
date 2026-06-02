@@ -288,11 +288,14 @@ impl Default for ThanosMcpServer {
 
 // ─── Tool 方法 ───────────────────────────────────────────────────────────────
 
-#[tool(tool_box)]
+#[tool_router]
 impl ThanosMcpServer {
     /// 打开文件并加入 file store
-    #[tool(description = "Open a file and load it into the language server's file store", vis = pub)]
-    pub async fn open_file(&self, #[tool(aggr)] params: OpenFileParams) -> String {
+    #[tool(description = "Open a file and load it into the language server's file store")]
+    pub async fn open_file(
+        &self,
+        #[tool(aggr)] Parameters(params): Parameters<OpenFileParams>,
+    ) -> String {
         let lang = Self::language_from_uri(&params.uri);
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
