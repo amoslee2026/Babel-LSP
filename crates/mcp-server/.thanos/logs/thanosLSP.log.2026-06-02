@@ -1,0 +1,58 @@
+2026-06-02T11:31:36.167074Z  INFO thanosLSP: thanosLSP starting in MCP mode
+2026-06-02T11:31:36.167267Z  INFO thanosLSP: thanosLSP starting in MCP mode
+2026-06-02T11:31:36.167603Z  INFO thanosLSP: thanosLSP starting in MCP mode
+2026-06-02T11:31:36.167738Z  INFO thanosLSP: thanosLSP starting in MCP mode
+2026-06-02T11:31:36.167806Z  INFO thanosLSP: thanosLSP starting in MCP mode
+2026-06-02T11:31:36.167816Z  INFO thanosLSP: thanosLSP starting in MCP mode
+2026-06-02T11:31:36.168049Z  INFO thanosLSP: thanosLSP starting in MCP mode
+2026-06-02T11:31:36.168066Z  INFO thanosLSP: thanosLSP starting in MCP mode
+2026-06-02T11:31:36.168248Z  INFO thanosLSP: thanosLSP starting in MCP mode
+2026-06-02T11:31:36.168777Z  INFO thanosLSP: thanosLSP starting in MCP mode
+2026-06-02T11:31:36.169015Z ERROR rmcp::transport::async_rw: Error reading from stream: serde error expected ident at line 1 column 2
+2026-06-02T11:31:36.169172Z ERROR thanosLSP_mcp::server: MCP serve error: connection closed: initialized request
+2026-06-02T11:31:36.169398Z  INFO rmcp::handler::server: client initialized
+2026-06-02T11:31:36.169588Z  INFO serve_inner: rmcp::service: Service initialized as server peer_info=Some(InitializeRequestParam { protocol_version: ProtocolVersion("2025-03-26"), capabilities: ClientCapabilities { experimental: None, roots: None, sampling: None }, client_info: Implementation { name: "test", version: "0.1" } })
+2026-06-02T11:31:36.169727Z  INFO thanosLSP_mcp::server: MCP server started
+2026-06-02T11:31:36.169885Z  INFO serve_inner: rmcp::service: input stream terminated
+2026-06-02T11:31:36.169927Z  INFO serve_inner: rmcp::service: serve finished quit_reason=Closed
+2026-06-02T11:31:36.170127Z  INFO rmcp::handler::server: client initialized
+2026-06-02T11:31:36.170261Z  INFO serve_inner: rmcp::service: Service initialized as server peer_info=Some(InitializeRequestParam { protocol_version: ProtocolVersion("2025-03-26"), capabilities: ClientCapabilities { experimental: None, roots: None, sampling: None }, client_info: Implementation { name: "test", version: "0.1" } })
+2026-06-02T11:31:36.170356Z  INFO thanosLSP_mcp::server: MCP server started
+2026-06-02T11:31:36.170354Z  INFO rmcp::handler::server: client initialized
+2026-06-02T11:31:36.170411Z  INFO rmcp::handler::server: client initialized
+2026-06-02T11:31:36.170528Z  INFO serve_inner: rmcp::service: Service initialized as server peer_info=Some(InitializeRequestParam { protocol_version: ProtocolVersion("2025-03-26"), capabilities: ClientCapabilities { experimental: None, roots: None, sampling: None }, client_info: Implementation { name: "test", version: "0.1" } })
+2026-06-02T11:31:36.170565Z  INFO rmcp::handler::server: client initialized
+2026-06-02T11:31:36.170573Z  INFO serve_inner: rmcp::service: Service initialized as server peer_info=Some(InitializeRequestParam { protocol_version: ProtocolVersion("2025-03-26"), capabilities: ClientCapabilities { experimental: None, roots: None, sampling: None }, client_info: Implementation { name: "test", version: "0.1" } })
+2026-06-02T11:31:36.170687Z  INFO thanosLSP_mcp::server: MCP server started
+2026-06-02T11:31:36.170696Z  INFO thanosLSP_mcp::server: MCP server started
+2026-06-02T11:31:36.170693Z  INFO serve_inner: rmcp::service: Service initialized as server peer_info=Some(InitializeRequestParam { protocol_version: ProtocolVersion("2025-03-26"), capabilities: ClientCapabilities { experimental: None, roots: None, sampling: None }, client_info: Implementation { name: "test", version: "0.1" } })
+2026-06-02T11:31:36.170691Z  INFO rmcp::handler::server: client initialized
+2026-06-02T11:31:36.170729Z  INFO serve_inner: thanosLSP_mcp::server: set_log_level: debug
+2026-06-02T11:31:36.170770Z  INFO thanosLSP_mcp::server: MCP server started
+2026-06-02T11:31:36.170773Z  INFO rmcp::handler::server: client initialized
+2026-06-02T11:31:36.170823Z  INFO serve_inner: rmcp::service: Service initialized as server peer_info=Some(InitializeRequestParam { protocol_version: ProtocolVersion("2025-03-26"), capabilities: ClientCapabilities { experimental: None, roots: None, sampling: None }, client_info: Implementation { name: "test", version: "0.1" } })
+2026-06-02T11:31:36.170821Z  INFO serve_inner: rmcp::service: input stream terminated
+2026-06-02T11:31:36.170856Z  INFO rmcp::handler::server: client initialized
+2026-06-02T11:31:36.170891Z  INFO serve_inner: rmcp::service: serve finished quit_reason=Closed
+2026-06-02T11:31:36.170928Z  INFO thanosLSP_mcp::server: MCP server started
+2026-06-02T11:31:36.170934Z  INFO serve_inner: rmcp::service: Service initialized as server peer_info=Some(InitializeRequestParam { protocol_version: ProtocolVersion("2025-03-26"), capabilities: ClientCapabilities { experimental: None, roots: None, sampling: None }, client_info: Implementation { name: "test", version: "0.1" } })
+2026-06-02T11:31:36.171005Z  INFO serve_inner: rmcp::service: Service initialized as server peer_info=Some(InitializeRequestParam { protocol_version: ProtocolVersion("2025-03-26"), capabilities: ClientCapabilities { experimental: None, roots: None, sampling: None }, client_info: Implementation { name: "test", version: "0.1" } })
+2026-06-02T11:31:36.171033Z  INFO serve_inner: rmcp::service: input stream terminated
+2026-06-02T11:31:36.171050Z  INFO thanosLSP_mcp::server: MCP server started
+2026-06-02T11:31:36.171068Z  INFO serve_inner: rmcp::service: serve finished quit_reason=Closed
+2026-06-02T11:31:36.171112Z  INFO thanosLSP_mcp::server: MCP server started
+2026-06-02T11:31:36.171229Z  INFO serve_inner: rmcp::service: input stream terminated
+2026-06-02T11:31:36.171300Z  INFO serve_inner: rmcp::service: serve finished quit_reason=Closed
+2026-06-02T11:31:36.171328Z  INFO rmcp::handler::server: client initialized
+2026-06-02T11:31:36.171476Z  INFO serve_inner: rmcp::service: Service initialized as server peer_info=Some(InitializeRequestParam { protocol_version: ProtocolVersion("2025-03-26"), capabilities: ClientCapabilities { experimental: None, roots: None, sampling: None }, client_info: Implementation { name: "test", version: "0.1" } })
+2026-06-02T11:31:36.171590Z  INFO thanosLSP_mcp::server: MCP server started
+2026-06-02T11:31:36.171626Z  INFO serve_inner: rmcp::service: input stream terminated
+2026-06-02T11:31:36.171685Z  INFO serve_inner: rmcp::service: serve finished quit_reason=Closed
+2026-06-02T11:31:36.173292Z  INFO serve_inner: rmcp::service: input stream terminated
+2026-06-02T11:31:36.173357Z  INFO serve_inner: rmcp::service: serve finished quit_reason=Closed
+2026-06-02T11:31:36.173539Z  INFO serve_inner: rmcp::service: input stream terminated
+2026-06-02T11:31:36.173603Z  INFO serve_inner: rmcp::service: serve finished quit_reason=Closed
+2026-06-02T11:31:36.173789Z  INFO serve_inner: rmcp::service: input stream terminated
+2026-06-02T11:31:36.173851Z  INFO serve_inner: rmcp::service: serve finished quit_reason=Closed
+2026-06-02T11:31:36.177442Z  INFO serve_inner: rmcp::service: input stream terminated
+2026-06-02T11:31:36.177513Z  INFO serve_inner: rmcp::service: serve finished quit_reason=Closed
