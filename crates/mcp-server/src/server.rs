@@ -390,7 +390,7 @@ impl ThanosMcpServer {
             uri: uri_str,
             content: params.content,
         };
-        self.open_file(Parameters(Parameters(open_params))).await
+        self.open_file(Parameters(open_params))).await
     }
 
     /// 获取文件的诊断信息（SV综合规则检查）
@@ -1236,7 +1236,7 @@ mod tests {
     async fn test_open_and_read_file() {
         let server = ThanosMcpServer::new();
         let result = server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.sv".to_string(),
                 content: "module foo;\nendmodule".to_string(),
             }))
@@ -1244,7 +1244,7 @@ mod tests {
         assert!(result.contains("opened"), "got: {result}");
 
         let content = server
-            .read_file(Parameters(Parameters(UriParam {
+            .read_file(Parameters(UriParam {
                 uri: "file:///test.sv".to_string(),
             })))
             .await;
@@ -1255,18 +1255,18 @@ mod tests {
     async fn test_close_file() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.sv".to_string(),
                 content: "module foo;\nendmodule".to_string(),
             })))
             .await;
         server
-            .close_file(Parameters(Parameters(UriParam {
+            .close_file(Parameters(UriParam {
                 uri: "file:///test.sv".to_string(),
             })))
             .await;
         let content = server
-            .read_file(Parameters(Parameters(UriParam {
+            .read_file(Parameters(UriParam {
                 uri: "file:///test.sv".to_string(),
             })))
             .await;
@@ -1277,13 +1277,13 @@ mod tests {
     async fn test_get_symbols() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.sv".to_string(),
                 content: "module my_module(\n  input clk\n);\nendmodule".to_string(),
             })))
             .await;
         let result = server
-            .get_symbols(Parameters(Parameters(UriParam {
+            .get_symbols(Parameters(UriParam {
                 uri: "file:///test.sv".to_string(),
             })))
             .await;
@@ -1294,13 +1294,13 @@ mod tests {
     async fn test_check_synthesizability() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///rtl.sv".to_string(),
                 content: "module foo;\n  initial begin\n    #10;\n  end\nendmodule".to_string(),
             })))
             .await;
         let result = server
-            .check_synthesizability(Parameters(Parameters(UriParam {
+            .check_synthesizability(Parameters(UriParam {
                 uri: "file:///rtl.sv".to_string(),
             })))
             .await;
@@ -1314,13 +1314,13 @@ mod tests {
     async fn test_replace_content() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.sv".to_string(),
                 content: "module old_name;\nendmodule".to_string(),
             })))
             .await;
         let result = server
-            .replace_content(Parameters(Parameters(ReplaceContentParams {
+            .replace_content(Parameters(ReplaceContentParams {
                 uri: "file:///test.sv".to_string(),
                 old_text: "old_name".to_string(),
                 new_text: "new_name".to_string(),
@@ -1328,7 +1328,7 @@ mod tests {
             .await;
         assert_eq!(result, "replaced");
         let content = server
-            .read_file(Parameters(Parameters(UriParam {
+            .read_file(Parameters(UriParam {
                 uri: "file:///test.sv".to_string(),
             })))
             .await;
@@ -1339,7 +1339,7 @@ mod tests {
     async fn test_search_for_pattern() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.sv".to_string(),
                 content: "module foo;\n  always_ff @(posedge clk);\nendmodule".to_string(),
             })))
@@ -1357,7 +1357,7 @@ mod tests {
     async fn test_get_project_memory() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///a.sv".to_string(),
                 content: "module a;\nendmodule".to_string(),
             })))
@@ -1758,14 +1758,14 @@ mod tests {
     async fn test_get_references_exact_count_with_word_boundary() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///t.sv".to_string(),
                 content: "wire clk;\nwire clk_en;\nassign out = clk;".to_string(),
             })))
             .await;
         // 'clk' at line 0 col 5 and line 2 col 13; 'clk_en' on line 1 must NOT match
         let result = server
-            .get_references(Parameters(Parameters(GetDefinitionParams {
+            .get_references(Parameters(GetDefinitionParams {
                 uri: "file:///t.sv".to_string(),
                 line: 0,
                 character: 5,
@@ -1782,14 +1782,14 @@ mod tests {
     async fn test_get_hover_non_empty_for_module_name() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///hover_mod.sv".to_string(),
                 content: "module foo;\nendmodule".to_string(),
             })))
             .await;
         // Position on 'foo' (col 7)
         let result = server
-            .get_hover(Parameters(Parameters(GetDefinitionParams {
+            .get_hover(Parameters(GetDefinitionParams {
                 uri: "file:///hover_mod.sv".to_string(),
                 line: 0,
                 character: 7,
@@ -1804,13 +1804,13 @@ mod tests {
         // so any position near text will return hover info. Just verify no panic.
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///hover_null.sv".to_string(),
                 content: "module foo;\nendmodule".to_string(),
             })))
             .await;
         let result = server
-            .get_hover(Parameters(Parameters(GetDefinitionParams {
+            .get_hover(Parameters(GetDefinitionParams {
                 uri: "file:///hover_null.sv".to_string(),
                 line: 0,
                 character: 7, // 'f' in "foo"
@@ -1823,13 +1823,13 @@ mod tests {
     async fn test_search_symbols_query_filters_results() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///ss.sv".to_string(),
                 content: "module my_counter;\nendmodule\nmodule adder;\nendmodule".to_string(),
             })))
             .await;
         let result = server
-            .search_symbols(Parameters(Parameters(SearchSymbolsParams {
+            .search_symbols(Parameters(SearchSymbolsParams {
                 query: "counter".to_string(),
                 uri: None,
             })))
@@ -1851,19 +1851,19 @@ mod tests {
     async fn test_search_symbols_uri_filter_excludes_other_file() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///fa.sv".to_string(),
                 content: "module mod_a;\nendmodule".to_string(),
             })))
             .await;
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///fb.sv".to_string(),
                 content: "module mod_b;\nendmodule".to_string(),
             })))
             .await;
         let result = server
-            .search_symbols(Parameters(Parameters(SearchSymbolsParams {
+            .search_symbols(Parameters(SearchSymbolsParams {
                 query: "mod".to_string(),
                 uri: Some("file:///fa.sv".to_string()),
             })))
@@ -1882,7 +1882,7 @@ mod tests {
     async fn test_set_log_level_invalid_returns_error() {
         let server = ThanosMcpServer::new();
         let result = server
-            .set_log_level(Parameters(Parameters(SetLogLevelParams {
+            .set_log_level(Parameters(SetLogLevelParams {
                 level: "invalid_level_xyz".to_string(),
             })))
             .await;
@@ -1896,13 +1896,13 @@ mod tests {
     async fn test_replace_lines_out_of_bounds_does_not_panic() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///rl_bounds.sv".to_string(),
                 content: "module foo;\nendmodule".to_string(),
             })))
             .await;
         let result = server
-            .replace_lines(Parameters(Parameters(ReplaceLinesParams {
+            .replace_lines(Parameters(ReplaceLinesParams {
                 uri: "file:///rl_bounds.sv".to_string(),
                 start_line: 100,
                 end_line: 200,
@@ -1917,21 +1917,21 @@ mod tests {
     async fn test_rename_symbol_respects_word_boundary() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///rename_wb.sv".to_string(),
                 content: "module clk_gen;\n  wire clk;\nendmodule".to_string(),
             })))
             .await;
         // Renaming standalone 'clk' should NOT touch 'clk_gen'
         let result = server
-            .rename_symbol(Parameters(Parameters(RenameSymbolParams {
+            .rename_symbol(Parameters(RenameSymbolParams {
                 uri: "file:///rename_wb.sv".to_string(),
                 old_name: "clk".to_string(),
                 new_name: "sys_clk".to_string(),
             })))
             .await;
         let content = server
-            .read_file(Parameters(Parameters(UriParam {
+            .read_file(Parameters(UriParam {
                 uri: "file:///rename_wb.sv".to_string(),
             })))
             .await;
@@ -1945,13 +1945,13 @@ mod tests {
     async fn test_replace_content_not_found_returns_error() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///rc_notfound.sv".to_string(),
                 content: "module foo;\nendmodule".to_string(),
             })))
             .await;
         let result = server
-            .replace_content(Parameters(Parameters(ReplaceContentParams {
+            .replace_content(Parameters(ReplaceContentParams {
                 uri: "file:///rc_notfound.sv".to_string(),
                 old_text: "nonexistent_text_xyz_abc".to_string(),
                 new_text: "replacement".to_string(),
@@ -1967,13 +1967,13 @@ mod tests {
     async fn test_list_open_files_language_detection() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///lang.sv".to_string(),
                 content: "module foo;\nendmodule".to_string(),
             })))
             .await;
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///lang.vhd".to_string(),
                 content: "entity e is end entity;".to_string(),
             })))
@@ -2001,7 +2001,7 @@ mod tests {
     async fn test_search_for_pattern_invalid_regex_returns_error() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///re_test.sv".to_string(),
                 content: "module foo;\nendmodule".to_string(),
             })))
@@ -2022,13 +2022,13 @@ mod tests {
     async fn test_search_for_pattern_global_finds_all_open_files() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///ga.sv".to_string(),
                 content: "module foo_top;\nendmodule".to_string(),
             })))
             .await;
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///gb.sv".to_string(),
                 content: "module bar_top;\nendmodule".to_string(),
             })))
@@ -2050,7 +2050,7 @@ mod tests {
     async fn test_get_file_outline_sv_returns_json_array() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///outline.sv".to_string(),
                 content:
                     "module design(\n  input logic clk,\n  output logic out\n);\nassign out = clk;\nendmodule"
@@ -2058,7 +2058,7 @@ mod tests {
             })))
             .await;
         let result = server
-            .get_file_outline(Parameters(Parameters(UriParam {
+            .get_file_outline(Parameters(UriParam {
                 uri: "file:///outline.sv".to_string(),
             })))
             .await;
@@ -2072,13 +2072,13 @@ mod tests {
     async fn test_get_module_hierarchy_returns_json_array() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///hier.sv".to_string(),
                 content: "module top;\n  sub_mod u1(.clk(clk));\nendmodule".to_string(),
             })))
             .await;
         let result = server
-            .get_module_hierarchy(Parameters(Parameters(UriParam {
+            .get_module_hierarchy(Parameters(UriParam {
                 uri: "file:///hier.sv".to_string(),
             })))
             .await;
@@ -2095,13 +2095,13 @@ mod tests {
     async fn test_get_module_hierarchy_empty_for_leaf_module() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///leaf.sv".to_string(),
                 content: "module leaf;\n  wire clk;\nendmodule".to_string(),
             })))
             .await;
         let result = server
-            .get_module_hierarchy(Parameters(Parameters(UriParam {
+            .get_module_hierarchy(Parameters(UriParam {
                 uri: "file:///leaf.sv".to_string(),
             })))
             .await;
@@ -2116,7 +2116,7 @@ mod tests {
     async fn test_get_file_outline_invalid_uri_returns_error() {
         let server = ThanosMcpServer::new();
         let result = server
-            .get_file_outline(Parameters(Parameters(UriParam {
+            .get_file_outline(Parameters(UriParam {
                 uri: "!!!not_a_uri".to_string(),
             })))
             .await;
@@ -2127,7 +2127,7 @@ mod tests {
     async fn test_get_module_hierarchy_invalid_uri_returns_error() {
         let server = ThanosMcpServer::new();
         let result = server
-            .get_module_hierarchy(Parameters(Parameters(UriParam {
+            .get_module_hierarchy(Parameters(UriParam {
                 uri: "!!!not_a_uri".to_string(),
             })))
             .await;
@@ -2138,7 +2138,7 @@ mod tests {
     async fn test_get_module_hierarchy_not_open_returns_error() {
         let server = ThanosMcpServer::new();
         let result = server
-            .get_module_hierarchy(Parameters(Parameters(UriParam {
+            .get_module_hierarchy(Parameters(UriParam {
                 uri: "file:///never_opened.sv".to_string(),
             })))
             .await;
@@ -2149,13 +2149,13 @@ mod tests {
     async fn test_get_file_outline_unsupported_type_returns_error() {
         let server = ThanosMcpServer::new();
         server
-            .open_file(Parameters(Parameters(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.tcl".to_string(),
                 content: "set x 1".to_string(),
             })))
             .await;
         let result = server
-            .get_file_outline(Parameters(Parameters(UriParam {
+            .get_file_outline(Parameters(UriParam {
                 uri: "file:///test.tcl".to_string(),
             })))
             .await;
@@ -2171,7 +2171,7 @@ mod tests {
         // (no error, just "no synthesizability issues found")
         let server = ThanosMcpServer::new();
         let result = server
-            .check_synthesizability(Parameters(Parameters(UriParam {
+            .check_synthesizability(Parameters(UriParam {
                 uri: "file:///not_opened.sv".to_string(),
             })))
             .await;
@@ -2188,7 +2188,7 @@ mod tests {
         let server = ThanosMcpServer::new();
         // update_file on a file that was never opened
         let result = server
-            .update_file(Parameters(Parameters(UpdateFileParams {
+            .update_file(Parameters(UpdateFileParams {
                 uri: "file:///update_new.sv".to_string(),
                 content: "module new_file;\nendmodule".to_string(),
             })))
