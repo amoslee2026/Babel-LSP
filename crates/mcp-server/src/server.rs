@@ -1134,7 +1134,7 @@ impl ThanosMcpServer {
 
 // ─── ServerHandler ───────────────────────────────────────────────────────────
 
-#[tool(tool_box)]
+#[tool_handler]
 impl ServerHandler for ThanosMcpServer {
     fn get_info(&self) -> ServerInfo {
         ServerInfo {
