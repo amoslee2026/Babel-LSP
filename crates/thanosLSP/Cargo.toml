@@ -6,7 +6,7 @@ edition.workspace = true
 rust-version.workspace = true
 
 [[bin]]
-name = "thanosLSP"
+name = "Babel-LSP"
 path = "src/main.rs"
 
 [dependencies]
