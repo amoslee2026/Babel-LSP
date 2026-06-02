@@ -70,11 +70,11 @@ async fn test_get_definition_returns_json() {
 async fn test_get_references_returns_json() {
     let s = make_server();
     let uri = "file:///tmp/refs.sv";
-    s.open_file(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
-    }))
-    .await;
+    })))
+        .await;
     let res = s
         .get_references(Parameters(GetDefinitionParams {
             uri: uri.to_string(),
