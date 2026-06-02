@@ -390,7 +390,7 @@ impl ThanosMcpServer {
             uri: uri_str,
             content: params.content,
         };
-        self.open_file(Parameters(open_params))).await
+        self.open_file(Parameters(open_params)).await
     }
 
     /// 获取文件的诊断信息（SV综合规则检查）
