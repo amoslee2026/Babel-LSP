@@ -1,8 +1,0 @@
-{
-  "project": {"name": "minimal_test"},
-  "hdl": {"source_dirs": ["**/*.sv", "**/*.v"], "defines": [], "include_dirs": []},
-  "vhdl": {"source_dirs": ["**/*.vhd", "**/*.vhdl"]},
-  "tcl": {"source_dirs": ["**/*.tcl"]},
-  "server": {"lsp_port": 0, "mcp_port": 0},
-  "logging": {"level": "debug"}
-}
