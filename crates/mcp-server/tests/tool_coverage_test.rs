@@ -221,13 +221,13 @@ async fn test_format_file_sv_returns_response() {
     }))
     .await;
     let res = s
-        .format_file(UriParam {
+        .format_file(Parameters(UriParam {
             uri: uri.to_string(),
         }))
         .await;
     // May succeed or return "verible not found" - must not panic
     assert!(!res.is_empty(), "format_file should return non-empty response");
-}
+})
 
 #[tokio::test]
 async fn test_error_on_unopened_file() {

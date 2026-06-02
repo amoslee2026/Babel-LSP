@@ -131,13 +131,13 @@ async fn test_search_pattern_across_file() {
         .await;
 
     let result = server
-        .search_for_pattern(SearchPatternParams {
+        .search_for_pattern(Parameters(SearchPatternParams {
             pattern: "assign".to_string(),
             uri: Some(uri.to_string()),
         }))
         .await;
     assert!(result.contains("assign"), "search: {result}");
-}
+})
 
 #[tokio::test]
 async fn test_replace_content_and_verify() {
