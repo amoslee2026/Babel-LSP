@@ -414,8 +414,7 @@ impl ThanosMcpServer {
         drop(state);
 
         // SV 综合规则检查
-        if params.uri.ends_with(".sv") || params.uri.ends_with(".svh") || params.uri.ends_with(".v")
-        {
+        if params.uri.ends_with(".sv") || params.uri.ends_with(".svh") || params.uri.ends_with(".v") || params.uri.ends_with(".vh")
             let checker = thanosLSP_sv::synth_checker::SynthChecker::new();
             let diags = checker.check_source(&content, file_class, &params.uri);
             let state = self.state.lock().await;
@@ -460,8 +459,7 @@ impl ThanosMcpServer {
         drop(state);
 
         // Try enhanced SV symbol collection
-        if params.uri.ends_with(".sv") || params.uri.ends_with(".svh") || params.uri.ends_with(".v")
-        {
+        if params.uri.ends_with(".sv") || params.uri.ends_with(".svh") || params.uri.ends_with(".v") || params.uri.ends_with(".vh")
             let collector = thanosLSP_sv::symbol_collector::SymbolCollector::new();
             let symbols = collector.collect_from_source(&content, &params.uri);
             let state = self.state.lock().await;
