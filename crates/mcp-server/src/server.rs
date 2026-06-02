@@ -857,7 +857,8 @@ impl ThanosMcpServer {
 
     /// 设置日志级别
     #[tool(description = "Set the log level (error|warn|info|debug|trace)")]
-    pub async fn set_log_level(&self, params: SetLogLevelParams) -> String {
+    #[tool(description = "Set the log level (error|warn|info|debug|trace)")]
+    pub async fn set_log_level(&self, Parameters(params): Parameters<SetLogLevelParams>) -> String {
         const VALID: &[&str] = &["error", "warn", "info", "debug", "trace"];
         if !VALID.contains(&params.level.to_lowercase().as_str()) {
             return format!(
