@@ -1345,7 +1345,7 @@ mod tests {
             }))
             .await;
         let result = server
-            .search_for_pattern(SearchPatternParams {
+            .search_for_pattern(Parameters(SearchPatternParams {
                 pattern: "always_ff".to_string(),
                 uri: Some("file:///test.sv".to_string()),
             }))
