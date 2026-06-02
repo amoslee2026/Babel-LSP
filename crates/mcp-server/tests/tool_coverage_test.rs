@@ -30,7 +30,7 @@ async fn test_get_completions_returns_json() {
     s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
-    })
+    }))
     .await;
     let res = s
         .get_completions(Parameters(GetCompletionsParams {
@@ -54,7 +54,7 @@ async fn test_get_definition_returns_json() {
     s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
-    })
+    }))
     .await;
     let res = s
         .get_definition(Parameters(GetDefinitionParams {
@@ -262,7 +262,7 @@ end architecture;
     s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: vhdl_content.to_string(),
-    })
+    }))
     .await;
     let res = s
         .get_diagnostics(Parameters(UriParam {
