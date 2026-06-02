@@ -1765,11 +1765,11 @@ mod tests {
             .await;
         // 'clk' at line 0 col 5 and line 2 col 13; 'clk_en' on line 1 must NOT match
         let result = server
-            .get_references(GetDefinitionParams {
+            .get_references(Parameters(GetDefinitionParams {
                 uri: "file:///t.sv".to_string(),
                 line: 0,
                 character: 5,
-            }))
+            })))
             .await;
         let v: serde_json::Value =
             serde_json::from_str(&result).unwrap_or(serde_json::json!([]));
