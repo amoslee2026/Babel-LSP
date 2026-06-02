@@ -16,6 +16,5 @@ tokio = { workspace = true }
 regex = "1"
 smol_str = { workspace = true }
 
-tempfile = { workspace = true }
-
 [dev-dependencies]
+tempfile = { workspace = true }
