@@ -1928,7 +1928,7 @@ mod tests {
                 uri: "file:///rename_wb.sv".to_string(),
                 old_name: "clk".to_string(),
                 new_name: "sys_clk".to_string(),
-            })))
+            }))
             .await;
         let content = server
             .read_file(Parameters(UriParam {
