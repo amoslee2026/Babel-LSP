@@ -1,0 +1,69 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/core",
+    "crates/sv-analyzer",
+    "crates/vhdl-analyzer",
+    "crates/tcl-analyzer",
+    "crates/filelist-parser",
+    "crates/cell-library",
+    "crates/lsp-router",
+    "crates/mcp-server",
+    "crates/thanosLSP",
+]
+
+[workspace.package]
+version = "0.2.0"
+edition = "2021"
+rust-version = "1.80"
+
+[workspace.dependencies]
+# internal crates
+thanosLSP-core = { path = "crates/core" }
+thanosLSP-sv = { path = "crates/sv-analyzer" }
+thanosLSP-vhdl = { path = "crates/vhdl-analyzer" }
+thanosLSP-tcl = { path = "crates/tcl-analyzer" }
+thanosLSP-filelist = { path = "crates/filelist-parser" }
+thanosLSP-cell = { path = "crates/cell-library" }
+thanosLSP-lsp = { path = "crates/lsp-router" }
+thanosLSP-mcp = { path = "crates/mcp-server" }
+
+# external crates — versions locked per spec re-review RR-01/02/03
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+dashmap = "6"
+ropey = "1"
+salsa = "0.22"
+redb = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tracing-appender = "0.2"
+notify = "7"
+lasso = "0.7"
+thiserror = "1"
+anyhow = "1"
+smol_str = "0.2"
+tokio = { version = "1", features = ["full"] }
+url = "2"
+glob = "0.3"
+regex = "1"
+sha2 = "0.10"
+clap = { version = "4", features = ["derive"] }
+
+# LSP / MCP protocol crates
+tower-lsp = "0.20"
+rmcp = "0.5"
+
+# parser backends
+tree-sitter = "0.22"
+
+# dev/test
+tempfile = "3"
+proptest = "1"
+rstest = "0.21"
+tower = "0.4"
+tower-test = "0.4"
+
+[workspace.lints.rust]
+dead_code = "warn"
+unused_imports = "warn"
