@@ -2035,7 +2035,7 @@ mod tests {
             .await;
         // Global search (no uri) should search all open files
         let result = server
-            .search_for_pattern(SearchPatternParams {
+            .search_for_pattern(Parameters(SearchPatternParams {
                 pattern: "endmodule".to_string(),
                 uri: None,
             }))
