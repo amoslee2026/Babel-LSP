@@ -7,8 +7,9 @@ use std::sync::Arc;
 
 use dashmap::DashMap;
 use rmcp::{
+    handler::server::tool::Parameters,
     model::{ServerCapabilities, ServerInfo},
-    schemars, serde, tool, ServerHandler,
+    schemars, serde, serve_server, tool, tool_handler, tool_router, ServerHandler,
 };
 use smol_str::SmolStr;
 use thanosLSP_core::{
