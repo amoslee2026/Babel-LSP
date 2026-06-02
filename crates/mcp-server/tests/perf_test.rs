@@ -25,7 +25,7 @@ async fn perf_mcp_tool_response_under_100ms() {
 
     // open_file returns String result (not Result), no expect needed
     let _ = server
-        .open_file(OpenFileParams {
+        .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: content.clone(),
         })
@@ -33,7 +33,7 @@ async fn perf_mcp_tool_response_under_100ms() {
 
     // Warm up
     let _ = server
-        .search_symbols(SearchSymbolsParams {
+        .search_symbols(Parameters(SearchSymbolsParams {
             query: "mod_0".to_string(),
             uri: Some(uri.to_string()),
         })
@@ -43,7 +43,7 @@ async fn perf_mcp_tool_response_under_100ms() {
     let start = Instant::now();
     for _ in 0..10 {
         let _ = server
-            .search_symbols(SearchSymbolsParams {
+            .search_symbols(Parameters(SearchSymbolsParams {
                 query: "mod_".to_string(),
                 uri: Some(uri.to_string()),
             })
@@ -68,7 +68,7 @@ async fn perf_open_file_latency_under_200ms() {
     for i in 0..10 {
         let uri = format!("file:///perf_open_{i}.sv");
         let _ = server
-            .open_file(OpenFileParams {
+            .open_file(Parameters(OpenFileParams {
                 uri,
                 content: content.clone(),
             })

@@ -32,7 +32,7 @@ async fn test_get_completions_returns_json() {
     })
     .await;
     let res = s
-        .get_completions(GetCompletionsParams {
+        .get_completions(Parameters(GetCompletionsParams {
             uri: uri.to_string(),
             line: 0,
             character: 0,
@@ -56,7 +56,7 @@ async fn test_get_definition_returns_json() {
     })
     .await;
     let res = s
-        .get_definition(GetDefinitionParams {
+        .get_definition(Parameters(GetDefinitionParams {
             uri: uri.to_string(),
             line: 0,
             character: 7, // 'counter' identifier
@@ -95,7 +95,7 @@ async fn test_get_hover_returns_response() {
     })
     .await;
     let res = s
-        .get_hover(GetDefinitionParams {
+        .get_hover(Parameters(GetDefinitionParams {
             uri: uri.to_string(),
             line: 0,
             character: 7,
@@ -124,7 +124,7 @@ async fn test_rename_symbol_modifies_content() {
     assert!(!res.is_empty(), "rename_symbol should return non-empty response");
     // After rename, reading back should contain new name
     let content = s
-        .read_file(UriParam {
+        .read_file(Parameters(UriParam {
             uri: uri.to_string(),
         })
         .await;
@@ -145,7 +145,7 @@ async fn test_replace_lines_modifies_content() {
     .await;
     // Replace first line (0-based, exclusive end)
     let res = s
-        .replace_lines(ReplaceLinesParams {
+        .replace_lines(Parameters(ReplaceLinesParams {
             uri: uri.to_string(),
             start_line: 0,
             end_line: 1,
@@ -155,7 +155,7 @@ async fn test_replace_lines_modifies_content() {
     assert!(!res.is_empty(), "replace_lines should return non-empty response");
     // Verify content changed
     let content = s
-        .read_file(UriParam {
+        .read_file(Parameters(UriParam {
             uri: uri.to_string(),
         })
         .await;
@@ -170,7 +170,7 @@ async fn test_create_file_creates_and_opens() {
     let s = make_server();
     let path = "/tmp/created_mcp_test.sv";
     let res = s
-        .create_file(CreateFileParams {
+        .create_file(Parameters(CreateFileParams {
             path: path.to_string(),
             content: "// created by test\nmodule empty_mod; endmodule\n".to_string(),
         })
@@ -185,7 +185,7 @@ async fn test_create_file_creates_and_opens() {
 async fn test_set_log_level_valid() {
     let s = make_server();
     let res = s
-        .set_log_level(SetLogLevelParams {
+        .set_log_level(Parameters(SetLogLevelParams {
             level: "warn".to_string(),
         })
         .await;
@@ -199,12 +199,12 @@ async fn test_set_log_level_valid() {
 async fn test_set_log_level_restores_info() {
     let s = make_server();
     // Set to debug then back to info
-    s.set_log_level(SetLogLevelParams {
+    s.set_log_level(Parameters(SetLogLevelParams {
         level: "debug".to_string(),
     })
     .await;
     let res = s
-        .set_log_level(SetLogLevelParams {
+        .set_log_level(Parameters(SetLogLevelParams {
             level: "info".to_string(),
         })
         .await;
@@ -233,7 +233,7 @@ async fn test_format_file_sv_returns_response() {
 async fn test_error_on_unopened_file() {
     let s = make_server();
     let res = s
-        .read_file(UriParam {
+        .read_file(Parameters(UriParam {
             uri: "file:///nonexistent_file_12345.sv".to_string(),
         })
         .await;
@@ -264,7 +264,7 @@ end architecture;
     })
     .await;
     let res = s
-        .get_diagnostics(UriParam {
+        .get_diagnostics(Parameters(UriParam {
             uri: uri.to_string(),
         })
         .await;

@@ -47,7 +47,7 @@ async fn test_open_update_read_cycle() {
 
     // Open
     let res = server
-        .open_file(OpenFileParams {
+        .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: SIMPLE_SV.to_string(),
         })
@@ -57,7 +57,7 @@ async fn test_open_update_read_cycle() {
     // Update
     let new_content = SIMPLE_SV.replace("WIDTH = 8", "WIDTH = 16");
     let res = server
-        .update_file(UpdateFileParams {
+        .update_file(Parameters(UpdateFileParams {
             uri: uri.to_string(),
             content: new_content,
         })
@@ -66,7 +66,7 @@ async fn test_open_update_read_cycle() {
 
     // Read back
     let content = server
-        .read_file(UriParam {
+        .read_file(Parameters(UriParam {
             uri: uri.to_string(),
         })
         .await;
@@ -78,14 +78,14 @@ async fn test_get_symbols_for_sv_module() {
     let server = sv_test_server();
     let uri = "file:///adder.sv";
     server
-        .open_file(OpenFileParams {
+        .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: SIMPLE_SV.to_string(),
         })
         .await;
 
     let symbols = server
-        .get_symbols(UriParam {
+        .get_symbols(Parameters(UriParam {
             uri: uri.to_string(),
         })
         .await;
@@ -98,7 +98,7 @@ async fn test_synthesizability_detects_issues() {
     let server = sv_test_server();
     let uri = "file:///bad_rtl.sv";
     server
-        .open_file(OpenFileParams {
+        .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: RTL_WITH_ISSUES.to_string(),
         })
@@ -124,7 +124,7 @@ async fn test_search_pattern_across_file() {
     let server = sv_test_server();
     let uri = "file:///adder.sv";
     server
-        .open_file(OpenFileParams {
+        .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: SIMPLE_SV.to_string(),
         })
@@ -144,14 +144,14 @@ async fn test_replace_content_and_verify() {
     let server = sv_test_server();
     let uri = "file:///adder.sv";
     server
-        .open_file(OpenFileParams {
+        .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: SIMPLE_SV.to_string(),
         })
         .await;
 
     let result = server
-        .replace_content(ReplaceContentParams {
+        .replace_content(Parameters(ReplaceContentParams {
             uri: uri.to_string(),
             old_text: "assign sum = a + b".to_string(),
             new_text: "assign sum = a ^ b".to_string(),
@@ -160,7 +160,7 @@ async fn test_replace_content_and_verify() {
     assert_eq!(result, "replaced");
 
     let content = server
-        .read_file(UriParam {
+        .read_file(Parameters(UriParam {
             uri: uri.to_string(),
         })
         .await;
@@ -173,19 +173,19 @@ async fn test_close_and_verify_removed() {
     let server = sv_test_server();
     let uri = "file:///adder.sv";
     server
-        .open_file(OpenFileParams {
+        .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: SIMPLE_SV.to_string(),
         })
         .await;
     server
-        .close_file(UriParam {
+        .close_file(Parameters(UriParam {
             uri: uri.to_string(),
         })
         .await;
 
     let content = server
-        .read_file(UriParam {
+        .read_file(Parameters(UriParam {
             uri: uri.to_string(),
         })
         .await;
@@ -197,20 +197,20 @@ async fn test_search_symbols_multi_file() {
     let server = sv_test_server();
 
     server
-        .open_file(OpenFileParams {
+        .open_file(Parameters(OpenFileParams {
             uri: "file:///a.sv".to_string(),
             content: "module module_a;\nendmodule".to_string(),
         })
         .await;
     server
-        .open_file(OpenFileParams {
+        .open_file(Parameters(OpenFileParams {
             uri: "file:///b.sv".to_string(),
             content: "module module_b;\nendmodule".to_string(),
         })
         .await;
 
     let result = server
-        .search_symbols(SearchSymbolsParams {
+        .search_symbols(Parameters(SearchSymbolsParams {
             query: "module".to_string(),
             uri: None,
         })
@@ -223,7 +223,7 @@ async fn test_search_symbols_multi_file() {
 async fn test_project_memory_lists_files() {
     let server = sv_test_server();
     server
-        .open_file(OpenFileParams {
+        .open_file(Parameters(OpenFileParams {
             uri: "file:///top.sv".to_string(),
             content: "module top;\nendmodule".to_string(),
         })
@@ -238,14 +238,14 @@ async fn test_get_diagnostics_sv_synth() {
     let server = sv_test_server();
     let uri = "file:///rtl.sv";
     server
-        .open_file(OpenFileParams {
+        .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: "module foo;\n  initial begin\n    a = 1;\n  end\nendmodule".to_string(),
         })
         .await;
 
     let diags = server
-        .get_diagnostics(UriParam {
+        .get_diagnostics(Parameters(UriParam {
             uri: uri.to_string(),
         })
         .await;
