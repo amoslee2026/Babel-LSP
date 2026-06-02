@@ -459,7 +459,7 @@ impl ThanosMcpServer {
         drop(state);
 
         // Try enhanced SV symbol collection
-        if params.uri.ends_with(".sv") || params.uri.ends_with(".svh") || params.uri.ends_with(".v") || params.uri.ends_with(".vh")
+        if params.uri.ends_with(".sv") || params.uri.ends_with(".svh") || params.uri.ends_with(".v") || params.uri.ends_with(".vh") {
             let collector = thanosLSP_sv::symbol_collector::SymbolCollector::new();
             let symbols = collector.collect_from_source(&content, &params.uri);
             let state = self.state.lock().await;
