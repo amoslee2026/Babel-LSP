@@ -873,7 +873,6 @@ impl ThanosMcpServer {
     /// 获取项目记忆（已打开文件列表）
     #[tool(description = "Get current project context: open files and symbol counts")]
     pub async fn get_project_memory(&self) -> String {
-        let _self: &Self = Box::leak(Box::new(()));
         let state = self.state.lock().await;
         let files: Vec<serde_json::Value> = state
             .file_store
