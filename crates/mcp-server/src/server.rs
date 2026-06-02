@@ -936,7 +936,7 @@ impl ThanosMcpServer {
         }
 
         // 收集符号
-        let symbols = if params.uri.ends_with(".sv") || params.uri.ends_with(".svh") || params.uri.ends_with(".v") {
+        let symbols = if params.uri.ends_with(".sv") || params.uri.ends_with(".svh") || params.uri.ends_with(".v") || params.uri.ends_with(".vh") {
             let collector = thanosLSP_sv::symbol_collector::SymbolCollector::new();
             collector.collect_from_source(&content, &params.uri)
         } else if params.uri.ends_with(".vhd") || params.uri.ends_with(".vhdl") {
