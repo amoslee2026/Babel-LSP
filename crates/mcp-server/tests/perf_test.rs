@@ -3,6 +3,7 @@
 //! 对照 functional_spec §7.1 性能目标进行测量
 //! 目标: MCP 工具响应 < 100ms (已缓存符号)
 
+use rmcp::handler::server::tool::Parameters;
 use std::time::Instant;
 use thanosLSP_mcp::server::{OpenFileParams, SearchSymbolsParams, ThanosMcpServer};
 
