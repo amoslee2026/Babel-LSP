@@ -1302,7 +1302,7 @@ mod tests {
         let result = server
             .check_synthesizability(Parameters(UriParam {
                 uri: "file:///rtl.sv".to_string(),
-            })
+            }))
             .await;
         assert!(
             result.contains("SYN-V"),
