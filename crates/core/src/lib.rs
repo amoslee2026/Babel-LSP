@@ -4,6 +4,7 @@
 #![allow(non_snake_case)]
 
 pub mod config;
+pub mod core_engine;
 pub mod cross_lang;
 pub mod diagnostic;
 pub mod document;
