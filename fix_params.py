@@ -31,38 +31,81 @@ method_names = [
     "search_symbols", "search_pattern", "replace_lines", "get_line_range",
     "get_module_hierarchy", "get_memory_usage", "check_synthesizability",
     "get_file_outline", "get_instance_tree", "find_module_definition",
-    "get_references",
+    "get_references", "rename_symbol",
 ]
 
-fixes = 0
+param_types = [
+    "OpenFileParams", "UriParam", "UpdateFileParams", "CreateFileParams",
+    "ReplaceContentParams", "SearchPatternParams", "SetLogLevelParams",
+    "GetDefinitionParams", "SearchSymbolsParams", "GetCompletionsParams",
+    "ReplaceLinesParams", "GetLineRangeParams", "FormatSourceParams",
+    "ModuleHierarchyParams", "RenameSymbolParams",
+]
 
-# Fix 1: extra ) after method(Parameters(Type{...}))
+changes = []  # (start, end, replacement)
+
+# Step 1: Find all calls where the first arg is a type literal { and add Parameters()
 for method in method_names:
     pat = re.compile(r"\." + re.escape(method) + r"\(")
     for m in pat.finditer(content):
-        start = m.end()
-        close_pos = find_matching_paren(content, start)
-        if close_pos is None:
+        call_start = m.end()
+
+        # Skip if next char is not uppercase
+        if not content[call_start].isupper():
             continue
-        body = content[start:close_pos]
-        if body.startswith("Parameters("):
-            after = content[close_pos+1:close_pos+10].strip()
+
+        # Find the matching )
+        closing = find_matching_paren(content, call_start)
+        if closing is None:
+            continue
+
+        arg_body = content[call_start:closing]
+
+        # Case 1: Already has Parameters( — check for extra )
+        if arg_body.startswith("Parameters("):
+            after = content[closing+1:closing+15].strip()
+            # After the ), what follows?  .await? ; ? or another )?
             if after.startswith(")"):
-                content = content[:close_pos+1] + content[close_pos+2:]
-                fixes += 1
+                # Extra ) — remove it
+                content = content[:closing+1] + content[closing+2:]
+                continue
 
-# Fix 2: triple ))) patterns (simplified)
-triple_positions = []
-for m in re.finditer(r"\)\)\)", content):
+        # Case 2: No Parameters( wrapping — wrap it
+        # arg_body should be something like "TypeName{...}"
+        # We need to change: .method(TypeName{...}) to .method(Parameters(TypeName{...}))
+        changes.append((call_start, closing, "Parameters(" + arg_body + ")"))
+        print("Wrapping: .{}(TypeName{{...}}) -> .{}(Parameters(TypeName{{...}}))".format(method, method))
+
+# Apply changes in reverse
+changes.sort(key=lambda x: x[0], reverse=True)
+for start, end, replacement in changes:
+    content = content[:start] + replacement + content[end:]
+
+# Step 2: Fix any remaining triple ))) patterns (from previous scripts)
+# These look like: })) .await or })) ; or })) )
+# Each } is actually }(struct) + )(wrong) + )(method).
+# The correct pattern depends on whether Parameters( is used.
+
+# Actually let's just handle what the errors tell us.
+# Find })) before .await in test code
+changes2 = []
+for m in re.finditer(r"\}\)\)\)", content):
     pos = m.start()
-    after_chars = content[pos+3:pos+20]
-    if ".await" in after_chars[:10] or ";" in after_chars[:5]:
-        triple_positions.append(pos)
-
-for pos in reversed(triple_positions):
-    content = content[:pos] + "))" + content[pos+3:]
-    fixes += 1
+    after = content[pos+3:pos+20].strip()
+    if after.startswith(".await") or after.startswith(";") or after.startswith(")"):
+        # Check if there's a matching Parameters( before this
+        before = content[max(0,pos-500):pos]
+        # Simple check: is there a Parameters(TypeName{ before this?
+        # If yes: })) → })) is correct (struct + Parameters + method)
+        # If no: })) → }) (remove one )
+        has_params = re.search(r"Parameters\(\w+\{", before[::-1][:500])
+        if has_params:
+            pass  # already correct
+        else:
+            # No Parameters wrapping — remove the extra )
+            content = content[:pos] + "})" + content[pos+3:]
+            print("Fixed extra ) at pos", pos)
 
 with open(path, "w") as f:
     f.write(content)
-print("Total fixes:", fixes)
+print("Done")
