@@ -3,7 +3,7 @@
 //! 使用 rmcp crate 实现 Model Context Protocol server，
 //! 通过 stdio 或 SSE 与 Claude Code 通信。
 
-use std::sync::Arc;
+use std::{future::Future, sync::Arc};
 
 use dashmap::DashMap;
 use rmcp::{
