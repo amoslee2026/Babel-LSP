@@ -1300,7 +1300,7 @@ mod tests {
             }))
             .await;
         let result = server
-            .check_synthesizability(UriParam {
+            .check_synthesizability(Parameters(UriParam {
                 uri: "file:///rtl.sv".to_string(),
             })
             .await;
@@ -1320,7 +1320,7 @@ mod tests {
             }))
             .await;
         let result = server
-            .replace_content(ReplaceContentParams {
+            .replace_content(Parameters(ReplaceContentParams {
                 uri: "file:///test.sv".to_string(),
                 old_text: "old_name".to_string(),
                 new_text: "new_name".to_string(),
@@ -1789,7 +1789,7 @@ mod tests {
             .await;
         // Position on 'foo' (col 7)
         let result = server
-            .get_hover(GetDefinitionParams {
+            .get_hover(Parameters(GetDefinitionParams {
                 uri: "file:///hover_mod.sv".to_string(),
                 line: 0,
                 character: 7,
@@ -1810,7 +1810,7 @@ mod tests {
             }))
             .await;
         let result = server
-            .get_hover(GetDefinitionParams {
+            .get_hover(Parameters(GetDefinitionParams {
                 uri: "file:///hover_null.sv".to_string(),
                 line: 0,
                 character: 7, // 'f' in "foo"
@@ -1829,7 +1829,7 @@ mod tests {
             }))
             .await;
         let result = server
-            .search_symbols(SearchSymbolsParams {
+            .search_symbols(Parameters(SearchSymbolsParams {
                 query: "counter".to_string(),
                 uri: None,
             })
@@ -1863,7 +1863,7 @@ mod tests {
             }))
             .await;
         let result = server
-            .search_symbols(SearchSymbolsParams {
+            .search_symbols(Parameters(SearchSymbolsParams {
                 query: "mod".to_string(),
                 uri: Some("file:///fa.sv".to_string()),
             })
@@ -1882,7 +1882,7 @@ mod tests {
     async fn test_set_log_level_invalid_returns_error() {
         let server = ThanosMcpServer::new();
         let result = server
-            .set_log_level(SetLogLevelParams {
+            .set_log_level(Parameters(SetLogLevelParams {
                 level: "invalid_level_xyz".to_string(),
             })
             .await;
@@ -1902,7 +1902,7 @@ mod tests {
             }))
             .await;
         let result = server
-            .replace_lines(ReplaceLinesParams {
+            .replace_lines(Parameters(ReplaceLinesParams {
                 uri: "file:///rl_bounds.sv".to_string(),
                 start_line: 100,
                 end_line: 200,
@@ -1951,7 +1951,7 @@ mod tests {
             }))
             .await;
         let result = server
-            .replace_content(ReplaceContentParams {
+            .replace_content(Parameters(ReplaceContentParams {
                 uri: "file:///rc_notfound.sv".to_string(),
                 old_text: "nonexistent_text_xyz_abc".to_string(),
                 new_text: "replacement".to_string(),
@@ -2058,7 +2058,7 @@ mod tests {
             }))
             .await;
         let result = server
-            .get_file_outline(UriParam {
+            .get_file_outline(Parameters(UriParam {
                 uri: "file:///outline.sv".to_string(),
             })
             .await;
@@ -2078,7 +2078,7 @@ mod tests {
             }))
             .await;
         let result = server
-            .get_module_hierarchy(UriParam {
+            .get_module_hierarchy(Parameters(UriParam {
                 uri: "file:///hier.sv".to_string(),
             })
             .await;
@@ -2101,7 +2101,7 @@ mod tests {
             }))
             .await;
         let result = server
-            .get_module_hierarchy(UriParam {
+            .get_module_hierarchy(Parameters(UriParam {
                 uri: "file:///leaf.sv".to_string(),
             })
             .await;
@@ -2116,7 +2116,7 @@ mod tests {
     async fn test_get_file_outline_invalid_uri_returns_error() {
         let server = ThanosMcpServer::new();
         let result = server
-            .get_file_outline(UriParam {
+            .get_file_outline(Parameters(UriParam {
                 uri: "!!!not_a_uri".to_string(),
             })
             .await;
@@ -2127,7 +2127,7 @@ mod tests {
     async fn test_get_module_hierarchy_invalid_uri_returns_error() {
         let server = ThanosMcpServer::new();
         let result = server
-            .get_module_hierarchy(UriParam {
+            .get_module_hierarchy(Parameters(UriParam {
                 uri: "!!!not_a_uri".to_string(),
             })
             .await;
@@ -2138,7 +2138,7 @@ mod tests {
     async fn test_get_module_hierarchy_not_open_returns_error() {
         let server = ThanosMcpServer::new();
         let result = server
-            .get_module_hierarchy(UriParam {
+            .get_module_hierarchy(Parameters(UriParam {
                 uri: "file:///never_opened.sv".to_string(),
             })
             .await;
@@ -2155,7 +2155,7 @@ mod tests {
             }))
             .await;
         let result = server
-            .get_file_outline(UriParam {
+            .get_file_outline(Parameters(UriParam {
                 uri: "file:///test.tcl".to_string(),
             })
             .await;
@@ -2171,7 +2171,7 @@ mod tests {
         // (no error, just "no synthesizability issues found")
         let server = ThanosMcpServer::new();
         let result = server
-            .check_synthesizability(UriParam {
+            .check_synthesizability(Parameters(UriParam {
                 uri: "file:///not_opened.sv".to_string(),
             })
             .await;
@@ -2188,7 +2188,7 @@ mod tests {
         let server = ThanosMcpServer::new();
         // update_file on a file that was never opened
         let result = server
-            .update_file(UpdateFileParams {
+            .update_file(Parameters(UpdateFileParams {
                 uri: "file:///update_new.sv".to_string(),
                 content: "module new_file;\nendmodule".to_string(),
             })
