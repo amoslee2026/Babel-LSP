@@ -74,7 +74,7 @@ async fn test_get_references_returns_json() {
     s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
-    })))
+    }))
         .await;
     let res = s
         .get_references(Parameters(GetDefinitionParams {
