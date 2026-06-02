@@ -333,8 +333,8 @@ impl ThanosMcpServer {
     }
 
     /// 读取文件内容
-    #[tool(description = "Read the content of an opened file", vis = pub)]
-    pub async fn read_file(&self, #[tool(aggr)] params: UriParam) -> String {
+    #[tool(description = "Read the content of an opened file")]
+    pub async fn read_file(&self, #[tool(aggr)] Parameters(params): Parameters<UriParam>) -> String {
         let uri = match url::Url::parse(&params.uri) {
             Ok(u) => u,
             Err(e) => return format!("error: invalid URI: {e}"),
