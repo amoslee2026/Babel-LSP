@@ -1154,14 +1154,13 @@ impl ServerHandler for ThanosMcpServer {
 
 /// 启动 MCP 服务（stdio 模式）
 pub async fn run_stdio() -> anyhow::Result<()> {
-    use rmcp::ServiceExt;
     let server = ThanosMcpServer::new();
     let transport = (tokio::io::stdin(), tokio::io::stdout());
     // 使用 tokio::spawn 隔离 panic（如收到 invalid JSON 时 rmcp 内部 panic 不会终止进程）
     let handle = tokio::spawn(async move {
-        match server.serve(transport).await {
-            Ok(svc) => { let _ = svc.waiting().await; }
-            Err(e) => { tracing::error!("MCP serve init error: {}", e); }
+        match serve_server(server, transport).await {
+            Ok(()) => { tracing::info!("MCP server stopped normally"); }
+            Err(e) => { tracing::error!("MCP serve error: {}", e); }
         }
     });
     match handle.await {
