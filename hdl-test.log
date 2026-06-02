@@ -13105,3 +13105,183 @@ FileNotFoundError: [Errno 2] No such file or directory: 'target/release/thanosLS
 2026-06-02T21:05:00 [INFO] JSON 报告已写入: /mnt/big10T/wrk/Babel-LSP/reports/hdl_sys_20260602T210430/zipcpu_results.json
 2026-06-02T21:05:00 [DEBUG] 发送 stdin EOF，等待进程退出...
 2026-06-02T21:05:00 [INFO] 进程已停止，退出码: 0
+2026-06-02T21:16:58 [INFO] ============================================================
+2026-06-02T21:16:58 [INFO] thanosLSP HDL 系统测试启动
+2026-06-02T21:16:58 [INFO] binary    : /mnt/big10T/wrk/Babel-LSP/target/release/Babel-LSP
+2026-06-02T21:16:58 [INFO] config    : /mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/Babel-LSP.json
+2026-06-02T21:16:58 [INFO] project   : /mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf
+2026-06-02T21:16:58 [INFO] log_file  : /mnt/big10T/wrk/Babel-LSP/hdl-test.log
+2026-06-02T21:16:58 [INFO] ============================================================
+2026-06-02T21:16:58 [INFO] 启动进程: /mnt/big10T/wrk/Babel-LSP/target/release/Babel-LSP --mcp  [cwd=/mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf]
+2026-06-02T21:16:58 [INFO] 进程 PID: 4182862
+2026-06-02T21:16:59 [INFO] 执行 MCP initialize 握手...
+2026-06-02T21:16:59 [DEBUG] → RPC initialize | {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2024-11-05", "capabilities": {}, "clientInfo": {"name": "thanoslsp-hdl-test", "version": "1.0.0"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC initialize | {"jsonrpc": "2.0", "id": 1, "result": {"protocolVersion": "2024-11-05", "capabilities": {"tools": {}}, "serverInfo": {"name": "rmcp", "version": "0.5.0"}, "instructions": "thanosLSP: HDL Language Server (SV/VHDL/TCL). Provides diagnostics, symbols, completions, definitions, references, hover, format
+2026-06-02T21:16:59 [DEBUG] → RPC notifications/initialized | {"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}}
+2026-06-02T21:16:59 [DEBUG]   (通知，无需响应)
+2026-06-02T21:16:59 [INFO] 握手成功: serverInfo={'name': 'rmcp', 'version': '0.5.0'}
+2026-06-02T21:16:59 [INFO] 文件列表: SV=['/mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v', '/mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomSend.v', '/mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-lib/BRAM2.v', '/mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-lib/BypassWire.v', '/mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-lib/CRegN5.v'], VHDL=['/mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/axi/axi-lite/ip_integrator/AxiDualPortRamIpIntegrator.vhd', '/mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/axi/axi-lite/ip_integrator/AxiVersionIpIntegrator.vhd', '/mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/axi/axi-lite/ip_integrator/MasterAxiLiteIpIntegrator.vhd', '/mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/axi/axi-lite/ip_integrator/SlaveAxiLiteIpIntegrator.vhd', '/mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/axi/axi-lite/rtl/AxiDualPortRam.vhd'], TCL=['/mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ruckus.tcl', '/mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/axi/ruckus.tcl', '/mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/base/ruckus.tcl']
+2026-06-02T21:16:59 [INFO] 主测试文件: /mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v
+2026-06-02T21:16:59 [INFO]   SV 文件: /mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v
+2026-06-02T21:16:59 [INFO]   VHDL 文件: /mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/axi/axi-lite/ip_integrator/AxiDualPortRamIpIntegrator.vhd
+2026-06-02T21:16:59 [INFO]   TCL 文件: /mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ruckus.tcl
+2026-06-02T21:16:59 [INFO] --- [G1] 文件管理 ---
+2026-06-02T21:16:59 [DEBUG] open_file: uri=file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v, content_len=318955
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(open_file) | {"jsonrpc": "2.0", "id": 2, "method": "tools/call", "params": {"name": "open_file", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v", "content": "/*\n * ------------------------------------------------------------
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(open_file) | {"jsonrpc": "2.0", "id": 2, "result": {"content": [{"type": "text", "text": "opened: file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G1] open_file: PASS  | uri=file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/et
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(read_file) | {"jsonrpc": "2.0", "id": 3, "method": "tools/call", "params": {"name": "read_file", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(read_file) | {"jsonrpc": "2.0", "id": 3, "result": {"content": [{"type": "text", "text": "/*\n * -------------------------------------------------------------------\n * This Verilog file has been automatically generated from a core originally written\n * in Bluespec SystemVerilog (BSV). The original source code 
+2026-06-02T21:16:59 [INFO] ✅ [G1] read_file: PASS  | 内容长度=318955
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(list_open_files) | {"jsonrpc": "2.0", "id": 4, "method": "tools/call", "params": {"name": "list_open_files", "arguments": {}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(list_open_files) | {"jsonrpc": "2.0", "id": 4, "result": {"content": [{"type": "text", "text": "[\n  {\n    \"language\": \"verilog\",\n    \"uri\": \"file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v\"\n  }\n]"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G1] list_open_files: PASS  | 已打开=1个文件, 语言检测=OK
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(close_file) | {"jsonrpc": "2.0", "id": 5, "method": "tools/call", "params": {"name": "close_file", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(close_file) | {"jsonrpc": "2.0", "id": 5, "result": {"content": [{"type": "text", "text": "closed: file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G1] close_file: PASS
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(open_file) | {"jsonrpc": "2.0", "id": 6, "method": "tools/call", "params": {"name": "open_file", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v", "content": "/*\n * ------------------------------------------------------------
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(open_file) | {"jsonrpc": "2.0", "id": 6, "result": {"content": [{"type": "text", "text": "opened: file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] --- [G2] 诊断分析 ---
+2026-06-02T21:16:59 [DEBUG] get_diagnostics: uri=file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(get_diagnostics) | {"jsonrpc": "2.0", "id": 7, "method": "tools/call", "params": {"name": "get_diagnostics", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(get_diagnostics) | {"jsonrpc": "2.0", "id": 7, "result": {"content": [{"type": "text", "text": "[]"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G2] get_diagnostics: PASS  | 诊断数=0, errors=0, 字段校验=OK
+2026-06-02T21:16:59 [INFO] --- [G3] 符号查找 ---
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(get_symbols) | {"jsonrpc": "2.0", "id": 8, "method": "tools/call", "params": {"name": "get_symbols", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(get_symbols) | {"jsonrpc": "2.0", "id": 8, "result": {"content": [{"type": "text", "text": "[\n  {\n    \"col\": 7,\n    \"kind\": \"Module\",\n    \"line\": 46,\n    \"name\": \"mkCrcRawAxiStreamCustomRecv\",\n    \"uri\": \"file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcR
+2026-06-02T21:16:59 [INFO] ✅ [G3] get_symbols: PASS  | 顶级符号数=138, 字段校验=OK
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(search_symbols) | {"jsonrpc": "2.0", "id": 9, "method": "tools/call", "params": {"name": "search_symbols", "arguments": {"query": "clk"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(search_symbols) | {"jsonrpc": "2.0", "id": 9, "result": {"content": [{"type": "text", "text": "[\n  {\n    \"col\": 9,\n    \"kind\": \"Port\",\n    \"line\": 62,\n    \"name\": \"CLK\",\n    \"uri\": \"file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v\"\
+2026-06-02T21:16:59 [INFO] ✅ [G3] search_symbols: PASS  | 匹配数=2
+2026-06-02T21:16:59 [INFO] --- [G4] 导航功能 ---
+2026-06-02T21:16:59 [DEBUG] get_hover: {'uri': 'file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v', 'line': 1, 'character': 1}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(get_hover) | {"jsonrpc": "2.0", "id": 10, "method": "tools/call", "params": {"name": "get_hover", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v", "line": 1, "character": 1}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(get_hover) | {"jsonrpc": "2.0", "id": 10, "result": {"content": [{"type": "text", "text": "No hover info"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G4] get_hover: PASS  | No hover info
+2026-06-02T21:16:59 [DEBUG] get_definition: {'uri': 'file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v', 'line': 1, 'character': 1}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(get_definition) | {"jsonrpc": "2.0", "id": 11, "method": "tools/call", "params": {"name": "get_definition", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v", "line": 1, "character": 1}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(get_definition) | {"jsonrpc": "2.0", "id": 11, "result": {"content": [{"type": "text", "text": "null"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G4] get_definition: PASS  | None
+2026-06-02T21:16:59 [DEBUG] get_references: {'uri': 'file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v', 'line': 1, 'character': 1, 'include_declaration': True}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(get_references) | {"jsonrpc": "2.0", "id": 12, "method": "tools/call", "params": {"name": "get_references", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v", "line": 1, "character": 1, "include_declaration": true}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(get_references) | {"jsonrpc": "2.0", "id": 12, "result": {"content": [{"type": "text", "text": "[]"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G4] get_references: PASS  | []
+2026-06-02T21:16:59 [DEBUG] get_completions: {'uri': 'file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v', 'line': 1, 'character': 1}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(get_completions) | {"jsonrpc": "2.0", "id": 13, "method": "tools/call", "params": {"name": "get_completions", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v", "line": 1, "character": 1}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(get_completions) | {"jsonrpc": "2.0", "id": 13, "result": {"content": [{"type": "text", "text": "[\n  {\n    \"detail\": \"Port\",\n    \"kind\": \"Port\",\n    \"label\": \"ADDR_1\"\n  },\n  {\n    \"detail\": \"Port\",\n    \"kind\": \"Port\",\n    \"label\": \"ADDR_2\"\n  },\n  {\n    \"detail\": \"Port\",\n    \"k
+2026-06-02T21:16:59 [INFO] ✅ [G4] get_completions: PASS  | [{'detail': 'Port', 'kind': 'Port', 'label': 'ADDR_1'}, {'detail': 'Port', 'kind
+2026-06-02T21:16:59 [INFO] --- [G5] 综合检查 ---
+2026-06-02T21:16:59 [DEBUG] check_synthesizability: uri=file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(check_synthesizability) | {"jsonrpc": "2.0", "id": 14, "method": "tools/call", "params": {"name": "check_synthesizability", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(check_synthesizability) | {"jsonrpc": "2.0", "id": 14, "result": {"content": [{"type": "text", "text": "no synthesizability issues found"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G5] check_synthesizability: PASS  | no synthesizability issues found
+2026-06-02T21:16:59 [INFO] --- [G6] 项目信息 ---
+2026-06-02T21:16:59 [DEBUG] get_project_memory: {}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(get_project_memory) | {"jsonrpc": "2.0", "id": 15, "method": "tools/call", "params": {"name": "get_project_memory", "arguments": {}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(get_project_memory) | {"jsonrpc": "2.0", "id": 15, "result": {"content": [{"type": "text", "text": "[\n  {\n    \"symbols\": 138,\n    \"uri\": \"file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v\"\n  }\n]"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G6] get_project_memory: PASS  | 条目数=1
+2026-06-02T21:16:59 [DEBUG] get_file_outline: {'uri': 'file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v'}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(get_file_outline) | {"jsonrpc": "2.0", "id": 16, "method": "tools/call", "params": {"name": "get_file_outline", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(get_file_outline) | {"jsonrpc": "2.0", "id": 16, "result": {"content": [{"type": "text", "text": "[\n  {\n    \"children\": [],\n    \"column\": 7,\n    \"kind\": \"module\",\n    \"line\": 46,\n    \"name\": \"mkCrcRawAxiStreamCustomRecv\"\n  },\n  {\n    \"children\": [],\n    \"column\": 7,\n    \"kind\": \"module\"
+2026-06-02T21:16:59 [INFO] ✅ [G6] get_file_outline: PASS  | 条目数=3
+2026-06-02T21:16:59 [DEBUG] get_module_hierarchy: {'uri': 'file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v'}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(get_module_hierarchy) | {"jsonrpc": "2.0", "id": 17, "method": "tools/call", "params": {"name": "get_module_hierarchy", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(get_module_hierarchy) | {"jsonrpc": "2.0", "id": 17, "result": {"content": [{"type": "text", "text": "[]"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G6] get_module_hierarchy: PASS  | 条目数=0
+2026-06-02T21:16:59 [INFO] --- [G7] 代码补全 ---
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(get_completions) | {"jsonrpc": "2.0", "id": 18, "method": "tools/call", "params": {"name": "get_completions", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v", "line": 1, "character": 1}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(get_completions) | {"jsonrpc": "2.0", "id": 18, "result": {"content": [{"type": "text", "text": "[\n  {\n    \"detail\": \"Port\",\n    \"kind\": \"Port\",\n    \"label\": \"ADDR_1\"\n  },\n  {\n    \"detail\": \"Port\",\n    \"kind\": \"Port\",\n    \"label\": \"ADDR_2\"\n  },\n  {\n    \"detail\": \"Port\",\n    \"k
+2026-06-02T21:16:59 [INFO] ✅ [G7] get_completions: PASS  | 补全数=232
+2026-06-02T21:16:59 [INFO] --- [G8] 搜索功能 ---
+2026-06-02T21:16:59 [DEBUG] search_for_pattern: pattern=always
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(search_for_pattern) | {"jsonrpc": "2.0", "id": 19, "method": "tools/call", "params": {"name": "search_for_pattern", "arguments": {"pattern": "always"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(search_for_pattern) | {"jsonrpc": "2.0", "id": 19, "result": {"content": [{"type": "text", "text": "[\n  {\n    \"line\": 2978,\n    \"text\": \"always@(crc_crcAxiStream_crcRespFifoOut_preProcessResBuf_D_OUT)\",\n    \"uri\": \"file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxi
+2026-06-02T21:16:59 [INFO] ✅ [G8] search_for_pattern: PASS  | 匹配数=69
+2026-06-02T21:16:59 [DEBUG] search_for_pattern: pattern=always_ff.*clk (regex)
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(search_for_pattern) | {"jsonrpc": "2.0", "id": 20, "method": "tools/call", "params": {"name": "search_for_pattern", "arguments": {"pattern": "always_ff.*clk"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(search_for_pattern) | {"jsonrpc": "2.0", "id": 20, "result": {"content": [{"type": "text", "text": "[]"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G8] search_for_pattern(regex): PASS  | 匹配数=0
+2026-06-02T21:16:59 [INFO] --- [G9] 格式化 ---
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(format_file) | {"jsonrpc": "2.0", "id": 21, "method": "tools/call", "params": {"name": "format_file", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(format_file) | {"jsonrpc": "2.0", "id": 21, "result": {"content": [{"type": "text", "text": "formatted 318955 bytes"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G9] format_file: PASS  | formatted 318955 bytes
+2026-06-02T21:16:59 [INFO] --- [G10] TCL 专项 ---
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(open_file) | {"jsonrpc": "2.0", "id": 22, "method": "tools/call", "params": {"name": "open_file", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ruckus.tcl", "content": "# Load RUCKUS environment and library\nsource $::env(RUCKUS_PROC_TCL)\n\n# Check for submodule tagging\nif { [
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(open_file) | {"jsonrpc": "2.0", "id": 22, "result": {"content": [{"type": "text", "text": "opened: file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ruckus.tcl"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G10] open_file(tcl): PASS  | TCL 文件已打开
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(get_diagnostics) | {"jsonrpc": "2.0", "id": 23, "method": "tools/call", "params": {"name": "get_diagnostics", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ruckus.tcl"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(get_diagnostics) | {"jsonrpc": "2.0", "id": 23, "result": {"content": [{"type": "text", "text": "[]"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G10] get_diagnostics(tcl): PASS  | 诊断数=0
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(get_symbols) | {"jsonrpc": "2.0", "id": 24, "method": "tools/call", "params": {"name": "get_symbols", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ruckus.tcl"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(get_symbols) | {"jsonrpc": "2.0", "id": 24, "result": {"content": [{"type": "text", "text": "[]"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G10] get_symbols(tcl): PASS  | 符号数=0
+2026-06-02T21:16:59 [INFO] --- [G11] 文件变更 ---
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(update_file) | {"jsonrpc": "2.0", "id": 25, "method": "tools/call", "params": {"name": "update_file", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v", "content": "/*\n * ---------------------------------------------------------
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(update_file) | {"jsonrpc": "2.0", "id": 25, "result": {"content": [{"type": "text", "text": "updated: file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G11] update_file: PASS  | updated: file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhd
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(update_file) | {"jsonrpc": "2.0", "id": 26, "method": "tools/call", "params": {"name": "update_file", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v", "content": "/*\n * ---------------------------------------------------------
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(update_file) | {"jsonrpc": "2.0", "id": 26, "result": {"content": [{"type": "text", "text": "updated: file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v"}], "isError": false}}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(open_file) | {"jsonrpc": "2.0", "id": 27, "method": "tools/call", "params": {"name": "open_file", "arguments": {"uri": "file:///tmp/__thanos_replace_test_4182861.sv", "content": "module _test_replace;\nwire OLD_SIGNAL;\nendmodule"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(open_file) | {"jsonrpc": "2.0", "id": 27, "result": {"content": [{"type": "text", "text": "opened: file:///tmp/__thanos_replace_test_4182861.sv"}], "isError": false}}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(replace_content) | {"jsonrpc": "2.0", "id": 28, "method": "tools/call", "params": {"name": "replace_content", "arguments": {"uri": "file:///tmp/__thanos_replace_test_4182861.sv", "old_text": "OLD_SIGNAL", "new_text": "NEW_SIGNAL"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(replace_content) | {"jsonrpc": "2.0", "id": 28, "result": {"content": [{"type": "text", "text": "replaced"}], "isError": false}}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(read_file) | {"jsonrpc": "2.0", "id": 29, "method": "tools/call", "params": {"name": "read_file", "arguments": {"uri": "file:///tmp/__thanos_replace_test_4182861.sv"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(read_file) | {"jsonrpc": "2.0", "id": 29, "result": {"content": [{"type": "text", "text": "module _test_replace;\nwire NEW_SIGNAL;\nendmodule"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G11] replace_content: PASS  | 内容替换验证通过
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(replace_lines) | {"jsonrpc": "2.0", "id": 30, "method": "tools/call", "params": {"name": "replace_lines", "arguments": {"uri": "file:///tmp/__thanos_replace_test_4182861.sv", "start_line": 1, "end_line": 2, "new_text": "wire REPLACED_LINE;"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(replace_lines) | {"jsonrpc": "2.0", "id": 30, "result": {"content": [{"type": "text", "text": "replaced lines 1-2"}], "isError": false}}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(read_file) | {"jsonrpc": "2.0", "id": 31, "method": "tools/call", "params": {"name": "read_file", "arguments": {"uri": "file:///tmp/__thanos_replace_test_4182861.sv"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(read_file) | {"jsonrpc": "2.0", "id": 31, "result": {"content": [{"type": "text", "text": "module _test_replace;\nwire REPLACED_LINE;\nendmodule"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G11] replace_lines: PASS  | 行替换验证通过
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(close_file) | {"jsonrpc": "2.0", "id": 32, "method": "tools/call", "params": {"name": "close_file", "arguments": {"uri": "file:///tmp/__thanos_replace_test_4182861.sv"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(close_file) | {"jsonrpc": "2.0", "id": 32, "result": {"content": [{"type": "text", "text": "closed: file:///tmp/__thanos_replace_test_4182861.sv"}], "isError": false}}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(create_file) | {"jsonrpc": "2.0", "id": 33, "method": "tools/call", "params": {"name": "create_file", "arguments": {"path": "/tmp/__thanos_created_4182861.sv", "content": "module auto_created;\nendmodule"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(create_file) | {"jsonrpc": "2.0", "id": 33, "result": {"content": [{"type": "text", "text": "opened: file:///tmp/__thanos_created_4182861.sv"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G11] create_file: PASS  | 文件已创建: /tmp/__thanos_created_4182861.sv
+2026-06-02T21:16:59 [INFO] --- [G12] 综合检查-有问题文件 ---
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(open_file) | {"jsonrpc": "2.0", "id": 34, "method": "tools/call", "params": {"name": "open_file", "arguments": {"uri": "file:///tmp/__thanos_tb_test_4182861.sv", "content": "module synth_test_tb;\n  reg clk;\n  // \u4ee5\u4e0b\u4ee3\u7801\u8fdd\u53cd\u7efc\u5408\u89c4\u5219\n  initial begin\n    clk = 0;\n    fo
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(open_file) | {"jsonrpc": "2.0", "id": 34, "result": {"content": [{"type": "text", "text": "opened: file:///tmp/__thanos_tb_test_4182861.sv"}], "isError": false}}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(get_diagnostics) | {"jsonrpc": "2.0", "id": 35, "method": "tools/call", "params": {"name": "get_diagnostics", "arguments": {"uri": "file:///tmp/__thanos_tb_test_4182861.sv"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(get_diagnostics) | {"jsonrpc": "2.0", "id": 35, "result": {"content": [{"type": "text", "text": "[]"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G12] get_diagnostics(synth): PASS  | 诊断数=0, 问题数=0 (注：testbench 未触发诊断，检查 synth_checker 规则)
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(close_file) | {"jsonrpc": "2.0", "id": 36, "method": "tools/call", "params": {"name": "close_file", "arguments": {"uri": "file:///tmp/__thanos_tb_test_4182861.sv"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(close_file) | {"jsonrpc": "2.0", "id": 36, "result": {"content": [{"type": "text", "text": "closed: file:///tmp/__thanos_tb_test_4182861.sv"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] --- [G13] 扩展工具 ---
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(set_log_level) | {"jsonrpc": "2.0", "id": 37, "method": "tools/call", "params": {"name": "set_log_level", "arguments": {"level": "warn"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(set_log_level) | {"jsonrpc": "2.0", "id": 37, "result": {"content": [{"type": "text", "text": "log level set to warn"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G13] set_log_level: PASS  | log level set to warn
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(open_file) | {"jsonrpc": "2.0", "id": 38, "method": "tools/call", "params": {"name": "open_file", "arguments": {"uri": "file:///tmp/__thanos_rename_4182861.sv", "content": "module rename_test;\nwire OLD_NAME;\nassign OLD_NAME = 1;\nendmodule"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(open_file) | {"jsonrpc": "2.0", "id": 38, "result": {"content": [{"type": "text", "text": "opened: file:///tmp/__thanos_rename_4182861.sv"}], "isError": false}}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(rename_symbol) | {"jsonrpc": "2.0", "id": 39, "method": "tools/call", "params": {"name": "rename_symbol", "arguments": {"uri": "file:///tmp/__thanos_rename_4182861.sv", "old_name": "OLD_NAME", "new_name": "NEW_NAME"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(rename_symbol) | {"jsonrpc": "2.0", "id": 39, "result": {"content": [{"type": "text", "text": "renamed 2 occurrences of 'OLD_NAME' to 'NEW_NAME'"}], "isError": false}}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(read_file) | {"jsonrpc": "2.0", "id": 40, "method": "tools/call", "params": {"name": "read_file", "arguments": {"uri": "file:///tmp/__thanos_rename_4182861.sv"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(read_file) | {"jsonrpc": "2.0", "id": 40, "result": {"content": [{"type": "text", "text": "module rename_test;\nwire NEW_NAME;\nassign NEW_NAME = 1;\nendmodule"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G13] rename_symbol: PASS  | 符号重命名验证通过: renamed 2 occurrences of 'OLD_NAME' to 'NEW_NAME'
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(close_file) | {"jsonrpc": "2.0", "id": 41, "method": "tools/call", "params": {"name": "close_file", "arguments": {"uri": "file:///tmp/__thanos_rename_4182861.sv"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(close_file) | {"jsonrpc": "2.0", "id": 41, "result": {"content": [{"type": "text", "text": "closed: file:///tmp/__thanos_rename_4182861.sv"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] --- [G14] 边界测试 ---
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(read_file) | {"jsonrpc": "2.0", "id": 42, "method": "tools/call", "params": {"name": "read_file", "arguments": {"uri": "file:///nonexistent/path/ghost.sv"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(read_file) | {"jsonrpc": "2.0", "id": 42, "result": {"content": [{"type": "text", "text": "error: file not open: file:///nonexistent/path/ghost.sv"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G14] read_file(nonexistent): PASS  | 正确拒绝: error: file not open: file:///nonexistent/path/ghost.sv
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(get_diagnostics) | {"jsonrpc": "2.0", "id": 43, "method": "tools/call", "params": {"name": "get_diagnostics", "arguments": {"uri": "not-a-valid-uri"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(get_diagnostics) | {"jsonrpc": "2.0", "id": 43, "result": {"content": [{"type": "text", "text": "error: invalid URI: relative URL without a base"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G14] get_diagnostics(invalid_uri): PASS  | 正确拒绝: error: invalid URI: relative URL without a base
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(get_definition) | {"jsonrpc": "2.0", "id": 44, "method": "tools/call", "params": {"name": "get_definition", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ethernet/RoCEv2/blue-crc/mkCrcRawAxiStreamCustomRecv.v", "line": 999999, "character": 0}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(get_definition) | {"jsonrpc": "2.0", "id": 44, "result": {"content": [{"type": "text", "text": "null"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G14] get_definition(huge_line): PASS  | 不崩溃: None
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(close_file) | {"jsonrpc": "2.0", "id": 45, "method": "tools/call", "params": {"name": "close_file", "arguments": {"uri": "file:///nonexistent.sv"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(close_file) | {"jsonrpc": "2.0", "id": 45, "result": {"content": [{"type": "text", "text": "closed: file:///nonexistent.sv"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G14] close_file(not_open): PASS  | 正确处理: closed: file:///nonexistent.sv
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(replace_content) | {"jsonrpc": "2.0", "id": 46, "method": "tools/call", "params": {"name": "replace_content", "arguments": {"uri": "file:///nonexistent.sv", "old_text": "anything", "new_text": "something"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(replace_content) | {"jsonrpc": "2.0", "id": 46, "result": {"content": [{"type": "text", "text": "error: file not open: file:///nonexistent.sv"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ✅ [G14] replace_content(not_open): PASS  | 正确拒绝: error: file not open: file:///nonexistent.sv
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(close_file) | {"jsonrpc": "2.0", "id": 47, "method": "tools/call", "params": {"name": "close_file", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ruckus.tcl"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(close_file) | {"jsonrpc": "2.0", "id": 47, "result": {"content": [{"type": "text", "text": "closed: file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/ruckus.tcl"}], "isError": false}}
+2026-06-02T21:16:59 [DEBUG] → RPC tools/call(close_file) | {"jsonrpc": "2.0", "id": 48, "method": "tools/call", "params": {"name": "close_file", "arguments": {"uri": "file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/axi/axi-lite/ip_integrator/AxiDualPortRamIpIntegrator.vhd"}}}
+2026-06-02T21:16:59 [DEBUG] ← RPC tools/call(close_file) | {"jsonrpc": "2.0", "id": 48, "result": {"content": [{"type": "text", "text": "closed: file:///mnt/big10T/wrk/thanosLSP/HDL_test_cases/vhdl_surf/axi/axi-lite/ip_integrator/AxiDualPortRamIpIntegrator.vhd"}], "isError": false}}
+2026-06-02T21:16:59 [INFO] ============================================================
+2026-06-02T21:16:59 [INFO] 测试完成: 34/34 PASS  |  0 FAIL  |  0 SKIP
+2026-06-02T21:16:59 [INFO] ============================================================
+2026-06-02T21:16:59 [INFO] JSON 报告已写入: /tmp/vhdl_surf_retest.json
+2026-06-02T21:16:59 [DEBUG] 发送 stdin EOF，等待进程退出...
+2026-06-02T21:16:59 [INFO] 进程已停止，退出码: 0
