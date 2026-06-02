@@ -37,7 +37,7 @@ async fn test_get_completions_returns_json() {
             line: 0,
             character: 0,
             prefix: None,
-        })
+        }))
         .await;
     // Should return a valid JSON array (may be empty for position with no completion)
     assert!(
@@ -60,7 +60,7 @@ async fn test_get_definition_returns_json() {
             uri: uri.to_string(),
             line: 0,
             character: 7, // 'counter' identifier
-        })
+        }))
         .await;
     // Valid response is either null, an object, or an error string
     assert!(!res.is_empty(), "get_definition should return non-empty response");
@@ -73,7 +73,7 @@ async fn test_get_references_returns_json() {
     s.open_file(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
-    })
+    }))
     .await;
     let res = s
         .get_references(Parameters(GetDefinitionParams {
@@ -92,14 +92,14 @@ async fn test_get_hover_returns_response() {
     s.open_file(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
-    })
+    }))
     .await;
     let res = s
         .get_hover(Parameters(GetDefinitionParams {
             uri: uri.to_string(),
             line: 0,
             character: 7,
-        })
+        }))
         .await;
     assert!(!res.is_empty(), "get_hover should return non-empty response");
 }
@@ -111,7 +111,7 @@ async fn test_rename_symbol_modifies_content() {
     s.open_file(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
-    })
+    }))
     .await;
     let res = s
         .rename_symbol(Parameters(RenameSymbolParams {
@@ -126,7 +126,7 @@ async fn test_rename_symbol_modifies_content() {
     let content = s
         .read_file(Parameters(UriParam {
             uri: uri.to_string(),
-        })
+        }))
         .await;
     assert!(
         content.contains("counter_v2") || res.contains("error"),
@@ -141,7 +141,7 @@ async fn test_replace_lines_modifies_content() {
     s.open_file(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
-    })
+    }))
     .await;
     // Replace first line (0-based, exclusive end)
     let res = s
@@ -150,14 +150,14 @@ async fn test_replace_lines_modifies_content() {
             start_line: 0,
             end_line: 1,
             new_text: "// replaced line\n".to_string(),
-        })
+        }))
         .await;
     assert!(!res.is_empty(), "replace_lines should return non-empty response");
     // Verify content changed
     let content = s
         .read_file(Parameters(UriParam {
             uri: uri.to_string(),
-        })
+        }))
         .await;
     assert!(
         content.contains("replaced line") || res.contains("error"),
@@ -173,7 +173,7 @@ async fn test_create_file_creates_and_opens() {
         .create_file(Parameters(CreateFileParams {
             path: path.to_string(),
             content: "// created by test\nmodule empty_mod; endmodule\n".to_string(),
-        })
+        }))
         .await;
     assert!(
         res.contains("created") || res.contains("opened") || !res.contains("error"),
@@ -187,7 +187,7 @@ async fn test_set_log_level_valid() {
     let res = s
         .set_log_level(Parameters(SetLogLevelParams {
             level: "warn".to_string(),
-        })
+        }))
         .await;
     assert!(
         res.contains("warn") || res.contains("log"),
@@ -201,12 +201,12 @@ async fn test_set_log_level_restores_info() {
     // Set to debug then back to info
     s.set_log_level(Parameters(SetLogLevelParams {
         level: "debug".to_string(),
-    })
+    }))
     .await;
     let res = s
         .set_log_level(Parameters(SetLogLevelParams {
             level: "info".to_string(),
-        })
+        }))
         .await;
     assert!(!res.is_empty(), "set_log_level(info) should respond");
 }
@@ -218,12 +218,12 @@ async fn test_format_file_sv_returns_response() {
     s.open_file(thanosLSP_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
-    })
+    }))
     .await;
     let res = s
         .format_file(UriParam {
             uri: uri.to_string(),
-        })
+        }))
         .await;
     // May succeed or return "verible not found" - must not panic
     assert!(!res.is_empty(), "format_file should return non-empty response");
@@ -235,7 +235,7 @@ async fn test_error_on_unopened_file() {
     let res = s
         .read_file(Parameters(UriParam {
             uri: "file:///nonexistent_file_12345.sv".to_string(),
-        })
+        }))
         .await;
     assert!(
         res.contains("error") || res.contains("not open"),
@@ -266,7 +266,7 @@ end architecture;
     let res = s
         .get_diagnostics(Parameters(UriParam {
             uri: uri.to_string(),
-        })
+        }))
         .await;
     // Should return a JSON array of diagnostics (empty = no errors for valid VHDL)
     assert!(

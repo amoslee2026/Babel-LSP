@@ -50,7 +50,7 @@ async fn test_open_update_read_cycle() {
         .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: SIMPLE_SV.to_string(),
-        })
+        }))
         .await;
     assert!(res.contains("opened"), "open: {res}");
 
@@ -60,7 +60,7 @@ async fn test_open_update_read_cycle() {
         .update_file(Parameters(UpdateFileParams {
             uri: uri.to_string(),
             content: new_content,
-        })
+        }))
         .await;
     assert!(res.contains("updated"), "update: {res}");
 
@@ -68,7 +68,7 @@ async fn test_open_update_read_cycle() {
     let content = server
         .read_file(Parameters(UriParam {
             uri: uri.to_string(),
-        })
+        }))
         .await;
     assert!(content.contains("WIDTH = 16"), "read: {content}");
 }
@@ -81,13 +81,13 @@ async fn test_get_symbols_for_sv_module() {
         .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: SIMPLE_SV.to_string(),
-        })
+        }))
         .await;
 
     let symbols = server
         .get_symbols(Parameters(UriParam {
             uri: uri.to_string(),
-        })
+        }))
         .await;
     // Should contain adder module
     assert!(symbols.contains("adder"), "symbols: {symbols}");
@@ -101,7 +101,7 @@ async fn test_synthesizability_detects_issues() {
         .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: RTL_WITH_ISSUES.to_string(),
-        })
+        }))
         .await;
 
     let result = server
@@ -127,14 +127,14 @@ async fn test_search_pattern_across_file() {
         .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: SIMPLE_SV.to_string(),
-        })
+        }))
         .await;
 
     let result = server
         .search_for_pattern(SearchPatternParams {
             pattern: "assign".to_string(),
             uri: Some(uri.to_string()),
-        })
+        }))
         .await;
     assert!(result.contains("assign"), "search: {result}");
 }
@@ -147,7 +147,7 @@ async fn test_replace_content_and_verify() {
         .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: SIMPLE_SV.to_string(),
-        })
+        }))
         .await;
 
     let result = server
@@ -155,14 +155,14 @@ async fn test_replace_content_and_verify() {
             uri: uri.to_string(),
             old_text: "assign sum = a + b".to_string(),
             new_text: "assign sum = a ^ b".to_string(),
-        })
+        }))
         .await;
     assert_eq!(result, "replaced");
 
     let content = server
         .read_file(Parameters(UriParam {
             uri: uri.to_string(),
-        })
+        }))
         .await;
     assert!(content.contains("a ^ b"), "content: {content}");
     assert!(!content.contains("a + b"), "old text still present");
@@ -176,18 +176,18 @@ async fn test_close_and_verify_removed() {
         .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: SIMPLE_SV.to_string(),
-        })
+        }))
         .await;
     server
         .close_file(Parameters(UriParam {
             uri: uri.to_string(),
-        })
+        }))
         .await;
 
     let content = server
         .read_file(Parameters(UriParam {
             uri: uri.to_string(),
-        })
+        }))
         .await;
     assert!(content.starts_with("error"), "should be error: {content}");
 }
@@ -200,20 +200,20 @@ async fn test_search_symbols_multi_file() {
         .open_file(Parameters(OpenFileParams {
             uri: "file:///a.sv".to_string(),
             content: "module module_a;\nendmodule".to_string(),
-        })
+        }))
         .await;
     server
         .open_file(Parameters(OpenFileParams {
             uri: "file:///b.sv".to_string(),
             content: "module module_b;\nendmodule".to_string(),
-        })
+        }))
         .await;
 
     let result = server
         .search_symbols(Parameters(SearchSymbolsParams {
             query: "module".to_string(),
             uri: None,
-        })
+        }))
         .await;
     assert!(result.contains("module_a"), "search_symbols: {result}");
     assert!(result.contains("module_b"), "search_symbols: {result}");
@@ -226,7 +226,7 @@ async fn test_project_memory_lists_files() {
         .open_file(Parameters(OpenFileParams {
             uri: "file:///top.sv".to_string(),
             content: "module top;\nendmodule".to_string(),
-        })
+        }))
         .await;
 
     let memory = server.get_project_memory().await;
@@ -241,13 +241,13 @@ async fn test_get_diagnostics_sv_synth() {
         .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: "module foo;\n  initial begin\n    a = 1;\n  end\nendmodule".to_string(),
-        })
+        }))
         .await;
 
     let diags = server
         .get_diagnostics(Parameters(UriParam {
             uri: uri.to_string(),
-        })
+        }))
         .await;
     // Should detect initial block
     assert!(diags.contains("SYN-V-001"), "diagnostics: {diags}");

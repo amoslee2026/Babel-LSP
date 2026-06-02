@@ -28,7 +28,7 @@ async fn perf_mcp_tool_response_under_100ms() {
         .open_file(Parameters(OpenFileParams {
             uri: uri.to_string(),
             content: content.clone(),
-        })
+        }))
         .await;
 
     // Warm up
@@ -36,7 +36,7 @@ async fn perf_mcp_tool_response_under_100ms() {
         .search_symbols(Parameters(SearchSymbolsParams {
             query: "mod_0".to_string(),
             uri: Some(uri.to_string()),
-        })
+        }))
         .await;
 
     // Measure 10 iterations
@@ -46,7 +46,7 @@ async fn perf_mcp_tool_response_under_100ms() {
             .search_symbols(Parameters(SearchSymbolsParams {
                 query: "mod_".to_string(),
                 uri: Some(uri.to_string()),
-            })
+            }))
             .await;
     }
     let avg_ms = start.elapsed().as_millis() / 10;
@@ -71,7 +71,7 @@ async fn perf_open_file_latency_under_200ms() {
             .open_file(Parameters(OpenFileParams {
                 uri,
                 content: content.clone(),
-            })
+            }))
             .await;
     }
     let avg_ms = start.elapsed().as_millis() / 10;
