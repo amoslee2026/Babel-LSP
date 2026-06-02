@@ -1246,7 +1246,7 @@ mod tests {
         let content = server
             .read_file(Parameters(UriParam {
                 uri: "file:///test.sv".to_string(),
-            })))
+            }))
             .await;
         assert!(content.contains("module foo"));
     }
@@ -1258,17 +1258,17 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.sv".to_string(),
                 content: "module foo;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         server
             .close_file(Parameters(UriParam {
                 uri: "file:///test.sv".to_string(),
-            })))
+            }))
             .await;
         let content = server
             .read_file(Parameters(UriParam {
                 uri: "file:///test.sv".to_string(),
-            })))
+            }))
             .await;
         assert!(content.contains("error"), "should be error: {content}");
     }
@@ -1280,12 +1280,12 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.sv".to_string(),
                 content: "module my_module(\n  input clk\n);\nendmodule".to_string(),
-            })))
+            }))
             .await;
         let result = server
             .get_symbols(Parameters(UriParam {
                 uri: "file:///test.sv".to_string(),
-            })))
+            }))
             .await;
         assert!(result.contains("my_module"), "got: {result}");
     }
@@ -1297,12 +1297,12 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///rtl.sv".to_string(),
                 content: "module foo;\n  initial begin\n    #10;\n  end\nendmodule".to_string(),
-            })))
+            }))
             .await;
         let result = server
             .check_synthesizability(Parameters(UriParam {
                 uri: "file:///rtl.sv".to_string(),
-            })))
+            }))
             .await;
         assert!(
             result.contains("SYN-V"),
@@ -1317,20 +1317,20 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.sv".to_string(),
                 content: "module old_name;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         let result = server
             .replace_content(Parameters(ReplaceContentParams {
                 uri: "file:///test.sv".to_string(),
                 old_text: "old_name".to_string(),
                 new_text: "new_name".to_string(),
-            })))
+            }))
             .await;
         assert_eq!(result, "replaced");
         let content = server
             .read_file(Parameters(UriParam {
                 uri: "file:///test.sv".to_string(),
-            })))
+            }))
             .await;
         assert!(content.contains("new_name"), "got: {content}");
     }
@@ -1342,7 +1342,7 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.sv".to_string(),
                 content: "module foo;\n  always_ff @(posedge clk);\nendmodule".to_string(),
-            })))
+            }))
             .await;
         let result = server
             .search_for_pattern(Parameters(SearchPatternParams {
@@ -1360,7 +1360,7 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///a.sv".to_string(),
                 content: "module a;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         let result = server.get_project_memory().await;
         assert!(result.contains("a.sv"), "got: {result}");
@@ -1761,7 +1761,7 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///t.sv".to_string(),
                 content: "wire clk;\nwire clk_en;\nassign out = clk;".to_string(),
-            })))
+            }))
             .await;
         // 'clk' at line 0 col 5 and line 2 col 13; 'clk_en' on line 1 must NOT match
         let result = server
@@ -1769,7 +1769,7 @@ mod tests {
                 uri: "file:///t.sv".to_string(),
                 line: 0,
                 character: 5,
-            })))
+            }))
             .await;
         let v: serde_json::Value =
             serde_json::from_str(&result).unwrap_or(serde_json::json!([]));
@@ -1785,7 +1785,7 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///hover_mod.sv".to_string(),
                 content: "module foo;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         // Position on 'foo' (col 7)
         let result = server
@@ -1793,7 +1793,7 @@ mod tests {
                 uri: "file:///hover_mod.sv".to_string(),
                 line: 0,
                 character: 7,
-            })))
+            }))
             .await;
         assert!(!result.is_empty(), "hover on module name should return something");
     }
@@ -1807,14 +1807,14 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///hover_null.sv".to_string(),
                 content: "module foo;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         let result = server
             .get_hover(Parameters(GetDefinitionParams {
                 uri: "file:///hover_null.sv".to_string(),
                 line: 0,
                 character: 7, // 'f' in "foo"
-            })))
+            }))
             .await;
         assert!(!result.is_empty(), "hover should return a response");
     }
@@ -1826,13 +1826,13 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///ss.sv".to_string(),
                 content: "module my_counter;\nendmodule\nmodule adder;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         let result = server
             .search_symbols(Parameters(SearchSymbolsParams {
                 query: "counter".to_string(),
                 uri: None,
-            })))
+            }))
             .await;
         let v: serde_json::Value =
             serde_json::from_str(&result).unwrap_or(serde_json::json!([]));
@@ -1854,19 +1854,19 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///fa.sv".to_string(),
                 content: "module mod_a;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///fb.sv".to_string(),
                 content: "module mod_b;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         let result = server
             .search_symbols(Parameters(SearchSymbolsParams {
                 query: "mod".to_string(),
                 uri: Some("file:///fa.sv".to_string()),
-            })))
+            }))
             .await;
         let v: serde_json::Value =
             serde_json::from_str(&result).unwrap_or(serde_json::json!([]));
@@ -1884,7 +1884,7 @@ mod tests {
         let result = server
             .set_log_level(Parameters(SetLogLevelParams {
                 level: "invalid_level_xyz".to_string(),
-            })))
+            }))
             .await;
         assert!(
             result.contains("error") || result.contains("invalid") || result.contains("unknown"),
@@ -1899,7 +1899,7 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///rl_bounds.sv".to_string(),
                 content: "module foo;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         let result = server
             .replace_lines(Parameters(ReplaceLinesParams {
@@ -1907,7 +1907,7 @@ mod tests {
                 start_line: 100,
                 end_line: 200,
                 new_text: "// replacement\n".to_string(),
-            })))
+            }))
             .await;
         // Must not panic; either error or graceful success
         assert!(!result.is_empty(), "replace_lines out-of-bounds should return a response");
@@ -1920,7 +1920,7 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///rename_wb.sv".to_string(),
                 content: "module clk_gen;\n  wire clk;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         // Renaming standalone 'clk' should NOT touch 'clk_gen'
         let result = server
@@ -1928,12 +1928,12 @@ mod tests {
                 uri: "file:///rename_wb.sv".to_string(),
                 old_name: "clk".to_string(),
                 new_name: "sys_clk".to_string(),
-            })))
+            }))
             .await;
         let content = server
             .read_file(Parameters(UriParam {
                 uri: "file:///rename_wb.sv".to_string(),
-            })))
+            }))
             .await;
         assert!(
             content.contains("clk_gen") || result.contains("error"),
@@ -1948,14 +1948,14 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///rc_notfound.sv".to_string(),
                 content: "module foo;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         let result = server
             .replace_content(Parameters(ReplaceContentParams {
                 uri: "file:///rc_notfound.sv".to_string(),
                 old_text: "nonexistent_text_xyz_abc".to_string(),
                 new_text: "replacement".to_string(),
-            })))
+            }))
             .await;
         assert!(
             result.contains("error") || result.contains("not found"),
@@ -1970,13 +1970,13 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///lang.sv".to_string(),
                 content: "module foo;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///lang.vhd".to_string(),
                 content: "entity e is end entity;".to_string(),
-            })))
+            }))
             .await;
         let result = server.list_open_files().await;
         let v: serde_json::Value = serde_json::from_str(&result).unwrap();
@@ -2004,7 +2004,7 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///re_test.sv".to_string(),
                 content: "module foo;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         let result = server
             .search_for_pattern(SearchPatternParams {
@@ -2025,13 +2025,13 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///ga.sv".to_string(),
                 content: "module foo_top;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///gb.sv".to_string(),
                 content: "module bar_top;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         // Global search (no uri) should search all open files
         let result = server
@@ -2055,12 +2055,12 @@ mod tests {
                 content:
                     "module design(\n  input logic clk,\n  output logic out\n);\nassign out = clk;\nendmodule"
                         .to_string(),
-            })))
+            }))
             .await;
         let result = server
             .get_file_outline(Parameters(UriParam {
                 uri: "file:///outline.sv".to_string(),
-            })))
+            }))
             .await;
         assert!(!result.contains("error"), "get_file_outline should not error: {result}");
         let v: serde_json::Value =
@@ -2075,12 +2075,12 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///hier.sv".to_string(),
                 content: "module top;\n  sub_mod u1(.clk(clk));\nendmodule".to_string(),
-            })))
+            }))
             .await;
         let result = server
             .get_module_hierarchy(Parameters(UriParam {
                 uri: "file:///hier.sv".to_string(),
-            })))
+            }))
             .await;
         assert!(
             !result.contains("error"),
@@ -2098,12 +2098,12 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///leaf.sv".to_string(),
                 content: "module leaf;\n  wire clk;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         let result = server
             .get_module_hierarchy(Parameters(UriParam {
                 uri: "file:///leaf.sv".to_string(),
-            })))
+            }))
             .await;
         let v: serde_json::Value =
             serde_json::from_str(&result).unwrap_or(serde_json::json!(null));
@@ -2118,7 +2118,7 @@ mod tests {
         let result = server
             .get_file_outline(Parameters(UriParam {
                 uri: "!!!not_a_uri".to_string(),
-            })))
+            }))
             .await;
         assert!(result.contains("error"), "invalid URI should return error: {result}");
     }
@@ -2129,7 +2129,7 @@ mod tests {
         let result = server
             .get_module_hierarchy(Parameters(UriParam {
                 uri: "!!!not_a_uri".to_string(),
-            })))
+            }))
             .await;
         assert!(result.contains("error"), "invalid URI should return error: {result}");
     }
@@ -2140,7 +2140,7 @@ mod tests {
         let result = server
             .get_module_hierarchy(Parameters(UriParam {
                 uri: "file:///never_opened.sv".to_string(),
-            })))
+            }))
             .await;
         assert!(result.contains("error"), "not-open file should return error: {result}");
     }
@@ -2152,12 +2152,12 @@ mod tests {
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.tcl".to_string(),
                 content: "set x 1".to_string(),
-            })))
+            }))
             .await;
         let result = server
             .get_file_outline(Parameters(UriParam {
                 uri: "file:///test.tcl".to_string(),
-            })))
+            }))
             .await;
         assert!(
             result.contains("error"),
@@ -2173,7 +2173,7 @@ mod tests {
         let result = server
             .check_synthesizability(Parameters(UriParam {
                 uri: "file:///not_opened.sv".to_string(),
-            })))
+            }))
             .await;
         assert!(!result.is_empty(), "check_synthesizability should return a response");
         // Should either say no issues or return JSON diagnostics — not panic
@@ -2191,7 +2191,7 @@ mod tests {
             .update_file(Parameters(UpdateFileParams {
                 uri: "file:///update_new.sv".to_string(),
                 content: "module new_file;\nendmodule".to_string(),
-            })))
+            }))
             .await;
         // Must not panic; returns some response
         assert!(!result.is_empty(), "update_file should return a response");
