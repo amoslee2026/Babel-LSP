@@ -2,7 +2,7 @@
 //!
 //! 使用 Salsa 进行增量计算，redb 持久化
 
-use redb::{Database, TableDefinition};
+use redb::{Database, ReadableTable, TableDefinition};
 use std::path::PathBuf;
 
 const SYMBOLS_TABLE: TableDefinition<&str, &[u8]> = TableDefinition::new("symbols");
