@@ -256,3 +256,24 @@ FileNotFoundError: [Errno 2] No such file or directory: 'target/release/thanosLS
 2026-06-02T20:49:27 [INFO] [Phase S] ✅ 冒烟通过: serverName=rmcp
 2026-06-02T20:49:27 [DEBUG] 发送 stdin EOF，等待进程退出...
 2026-06-02T20:49:27 [INFO] 进程已停止，退出码: 0
+2026-06-02T20:50:57 [INFO] ============================================================
+2026-06-02T20:50:57 [INFO] thanosLSP HDL 系统测试启动
+2026-06-02T20:50:57 [INFO] binary    : /mnt/big10T/wrk/Babel-LSP/target/release/Babel-LSP
+2026-06-02T20:50:57 [INFO] config    : /tmp/thanos_smoke.json
+2026-06-02T20:50:57 [INFO] project   : /mnt/big10T/wrk/Babel-LSP
+2026-06-02T20:50:57 [INFO] log_file  : /mnt/big10T/wrk/Babel-LSP/hdl-test.log
+2026-06-02T20:50:57 [INFO] ============================================================
+2026-06-02T20:50:57 [INFO] 启动进程: /mnt/big10T/wrk/Babel-LSP/target/release/Babel-LSP --mcp  [cwd=/mnt/big10T/wrk/Babel-LSP]
+2026-06-02T20:50:57 [INFO] 进程 PID: 4151667
+2026-06-02T20:50:57 [INFO] ============================================================
+2026-06-02T20:50:57 [INFO] [Phase S] MCP 冒烟测试（握手验证）
+2026-06-02T20:50:57 [INFO] ============================================================
+2026-06-02T20:50:57 [INFO] 执行 MCP initialize 握手...
+2026-06-02T20:50:57 [DEBUG] → RPC initialize | {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2024-11-05", "capabilities": {}, "clientInfo": {"name": "thanoslsp-hdl-test", "version": "1.0.0"}}}
+2026-06-02T20:50:57 [DEBUG] ← RPC initialize | {"jsonrpc": "2.0", "id": 1, "result": {"protocolVersion": "2024-11-05", "capabilities": {"tools": {}}, "serverInfo": {"name": "rmcp", "version": "0.5.0"}, "instructions": "thanosLSP: HDL Language Server (SV/VHDL/TCL). Provides diagnostics, symbols, completions, definitions, references, hover, format
+2026-06-02T20:50:57 [DEBUG] → RPC notifications/initialized | {"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}}
+2026-06-02T20:50:57 [DEBUG]   (通知，无需响应)
+2026-06-02T20:50:57 [INFO] 握手成功: serverInfo={'name': 'rmcp', 'version': '0.5.0'}
+2026-06-02T20:50:57 [INFO] [Phase S] ✅ 冒烟通过: serverName=rmcp
+2026-06-02T20:50:57 [DEBUG] 发送 stdin EOF，等待进程退出...
+2026-06-02T20:50:57 [INFO] 进程已停止，退出码: 0
