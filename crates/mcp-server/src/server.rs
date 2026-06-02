@@ -187,15 +187,6 @@ pub struct ThanosMcpServer {
     tool_router: rmcp::handler::server::router::tool::ToolRouter<Self>,
 }
 
-impl Clone for ThanosMcpServer {
-    fn clone(&self) -> Self {
-        Self {
-            state: self.state.clone(),
-            tool_router: self.tool_router.clone(),
-        }
-    }
-}
-
 impl ThanosMcpServer {
     pub fn new() -> Self {
         Self {
