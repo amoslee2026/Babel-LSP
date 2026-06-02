@@ -1924,11 +1924,11 @@ mod tests {
             .await;
         // Renaming standalone 'clk' should NOT touch 'clk_gen'
         let result = server
-            .rename_symbol(RenameSymbolParams {
+            .rename_symbol(Parameters(RenameSymbolParams {
                 uri: "file:///rename_wb.sv".to_string(),
                 old_name: "clk".to_string(),
                 new_name: "sys_clk".to_string(),
-            }))
+            })))
             .await;
         let content = server
             .read_file(Parameters(UriParam {
