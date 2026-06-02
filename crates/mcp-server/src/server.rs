@@ -893,7 +893,6 @@ impl ThanosMcpServer {
     /// 列出所有已打开的文件
     #[tool(description = "List all currently opened files in the server")]
     pub async fn list_open_files(&self) -> String {
-        let _self: &Self = Box::leak(Box::new(()));
         let state = self.state.lock().await;
         let files: Vec<serde_json::Value> = state
             .file_store
