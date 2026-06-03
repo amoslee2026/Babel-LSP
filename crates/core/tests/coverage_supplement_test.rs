@@ -27,8 +27,8 @@ fn test_diagnostic_with_code() {
 #[test]
 fn test_diagnostic_with_source() {
     let d = Diagnostic::warning(make_loc("file:///b.sv"), "warn".to_string())
-        .with_source("thanosLSP-sv".to_string());
-    assert_eq!(d.source, "thanosLSP-sv");
+        .with_source("babel-lsp-sv".to_string());
+    assert_eq!(d.source, "babel-lsp-sv");
 }
 
 #[test]
@@ -93,7 +93,7 @@ fn test_config_from_file_nonexistent_returns_err() {
 #[test]
 fn test_config_load_from_root_no_file_uses_default() {
     use std::path::Path;
-    // /tmp is guaranteed to exist but has no thanosLSP.json
+    // /tmp is guaranteed to exist but has no Babel-LSP.json
     let result = ProjectConfig::load_from_root(Path::new("/tmp"));
     assert!(result.is_ok());
     let config = result.unwrap();
@@ -133,7 +133,7 @@ fn test_config_from_file_valid_json() {
         "memory": {"scan_interval_secs": 300, "persist_path": "/tmp/.thanos"}
     }"#;
 
-    let path = PathBuf::from("/tmp/thanosLSP_test_config.json");
+    let path = PathBuf::from("/tmp/babel_lsp_test_config.json");
     let mut f = std::fs::File::create(&path).unwrap();
     f.write_all(json.as_bytes()).unwrap();
     drop(f);

@@ -1,6 +1,6 @@
 //! 项目配置解析
 //!
-//! 解析 thanosLSP.json 配置文件
+//! 解析 Babel-LSP.json 配置文件
 
 use serde::{Deserialize, Serialize};
 use std::path::{Path, PathBuf};
@@ -107,7 +107,7 @@ impl ProjectConfig {
 
     /// 从项目根目录加载默认配置
     pub fn load_from_root(root: &Path) -> anyhow::Result<Self> {
-        let config_path = root.join("thanosLSP.json");
+        let config_path = root.join("Babel-LSP.json");
         if config_path.exists() {
             Self::from_file(&config_path)
         } else {

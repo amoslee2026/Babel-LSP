@@ -125,7 +125,7 @@ impl SynthChecker {
                     };
                     let mut diag = Diagnostic::warning(loc, rule.message().to_string());
                     diag.code = Some(rule.code().to_string());
-                    diag.source = "thanosLSP-sv/synth".to_string();
+                    diag.source = "babel-lsp-sv/synth".to_string();
                     diagnostics.push(diag);
                 }
             }

@@ -225,13 +225,13 @@ fn test_convert_diagnostics_with_source() {
         end: Position::new(0, 10),
     };
     let diag = Diagnostic {
-        source: "thanosLSP".to_string(),
+        source: "babel-lsp".to_string(),
         ..Diagnostic::error(loc, "test".to_string())
     };
     let lsp_diags = convert_diagnostics(&[diag]);
 
     assert_eq!(lsp_diags.len(), 1);
-    assert_eq!(lsp_diags[0].source, Some("thanosLSP".to_string()));
+    assert_eq!(lsp_diags[0].source, Some("babel-lsp".to_string()));
 }
 
 #[test]

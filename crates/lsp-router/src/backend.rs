@@ -155,7 +155,7 @@ impl LanguageServer for ThanosLspBackend {
         Ok(InitializeResult {
             capabilities: build_server_capabilities(),
             server_info: Some(ServerInfo {
-                name: "thanosLSP".to_string(),
+                name: "babel-lsp".to_string(),
                 version: Some(env!("CARGO_PKG_VERSION").to_string()),
             }),
         })
@@ -511,14 +511,14 @@ mod tests {
         };
         let mut diag = CoreDiag::error(loc, "test error".to_string());
         diag.code = Some("E001".to_string());
-        diag.source = "thanosLSP".to_string();
+        diag.source = "babel-lsp".to_string();
         let lsp_diags = convert_diagnostics(&[diag]);
         assert_eq!(lsp_diags.len(), 1);
         assert_eq!(
             lsp_diags[0].code,
             Some(NumberOrString::String("E001".to_string()))
         );
-        assert_eq!(lsp_diags[0].source, Some("thanosLSP".to_string()));
+        assert_eq!(lsp_diags[0].source, Some("babel-lsp".to_string()));
     }
 
     #[test]

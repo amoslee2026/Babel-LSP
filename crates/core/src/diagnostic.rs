@@ -29,7 +29,7 @@ pub struct Diagnostic {
     pub severity: DiagnosticSeverity,
     /// 诊断代码
     pub code: Option<String>,
-    /// 来源（如 "thanosLSP-sv"）
+    /// 来源（如 "babel-lsp-sv"）
     pub source: String,
     /// 诊断消息
     pub message: String,
@@ -44,7 +44,7 @@ impl Diagnostic {
             range,
             severity,
             code: None,
-            source: "thanosLSP".to_string(),
+            source: "babel-lsp".to_string(),
             message,
             related_info: vec![],
         }

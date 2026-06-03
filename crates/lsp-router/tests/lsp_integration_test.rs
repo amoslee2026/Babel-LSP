@@ -339,7 +339,7 @@ async fn test_full_lsp_lifecycle() {
     // 初始化：验证服务能力和服务名称
     let result = client.initialize().await.unwrap();
     assert!(result.capabilities.completion_provider.is_some());
-    assert_eq!(result.server_info.unwrap().name, "thanosLSP");
+    assert_eq!(result.server_info.unwrap().name, "babel-lsp");
 
     client.initialized().await;
 

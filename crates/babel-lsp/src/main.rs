@@ -5,7 +5,7 @@
 //!   thanosLSP --mcp     — MCP stdio 模式（供 Claude Code 使用）
 //!
 //! 日志输出：
-//!   - 默认写入文件：.thanos/logs/thanosLSP.log（按日轮转）
+//!   - 默认写入文件：.thanos/logs/babel-lsp.log（按日轮转）
 //!   - THANOS_LOG=debug 启用 debug 级别
 //!   - --no-log-file 禁用文件日志，输出到 stderr
 
@@ -16,7 +16,7 @@ use babel_lsp_core::logging::{init_logging, LogMode, LoggingConfig};
 
 #[derive(Parser)]
 #[command(
-    name = "thanosLSP",
+    name = "babel-lsp",
     version,
     about = "HDL Language Server supporting SV/VHDL/TCL — LSP + MCP"
 )]

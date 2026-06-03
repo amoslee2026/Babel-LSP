@@ -43,7 +43,7 @@ pub fn init_logging(config: &LoggingConfig) -> anyhow::Result<()> {
         LogMode::Normal => {
             // 仅文件输出
             if let Some(path) = &config.file_path {
-                let file_appender = tracing_appender::rolling::daily(path, "thanosLSP.log");
+                let file_appender = tracing_appender::rolling::daily(path, "babel-lsp.log");
                 let file_layer = fmt::layer().with_writer(file_appender).with_ansi(false);
 
                 tracing_subscriber::registry()
@@ -64,7 +64,7 @@ pub fn init_logging(config: &LoggingConfig) -> anyhow::Result<()> {
             let stdout_layer = fmt::layer().with_writer(std::io::stderr).with_ansi(true);
 
             if let Some(path) = &config.file_path {
-                let file_appender = tracing_appender::rolling::daily(path, "thanosLSP.log");
+                let file_appender = tracing_appender::rolling::daily(path, "babel-lsp.log");
                 let file_layer = fmt::layer().with_writer(file_appender).with_ansi(false);
 
                 tracing_subscriber::registry()
@@ -212,7 +212,7 @@ mod tests {
     fn test_logging_config_debug_with_file() {
         let config = LoggingConfig {
             level: "debug".to_string(),
-            file_path: Some("/tmp/thanosLSP".to_string()),
+            file_path: Some("/tmp/babel-lsp".to_string()),
             mode: LogMode::Debug,
         };
         assert_eq!(config.mode, LogMode::Debug);
@@ -224,7 +224,7 @@ mod tests {
     fn test_logging_config_normal_with_file() {
         let config = LoggingConfig {
             level: "info".to_string(),
-            file_path: Some("/var/log/thanosLSP".to_string()),
+            file_path: Some("/var/log/babel-lsp".to_string()),
             mode: LogMode::Normal,
         };
         assert_eq!(config.mode, LogMode::Normal);
