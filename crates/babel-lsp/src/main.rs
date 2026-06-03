@@ -12,7 +12,7 @@
 use anyhow::Result;
 use clap::Parser;
 use std::path::PathBuf;
-use thanosLSP_core::logging::{init_logging, LogMode, LoggingConfig};
+use babel_lsp_core::logging::{init_logging, LogMode, LoggingConfig};
 
 #[derive(Parser)]
 #[command(
@@ -94,10 +94,10 @@ async fn main() -> Result<()> {
 
     if cli.mcp {
         tracing::info!("thanosLSP starting in MCP mode");
-        thanosLSP_mcp::run_stdio().await?;
+        babel_lsp_mcp::run_stdio().await?;
     } else {
         tracing::info!("thanosLSP starting in LSP stdio mode");
-        thanosLSP_lsp::backend::run_stdio().await;
+        babel_lsp_lsp::backend::run_stdio().await;
     }
 
     Ok(())

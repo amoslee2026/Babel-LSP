@@ -7,7 +7,7 @@ pub mod diagnostics;
 pub mod parser;
 pub mod symbol_collector;
 
-use thanosLSP_core::{diagnostic::Diagnostic, symbol::Symbol};
+use babel_lsp_core::{diagnostic::Diagnostic, symbol::Symbol};
 
 use diagnostics::VhdlDiagnostics;
 use parser::VhdlParser;
@@ -51,7 +51,7 @@ impl Default for VhdlAnalyzer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use thanosLSP_core::symbol::SymbolKind;
+    use babel_lsp_core::symbol::SymbolKind;
 
     const FILE_URI: &str = "file:///test.vhd";
 

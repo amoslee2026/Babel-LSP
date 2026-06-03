@@ -5,7 +5,7 @@
 
 use rmcp::handler::server::tool::Parameters;
 use std::time::Instant;
-use thanosLSP_mcp::server::{OpenFileParams, SearchSymbolsParams, ThanosMcpServer};
+use babel_lsp_mcp::server::{OpenFileParams, SearchSymbolsParams, ThanosMcpServer};
 
 fn make_large_sv(module_count: usize) -> String {
     let mut buf = String::new();
@@ -87,7 +87,7 @@ async fn perf_open_file_latency_under_200ms() {
 /// 文件分类吞吐量（> 1M ops/sec）
 #[test]
 fn perf_file_classifier_throughput() {
-    use thanosLSP_core::file_classifier::FileClassifier;
+    use babel_lsp_core::file_classifier::FileClassifier;
 
     let classifier = FileClassifier::new();
     let paths = [

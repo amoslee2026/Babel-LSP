@@ -1,6 +1,6 @@
 //! 文档符号处理器
 
-use thanosLSP_core::symbol::{Symbol, SymbolKind};
+use babel_lsp_core::symbol::{Symbol, SymbolKind};
 use tower_lsp::lsp_types::*;
 
 /// 将内部 SymbolKind 映射为 LSP SymbolKind
@@ -100,7 +100,7 @@ pub fn handle_workspace_symbols(all_symbols: &[Symbol], query: &str) -> Vec<Work
 mod tests {
     use super::*;
     use smol_str::SmolStr;
-    use thanosLSP_core::symbol::{Location, Position};
+    use babel_lsp_core::symbol::{Location, Position};
 
     fn make_symbol(name: &str, kind: SymbolKind) -> Symbol {
         Symbol::new(

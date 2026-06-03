@@ -7,8 +7,8 @@
 //! - Cell 数量统计
 
 use std::path::PathBuf;
-use thanosLSP_cell::cell_index::CellIndex;
-use thanosLSP_cell::parser::{Cell, Port, PortDirection};
+use babel_lsp_cell::cell_index::CellIndex;
+use babel_lsp_cell::parser::{Cell, Port, PortDirection};
 
 /// 创建测试 Cell
 fn make_cell(name: &str, ports: Vec<(&str, PortDirection, usize)>) -> Cell {

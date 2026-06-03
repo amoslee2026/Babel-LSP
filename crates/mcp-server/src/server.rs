@@ -12,7 +12,7 @@ use rmcp::{
     schemars, serde, serve_server, tool, tool_handler, tool_router, ServerHandler,
 };
 use smol_str::SmolStr;
-use thanosLSP_core::{
+use babel_lsp_core::{
     diagnostic::Diagnostic,
     document::{DocumentState, FileClass, Language},
     file_store::FileStore,
@@ -212,7 +212,7 @@ impl ThanosMcpServer {
 
     /// 基本符号提取（不依赖外部工具）
     fn extract_symbols(uri: &str, content: &str) -> Vec<Symbol> {
-        use thanosLSP_core::symbol::{Location, Position, SymbolKind};
+        use babel_lsp_core::symbol::{Location, Position, SymbolKind};
 
         let mut symbols = Vec::new();
         for (line_idx, line) in content.lines().enumerate() {
@@ -415,7 +415,7 @@ impl ThanosMcpServer {
 
         // SV 综合规则检查
         if params.uri.ends_with(".sv") || params.uri.ends_with(".svh") || params.uri.ends_with(".v") || params.uri.ends_with(".vh") {
-            let checker = thanosLSP_sv::synth_checker::SynthChecker::new();
+            let checker = babel_lsp_sv::synth_checker::SynthChecker::new();
             let diags = checker.check_source(&content, file_class, &params.uri);
             let state = self.state.lock().await;
             state.diag_cache.insert(params.uri.clone(), diags.clone());
@@ -425,7 +425,7 @@ impl ThanosMcpServer {
 
         // VHDL 诊断
         if params.uri.ends_with(".vhd") || params.uri.ends_with(".vhdl") {
-            let analyzer = thanosLSP_vhdl::VhdlAnalyzer::new();
+            let analyzer = babel_lsp_vhdl::VhdlAnalyzer::new();
             let (_, diags) = analyzer.analyze(&content, &params.uri);
             let state = self.state.lock().await;
             state.diag_cache.insert(params.uri.clone(), diags.clone());
@@ -460,7 +460,7 @@ impl ThanosMcpServer {
 
         // Try enhanced SV symbol collection
         if params.uri.ends_with(".sv") || params.uri.ends_with(".svh") || params.uri.ends_with(".v") || params.uri.ends_with(".vh") {
-            let collector = thanosLSP_sv::symbol_collector::SymbolCollector::new();
+            let collector = babel_lsp_sv::symbol_collector::SymbolCollector::new();
             let symbols = collector.collect_from_source(&content, &params.uri);
             let state = self.state.lock().await;
             state
@@ -472,7 +472,7 @@ impl ThanosMcpServer {
 
         // VHDL symbols
         if params.uri.ends_with(".vhd") || params.uri.ends_with(".vhdl") {
-            let analyzer = thanosLSP_vhdl::VhdlAnalyzer::new();
+            let analyzer = babel_lsp_vhdl::VhdlAnalyzer::new();
             let (symbols, _) = analyzer.analyze(&content, &params.uri);
             let state = self.state.lock().await;
             state
@@ -530,8 +530,8 @@ impl ThanosMcpServer {
         drop(state);
 
         let prefix = params.prefix.as_deref().unwrap_or("");
-        let pos = thanosLSP_core::symbol::Position::new(params.line, params.character);
-        let engine = thanosLSP_sv::completion::CompletionEngine::new();
+        let pos = babel_lsp_core::symbol::Position::new(params.line, params.character);
+        let engine = babel_lsp_sv::completion::CompletionEngine::new();
         let items = engine.complete(&symbols, prefix, pos);
 
         let list: Vec<serde_json::Value> = items
@@ -658,7 +658,7 @@ impl ThanosMcpServer {
             .unwrap_or_default();
         drop(state);
 
-        match thanosLSP_lsp::handlers::formatting::try_verible_format(&content) {
+        match babel_lsp_lsp::handlers::formatting::try_verible_format(&content) {
             Some(formatted) => {
                 // Update in-store
                 let state = self.state.lock().await;
@@ -694,7 +694,7 @@ impl ThanosMcpServer {
             .unwrap_or(FileClass::RTL);
         drop(state);
 
-        let checker = thanosLSP_sv::synth_checker::SynthChecker::new();
+        let checker = babel_lsp_sv::synth_checker::SynthChecker::new();
         let diags = checker.check_source(&content, file_class, &params.uri);
         if diags.is_empty() {
             "no synthesizability issues found".to_string()
@@ -901,10 +901,10 @@ impl ThanosMcpServer {
                 let uri_str = uri.to_string();
                 let lang = Self::language_from_uri(&uri_str);
                 let lang_str = match lang {
-                    thanosLSP_core::document::Language::SystemVerilog => "systemverilog",
-                    thanosLSP_core::document::Language::Verilog => "verilog",
-                    thanosLSP_core::document::Language::VHDL => "vhdl",
-                    thanosLSP_core::document::Language::TCL => "tcl",
+                    babel_lsp_core::document::Language::SystemVerilog => "systemverilog",
+                    babel_lsp_core::document::Language::Verilog => "verilog",
+                    babel_lsp_core::document::Language::VHDL => "vhdl",
+                    babel_lsp_core::document::Language::TCL => "tcl",
                 };
                 serde_json::json!({
                     "uri": uri_str,
@@ -937,10 +937,10 @@ impl ThanosMcpServer {
 
         // 收集符号
         let symbols = if params.uri.ends_with(".sv") || params.uri.ends_with(".svh") || params.uri.ends_with(".v") || params.uri.ends_with(".vh") {
-            let collector = thanosLSP_sv::symbol_collector::SymbolCollector::new();
+            let collector = babel_lsp_sv::symbol_collector::SymbolCollector::new();
             collector.collect_from_source(&content, &params.uri)
         } else if params.uri.ends_with(".vhd") || params.uri.ends_with(".vhdl") {
-            let analyzer = thanosLSP_vhdl::VhdlAnalyzer::new();
+            let analyzer = babel_lsp_vhdl::VhdlAnalyzer::new();
             let (syms, _) = analyzer.analyze(&content, &params.uri);
             syms
         } else {
@@ -984,7 +984,7 @@ impl ThanosMcpServer {
 
     /// 将扁平符号列表构建为层次树
     fn build_symbol_hierarchy(symbols: Vec<Symbol>) -> Vec<serde_json::Value> {
-        use thanosLSP_core::symbol::SymbolKind;
+        use babel_lsp_core::symbol::SymbolKind;
 
         // 容器类型（可以有子符号）
         const CONTAINER_KINDS: &[SymbolKind] = &[
@@ -1492,7 +1492,7 @@ mod tests {
 
     #[test]
     fn test_language_from_uri_sv_extensions() {
-        use thanosLSP_core::document::Language;
+        use babel_lsp_core::document::Language;
         assert_eq!(
             ThanosMcpServer::language_from_uri("file:///a.sv"),
             Language::SystemVerilog
@@ -1505,7 +1505,7 @@ mod tests {
 
     #[test]
     fn test_language_from_uri_verilog_extensions() {
-        use thanosLSP_core::document::Language;
+        use babel_lsp_core::document::Language;
         assert_eq!(
             ThanosMcpServer::language_from_uri("file:///a.v"),
             Language::Verilog
@@ -1518,7 +1518,7 @@ mod tests {
 
     #[test]
     fn test_language_from_uri_vhdl_extensions() {
-        use thanosLSP_core::document::Language;
+        use babel_lsp_core::document::Language;
         assert_eq!(
             ThanosMcpServer::language_from_uri("file:///a.vhd"),
             Language::VHDL
@@ -1531,7 +1531,7 @@ mod tests {
 
     #[test]
     fn test_language_from_uri_tcl_extensions() {
-        use thanosLSP_core::document::Language;
+        use babel_lsp_core::document::Language;
         assert_eq!(
             ThanosMcpServer::language_from_uri("file:///a.tcl"),
             Language::TCL
@@ -1544,7 +1544,7 @@ mod tests {
 
     #[test]
     fn test_language_from_uri_unknown_defaults_to_sv() {
-        use thanosLSP_core::document::Language;
+        use babel_lsp_core::document::Language;
         assert_eq!(
             ThanosMcpServer::language_from_uri("file:///a.txt"),
             Language::SystemVerilog
@@ -1601,7 +1601,7 @@ mod tests {
 
     #[test]
     fn test_diags_to_json_with_error_diag() {
-        use thanosLSP_core::{
+        use babel_lsp_core::{
             diagnostic::Diagnostic,
             symbol::{Location, Position},
         };
@@ -1621,7 +1621,7 @@ mod tests {
 
     #[test]
     fn test_diags_to_json_with_warning_diag_position() {
-        use thanosLSP_core::{
+        use babel_lsp_core::{
             diagnostic::Diagnostic,
             symbol::{Location, Position},
         };
@@ -1651,7 +1651,7 @@ mod tests {
     #[test]
     fn test_symbols_to_json_with_module_symbol() {
         use smol_str::SmolStr;
-        use thanosLSP_core::symbol::{Location, Position, Symbol, SymbolKind};
+        use babel_lsp_core::symbol::{Location, Position, Symbol, SymbolKind};
         let loc = Location {
             uri: "file:///t.sv".to_string(),
             start: Position::new(0, 0),
@@ -1676,7 +1676,7 @@ mod tests {
     #[test]
     fn test_build_symbol_hierarchy_module_with_port_children() {
         use smol_str::SmolStr;
-        use thanosLSP_core::symbol::{Location, Position, Symbol, SymbolKind};
+        use babel_lsp_core::symbol::{Location, Position, Symbol, SymbolKind};
         let mk = |name: &str, kind: SymbolKind, line: u32| {
             let loc = Location {
                 uri: "f.sv".to_string(),

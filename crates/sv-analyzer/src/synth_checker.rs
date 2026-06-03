@@ -3,9 +3,9 @@
 //! 实现 18 条 SYN-V 规则，基于文本模式匹配（不依赖 AST）。
 //! 只对 RTL 文件生效，TB/Netlist 文件跳过。
 
-use thanosLSP_core::diagnostic::Diagnostic;
-use thanosLSP_core::document::FileClass;
-use thanosLSP_core::symbol::{Location, Position};
+use babel_lsp_core::diagnostic::Diagnostic;
+use babel_lsp_core::document::FileClass;
+use babel_lsp_core::symbol::{Location, Position};
 
 /// SYN-V 规则枚举
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

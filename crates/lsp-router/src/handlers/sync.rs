@@ -3,7 +3,7 @@
 //! 处理 didOpen/didChange/didClose 事件，更新 FileStore 并触发分析
 
 use std::sync::Arc;
-use thanosLSP_core::{
+use babel_lsp_core::{
     document::{DocumentState, Language},
     file_store::FileStore,
 };

@@ -3,7 +3,7 @@
 //! 测试完整的 Tool 调用流程，包括多 tool 组合使用场景
 
 use rmcp::handler::server::tool::Parameters;
-use thanosLSP_mcp::server::{
+use babel_lsp_mcp::server::{
     OpenFileParams, ReplaceContentParams, SearchPatternParams, SearchSymbolsParams,
     ThanosMcpServer, UpdateFileParams, UriParam,
 };

@@ -1,10 +1,10 @@
 //! 定义跳转处理器
 
-use thanosLSP_core::symbol::Symbol;
+use babel_lsp_core::symbol::Symbol;
 use tower_lsp::lsp_types::*;
 
 /// 将内部 Location 转换为 LSP Location
-fn to_lsp_location(loc: &thanosLSP_core::symbol::Location) -> Option<Location> {
+fn to_lsp_location(loc: &babel_lsp_core::symbol::Location) -> Option<Location> {
     let uri = Url::parse(&loc.uri).ok()?;
     Some(Location {
         uri,
@@ -73,7 +73,7 @@ pub fn handle_all_definitions(symbols: &[Symbol], name: &str) -> Vec<Location> {
 mod tests {
     use super::*;
     use smol_str::SmolStr;
-    use thanosLSP_core::symbol::{Location as CoreLocation, Position as CorePos, SymbolKind};
+    use babel_lsp_core::symbol::{Location as CoreLocation, Position as CorePos, SymbolKind};
 
     fn make_symbol(name: &str, uri: &str, line: u32) -> Symbol {
         Symbol::new(

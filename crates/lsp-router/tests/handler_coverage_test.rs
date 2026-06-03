@@ -2,9 +2,9 @@
 
 use smol_str::SmolStr;
 use std::sync::Arc;
-use thanosLSP_core::file_store::FileStore;
-use thanosLSP_core::symbol::{Location, Position, Symbol, SymbolKind};
-use thanosLSP_lsp::handlers::{
+use babel_lsp_core::file_store::FileStore;
+use babel_lsp_core::symbol::{Location, Position, Symbol, SymbolKind};
+use babel_lsp_lsp::handlers::{
     completion::handle_completion,
     definition::handle_all_definitions,
     formatting::{content_to_edits, handle_formatting},
@@ -47,35 +47,35 @@ fn test_parse_uri_invalid() {
 
 #[test]
 fn test_language_from_uri_svh() {
-    use thanosLSP_core::document::Language;
+    use babel_lsp_core::document::Language;
     let lang = language_from_uri(&Url::parse("file:///a.svh").unwrap());
     assert_eq!(lang, Language::SystemVerilog);
 }
 
 #[test]
 fn test_language_from_uri_vh() {
-    use thanosLSP_core::document::Language;
+    use babel_lsp_core::document::Language;
     let lang = language_from_uri(&Url::parse("file:///a.vh").unwrap());
     assert_eq!(lang, Language::Verilog);
 }
 
 #[test]
 fn test_language_from_uri_vhdl() {
-    use thanosLSP_core::document::Language;
+    use babel_lsp_core::document::Language;
     let lang = language_from_uri(&Url::parse("file:///a.vhdl").unwrap());
     assert_eq!(lang, Language::VHDL);
 }
 
 #[test]
 fn test_language_from_uri_xdc() {
-    use thanosLSP_core::document::Language;
+    use babel_lsp_core::document::Language;
     let lang = language_from_uri(&Url::parse("file:///constraints.xdc").unwrap());
     assert_eq!(lang, Language::TCL);
 }
 
 #[test]
 fn test_language_from_uri_unknown_defaults_to_sv() {
-    use thanosLSP_core::document::Language;
+    use babel_lsp_core::document::Language;
     let lang = language_from_uri(&Url::parse("file:///a.unknown").unwrap());
     assert_eq!(lang, Language::SystemVerilog);
 }

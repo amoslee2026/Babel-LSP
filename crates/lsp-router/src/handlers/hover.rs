@@ -1,6 +1,6 @@
 //! Hover 信息处理器
 
-use thanosLSP_core::symbol::{Symbol, SymbolKind};
+use babel_lsp_core::symbol::{Symbol, SymbolKind};
 use tower_lsp::lsp_types::*;
 
 /// 格式化符号类型名称
@@ -57,7 +57,7 @@ pub fn handle_hover(symbols: &[Symbol], name: &str) -> Option<Hover> {
 mod tests {
     use super::*;
     use smol_str::SmolStr;
-    use thanosLSP_core::symbol::{Location, Position};
+    use babel_lsp_core::symbol::{Location, Position};
 
     fn make_symbol(name: &str, kind: SymbolKind) -> Symbol {
         let mut s = Symbol::new(

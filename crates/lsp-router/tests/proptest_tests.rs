@@ -12,7 +12,7 @@ proptest! {
     fn test_sv_module_name_extracted(name in valid_identifier()) {
         let sv = format!("module {};\nendmodule", name);
         let uri = url::Url::parse("file:///test.sv").unwrap();
-        let symbols = thanosLSP_lsp::backend::extract_symbols_basic(&uri, &sv);
+        let symbols = babel_lsp_lsp::backend::extract_symbols_basic(&uri, &sv);
 
         prop_assert_eq!(symbols.len(), 1);
         prop_assert_eq!(symbols[0].name.as_str(), name);
@@ -26,7 +26,7 @@ proptest! {
 
         let sv = modules.join("\n");
         let uri = url::Url::parse("file:///test.sv").unwrap();
-        let symbols = thanosLSP_lsp::backend::extract_symbols_basic(&uri, &sv);
+        let symbols = babel_lsp_lsp::backend::extract_symbols_basic(&uri, &sv);
 
         prop_assert_eq!(symbols.len(), count);
     }

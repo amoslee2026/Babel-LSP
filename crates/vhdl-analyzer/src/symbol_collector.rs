@@ -4,7 +4,7 @@
 
 use smol_str::SmolStr;
 
-use thanosLSP_core::symbol::{Location, Position, Symbol, SymbolKind};
+use babel_lsp_core::symbol::{Location, Position, Symbol, SymbolKind};
 
 use crate::parser::{VhdlArchitecture, VhdlEntity, VhdlParseResult};
 

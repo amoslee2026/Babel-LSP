@@ -5,7 +5,7 @@
 use std::sync::Arc;
 use tower::Service;
 use tower_lsp::{LspService, lsp_types::*};
-use thanosLSP_lsp::backend::ThanosLspBackend;
+use babel_lsp_lsp::backend::ThanosLspBackend;
 
 /// LSP 测试客户端
 pub struct LspTestClient {

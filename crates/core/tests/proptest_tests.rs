@@ -1,8 +1,8 @@
 //! Core 类型属性测试
 
 use proptest::prelude::*;
-use thanosLSP_core::symbol::{Position, Location};
-use thanosLSP_core::diagnostic::{Diagnostic, DiagnosticSeverity};
+use babel_lsp_core::symbol::{Position, Location};
+use babel_lsp_core::diagnostic::{Diagnostic, DiagnosticSeverity};
 
 // ============================================================
 // Position 属性测试

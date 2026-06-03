@@ -8,7 +8,7 @@
 
 use std::path::PathBuf;
 use tempfile::tempdir;
-use thanosLSP_cell::CellLibrary;
+use babel_lsp_cell::CellLibrary;
 
 /// 创建测试 Verilog 文件
 fn create_test_lib(dir: &std::path::Path) -> PathBuf {

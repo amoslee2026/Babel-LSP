@@ -1,6 +1,6 @@
 //! 跳转到定义引擎
 
-use thanosLSP_core::symbol::{Location, Position, Symbol};
+use babel_lsp_core::symbol::{Location, Position, Symbol};
 
 /// 定义跳转引擎
 pub struct DefinitionEngine;
@@ -78,7 +78,7 @@ fn is_ident(b: u8) -> bool {
 mod tests {
     use super::*;
     use smol_str::SmolStr;
-    use thanosLSP_core::symbol::SymbolKind;
+    use babel_lsp_core::symbol::SymbolKind;
 
     fn make_sym(name: &str, line: u32) -> Symbol {
         Symbol::new(

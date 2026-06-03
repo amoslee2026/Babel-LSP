@@ -11,7 +11,7 @@ proptest! {
     #[test]
     fn test_tcl_proc_name_preserved(name in valid_identifier()) {
         let tcl = format!("proc {} {{}} {{\n}}", name);
-        let parser = thanosLSP_tcl::parser::TclParser::new();
+        let parser = babel_lsp_tcl::parser::TclParser::new();
         let result = parser.parse(&tcl);
 
         prop_assert_eq!(result.procs.len(), 1);
@@ -21,7 +21,7 @@ proptest! {
     #[test]
     fn test_tcl_variable_name_preserved(name in valid_identifier()) {
         let tcl = format!("set {} 42", name);
-        let parser = thanosLSP_tcl::parser::TclParser::new();
+        let parser = babel_lsp_tcl::parser::TclParser::new();
         let result = parser.parse(&tcl);
 
         prop_assert!(!result.variables.is_empty());
@@ -39,7 +39,7 @@ proptest! {
             arg_names.join(" ")
         );
 
-        let parser = thanosLSP_tcl::parser::TclParser::new();
+        let parser = babel_lsp_tcl::parser::TclParser::new();
         let result = parser.parse(&tcl);
 
         prop_assert_eq!(result.procs.len(), 1);

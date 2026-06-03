@@ -1,6 +1,6 @@
 //! 补全引擎：基于符号表和 SV 关键字提供代码补全
 
-use thanosLSP_core::symbol::{Position, Symbol, SymbolKind};
+use babel_lsp_core::symbol::{Position, Symbol, SymbolKind};
 
 /// 补全项类型
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -210,7 +210,7 @@ impl Default for CompletionEngine {
 mod tests {
     use super::*;
     use smol_str::SmolStr;
-    use thanosLSP_core::symbol::{Location, Symbol};
+    use babel_lsp_core::symbol::{Location, Symbol};
 
     fn make_symbol(name: &str, kind: SymbolKind) -> Symbol {
         Symbol::new(

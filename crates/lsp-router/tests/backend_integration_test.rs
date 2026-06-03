@@ -2,7 +2,7 @@
 //!
 //! 测试 ThanosLspBackend 的辅助函数和内部逻辑
 
-use thanosLSP_lsp::backend::{extract_symbols_basic, convert_diagnostics};
+use babel_lsp_lsp::backend::{extract_symbols_basic, convert_diagnostics};
 use tower_lsp::lsp_types::*;
 use url::Url;
 
@@ -129,8 +129,8 @@ fn test_convert_diagnostics_empty() {
 
 #[test]
 fn test_convert_diagnostics_error() {
-    use thanosLSP_core::diagnostic::Diagnostic;
-    use thanosLSP_core::symbol::{Location, Position};
+    use babel_lsp_core::diagnostic::Diagnostic;
+    use babel_lsp_core::symbol::{Location, Position};
 
     let loc = Location {
         uri: "file:///test.sv".to_string(),
@@ -147,8 +147,8 @@ fn test_convert_diagnostics_error() {
 
 #[test]
 fn test_convert_diagnostics_warning() {
-    use thanosLSP_core::diagnostic::Diagnostic;
-    use thanosLSP_core::symbol::{Location, Position};
+    use babel_lsp_core::diagnostic::Diagnostic;
+    use babel_lsp_core::symbol::{Location, Position};
 
     let loc = Location {
         uri: "file:///test.sv".to_string(),
@@ -164,15 +164,15 @@ fn test_convert_diagnostics_warning() {
 
 #[test]
 fn test_convert_diagnostics_information() {
-    use thanosLSP_core::diagnostic::Diagnostic;
-    use thanosLSP_core::symbol::{Location, Position};
+    use babel_lsp_core::diagnostic::Diagnostic;
+    use babel_lsp_core::symbol::{Location, Position};
 
     let loc = Location {
         uri: "file:///test.sv".to_string(),
         start: Position::new(0, 0),
         end: Position::new(0, 10),
     };
-    let diags = vec![Diagnostic::new(loc, thanosLSP_core::diagnostic::DiagnosticSeverity::Information, "info".to_string())];
+    let diags = vec![Diagnostic::new(loc, babel_lsp_core::diagnostic::DiagnosticSeverity::Information, "info".to_string())];
     let lsp_diags = convert_diagnostics(&diags);
 
     assert_eq!(lsp_diags.len(), 1);
@@ -181,15 +181,15 @@ fn test_convert_diagnostics_information() {
 
 #[test]
 fn test_convert_diagnostics_hint() {
-    use thanosLSP_core::diagnostic::Diagnostic;
-    use thanosLSP_core::symbol::{Location, Position};
+    use babel_lsp_core::diagnostic::Diagnostic;
+    use babel_lsp_core::symbol::{Location, Position};
 
     let loc = Location {
         uri: "file:///test.sv".to_string(),
         start: Position::new(0, 0),
         end: Position::new(0, 10),
     };
-    let diags = vec![Diagnostic::new(loc, thanosLSP_core::diagnostic::DiagnosticSeverity::Hint, "hint".to_string())];
+    let diags = vec![Diagnostic::new(loc, babel_lsp_core::diagnostic::DiagnosticSeverity::Hint, "hint".to_string())];
     let lsp_diags = convert_diagnostics(&diags);
 
     assert_eq!(lsp_diags.len(), 1);
@@ -198,8 +198,8 @@ fn test_convert_diagnostics_hint() {
 
 #[test]
 fn test_convert_diagnostics_with_code() {
-    use thanosLSP_core::diagnostic::Diagnostic;
-    use thanosLSP_core::symbol::{Location, Position};
+    use babel_lsp_core::diagnostic::Diagnostic;
+    use babel_lsp_core::symbol::{Location, Position};
 
     let loc = Location {
         uri: "file:///test.sv".to_string(),
@@ -216,8 +216,8 @@ fn test_convert_diagnostics_with_code() {
 
 #[test]
 fn test_convert_diagnostics_with_source() {
-    use thanosLSP_core::diagnostic::Diagnostic;
-    use thanosLSP_core::symbol::{Location, Position};
+    use babel_lsp_core::diagnostic::Diagnostic;
+    use babel_lsp_core::symbol::{Location, Position};
 
     let loc = Location {
         uri: "file:///test.sv".to_string(),
@@ -236,8 +236,8 @@ fn test_convert_diagnostics_with_source() {
 
 #[test]
 fn test_convert_diagnostics_range() {
-    use thanosLSP_core::diagnostic::Diagnostic;
-    use thanosLSP_core::symbol::{Location, Position};
+    use babel_lsp_core::diagnostic::Diagnostic;
+    use babel_lsp_core::symbol::{Location, Position};
 
     let loc = Location {
         uri: "file:///test.sv".to_string(),
@@ -255,8 +255,8 @@ fn test_convert_diagnostics_range() {
 
 #[test]
 fn test_convert_diagnostics_multiple() {
-    use thanosLSP_core::diagnostic::Diagnostic;
-    use thanosLSP_core::symbol::{Location, Position};
+    use babel_lsp_core::diagnostic::Diagnostic;
+    use babel_lsp_core::symbol::{Location, Position};
 
     let loc = Location {
         uri: "file:///test.sv".to_string(),
@@ -275,8 +275,8 @@ fn test_convert_diagnostics_multiple() {
 
 #[test]
 fn test_convert_diagnostics_code_number_or_string() {
-    use thanosLSP_core::diagnostic::Diagnostic;
-    use thanosLSP_core::symbol::{Location, Position};
+    use babel_lsp_core::diagnostic::Diagnostic;
+    use babel_lsp_core::symbol::{Location, Position};
 
     let loc = Location {
         uri: "file:///test.sv".to_string(),

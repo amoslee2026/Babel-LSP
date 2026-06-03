@@ -1,7 +1,7 @@
 //! 诊断解析：解析 verilator 和 slang 的输出格式
 
-use thanosLSP_core::diagnostic::{Diagnostic, DiagnosticSeverity};
-use thanosLSP_core::symbol::{Location, Position};
+use babel_lsp_core::diagnostic::{Diagnostic, DiagnosticSeverity};
+use babel_lsp_core::symbol::{Location, Position};
 
 /// 诊断解析器
 pub struct DiagnosticParser;

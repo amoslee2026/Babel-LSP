@@ -4,8 +4,8 @@
 //! 2. 变形测试 (Metamorphic Relations MR-1..MR-4)
 
 use smol_str::SmolStr;
-use thanosLSP_core::symbol::{Location, Position, Symbol, SymbolKind};
-use thanosLSP_lsp::handlers::{
+use babel_lsp_core::symbol::{Location, Position, Symbol, SymbolKind};
+use babel_lsp_lsp::handlers::{
     completion::handle_completion, definition::handle_all_definitions, hover::handle_hover,
     lifecycle::build_server_capabilities, symbols::handle_document_symbols,
 };

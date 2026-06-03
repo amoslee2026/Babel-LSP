@@ -5,7 +5,7 @@
 use regex::Regex;
 use smol_str::SmolStr;
 use std::sync::OnceLock;
-use thanosLSP_core::symbol::{Location, Position, Symbol, SymbolKind};
+use babel_lsp_core::symbol::{Location, Position, Symbol, SymbolKind};
 
 /// 所有正则表达式的全局编译缓存
 struct Patterns {

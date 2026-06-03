@@ -1,6 +1,6 @@
 //! 补全处理器
 
-use thanosLSP_core::symbol::{Symbol, SymbolKind};
+use babel_lsp_core::symbol::{Symbol, SymbolKind};
 use tower_lsp::lsp_types::*;
 
 /// 将 SymbolKind 转换为 LSP CompletionItemKind
@@ -129,7 +129,7 @@ pub fn handle_completion(
 mod tests {
     use super::*;
     use smol_str::SmolStr;
-    use thanosLSP_core::symbol::{Location, Position};
+    use babel_lsp_core::symbol::{Location, Position};
 
     fn make_symbol(name: &str, kind: SymbolKind) -> Symbol {
         Symbol::new(

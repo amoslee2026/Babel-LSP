@@ -3,7 +3,7 @@
 //! 优先尝试 slang，若不可用则回退到 verilator。
 
 use std::process::Command;
-use thanosLSP_core::diagnostic::Diagnostic;
+use babel_lsp_core::diagnostic::Diagnostic;
 
 use crate::diagnostics::DiagnosticParser;
 
@@ -145,7 +145,7 @@ impl Default for SlangDriver {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use thanosLSP_core::diagnostic::DiagnosticSeverity;
+    use babel_lsp_core::diagnostic::DiagnosticSeverity;
 
     #[test]
     fn test_parse_verilator_output() {

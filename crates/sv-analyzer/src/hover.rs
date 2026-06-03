@@ -1,6 +1,6 @@
 //! Hover 信息生成引擎
 
-use thanosLSP_core::symbol::{Symbol, SymbolKind};
+use babel_lsp_core::symbol::{Symbol, SymbolKind};
 
 /// Hover 引擎：为符号生成 Markdown 格式的悬停说明
 pub struct HoverEngine;
@@ -91,7 +91,7 @@ fn kind_display(kind: SymbolKind) -> &'static str {
 mod tests {
     use super::*;
     use smol_str::SmolStr;
-    use thanosLSP_core::symbol::{Location, Position, Symbol};
+    use babel_lsp_core::symbol::{Location, Position, Symbol};
 
     fn make_sym(name: &str, kind: SymbolKind) -> Symbol {
         Symbol::new(

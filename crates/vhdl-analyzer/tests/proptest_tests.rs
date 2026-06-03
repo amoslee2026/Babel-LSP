@@ -11,7 +11,7 @@ proptest! {
     #[test]
     fn test_vhdl_entity_name_preserved(name in valid_identifier()) {
         let vhdl = format!("entity {} is\nend entity {};", name, name);
-        let parser = thanosLSP_vhdl::parser::VhdlParser::new();
+        let parser = babel_lsp_vhdl::parser::VhdlParser::new();
         let result = parser.parse(&vhdl);
 
         prop_assert_eq!(result.entities.len(), 1);
@@ -29,7 +29,7 @@ proptest! {
             port_decls.join(",\n")
         );
 
-        let parser = thanosLSP_vhdl::parser::VhdlParser::new();
+        let parser = babel_lsp_vhdl::parser::VhdlParser::new();
         let result = parser.parse(&vhdl);
 
         prop_assert_eq!(result.entities.len(), 1);

@@ -7,7 +7,7 @@
 //! - specify block 跳过
 //! - 注释提取
 
-use thanosLSP_cell::parser::{CellParser, PortDirection};
+use babel_lsp_cell::parser::{CellParser, PortDirection};
 
 /// 基础 module 解析测试
 #[test]

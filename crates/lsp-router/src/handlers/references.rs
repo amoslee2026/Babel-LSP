@@ -1,6 +1,6 @@
 //! 引用查找处理器
 
-use thanosLSP_core::symbol::Symbol;
+use babel_lsp_core::symbol::Symbol;
 use tower_lsp::lsp_types::*;
 
 /// 在文本中查找标识符的所有出现位置

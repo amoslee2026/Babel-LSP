@@ -1,9 +1,9 @@
 //! core crate coverage 补充测试 (Phase 8 Round 3)
 //! 覆盖 diagnostic.rs 和 config.rs 未覆盖路径
 
-use thanosLSP_core::config::ProjectConfig;
-use thanosLSP_core::diagnostic::{Diagnostic, DiagnosticCache, DiagnosticSeverity};
-use thanosLSP_core::symbol::{Location, Position};
+use babel_lsp_core::config::ProjectConfig;
+use babel_lsp_core::diagnostic::{Diagnostic, DiagnosticCache, DiagnosticSeverity};
+use babel_lsp_core::symbol::{Location, Position};
 
 fn make_loc(uri: &str) -> Location {
     Location {

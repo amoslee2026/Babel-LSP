@@ -9,8 +9,8 @@
 
 use std::path::PathBuf;
 use tempfile::tempdir;
-use thanosLSP_cell::parser::{Cell, Port, PortDirection};
-use thanosLSP_cell::redb_store::CellStore;
+use babel_lsp_cell::parser::{Cell, Port, PortDirection};
+use babel_lsp_cell::redb_store::CellStore;
 
 /// 创建测试 Cell
 fn make_cell(name: &str) -> Cell {

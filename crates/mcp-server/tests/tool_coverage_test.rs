@@ -2,7 +2,7 @@
 //! 覆盖 integration_test.rs 未涵盖的 tool 方法
 
 use rmcp::handler::server::tool::Parameters;
-use thanosLSP_mcp::server::{
+use babel_lsp_mcp::server::{
     CreateFileParams, GetCompletionsParams, GetDefinitionParams, RenameSymbolParams,
     ReplaceLinesParams, SetLogLevelParams, ThanosMcpServer, UriParam,
 };
@@ -27,7 +27,7 @@ endmodule
 async fn test_get_completions_returns_json() {
     let s = make_server();
     let uri = "file:///tmp/compl.sv";
-    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(babel_lsp_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
     }))
@@ -51,7 +51,7 @@ async fn test_get_completions_returns_json() {
 async fn test_get_definition_returns_json() {
     let s = make_server();
     let uri = "file:///tmp/def.sv";
-    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(babel_lsp_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
     }))
@@ -71,7 +71,7 @@ async fn test_get_definition_returns_json() {
 async fn test_get_references_returns_json() {
     let s = make_server();
     let uri = "file:///tmp/refs.sv";
-    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(babel_lsp_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
     }))
@@ -90,7 +90,7 @@ async fn test_get_references_returns_json() {
 async fn test_get_hover_returns_response() {
     let s = make_server();
     let uri = "file:///tmp/hover.sv";
-    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(babel_lsp_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
     }))
@@ -109,7 +109,7 @@ async fn test_get_hover_returns_response() {
 async fn test_rename_symbol_modifies_content() {
     let s = make_server();
     let uri = "file:///tmp/rename.sv";
-    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(babel_lsp_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
     }))
@@ -139,7 +139,7 @@ async fn test_rename_symbol_modifies_content() {
 async fn test_replace_lines_modifies_content() {
     let s = make_server();
     let uri = "file:///tmp/replace_lines.sv";
-    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(babel_lsp_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
     }))
@@ -216,7 +216,7 @@ async fn test_set_log_level_restores_info() {
 async fn test_format_file_sv_returns_response() {
     let s = make_server();
     let uri = "file:///tmp/format_test.sv";
-    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(babel_lsp_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: SIMPLE_SV.to_string(),
     }))
@@ -259,7 +259,7 @@ begin
     carry <= a and b;
 end architecture;
 "#;
-    s.open_file(Parameters(thanosLSP_mcp::server::OpenFileParams {
+    s.open_file(Parameters(babel_lsp_mcp::server::OpenFileParams {
         uri: uri.to_string(),
         content: vhdl_content.to_string(),
     }))

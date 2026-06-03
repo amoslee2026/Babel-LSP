@@ -13,7 +13,7 @@ proptest! {
     #[test]
     fn test_filelist_source_file_preserved(filename in valid_filename()) {
         let content = format!("{}\n", filename);
-        let parser = thanosLSP_filelist::cadence::CadenceParser::default();
+        let parser = babel_lsp_filelist::cadence::CadenceParser::default();
         let result = parser.parse(&content);
 
         // 有效文件名应该被解析到 source_files 中

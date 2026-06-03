@@ -1,7 +1,7 @@
 //! filelist-parser types/cadence coverage 补充测试 (Phase 8 Round 3)
 
-use thanosLSP_filelist::cadence::CadenceParser;
-use thanosLSP_filelist::types::{FilelistResult, ParseOptions, ParseWarning};
+use babel_lsp_filelist::cadence::CadenceParser;
+use babel_lsp_filelist::types::{FilelistResult, ParseOptions, ParseWarning};
 use std::path::PathBuf;
 
 // ============================================================
@@ -234,7 +234,7 @@ fn test_synopsys_define_with_value() {
 #[test]
 fn test_env_expand_in_path() {
     // 测试环境变量展开
-    use thanosLSP_filelist::env_expand::expand_with_warnings;
+    use babel_lsp_filelist::env_expand::expand_with_warnings;
     std::env::set_var("TEST_VAR", "/test/path");
     let (expanded, warnings) = expand_with_warnings("$TEST_VAR/file.v");
     assert!(expanded.contains("test") || expanded.contains("file.v"));

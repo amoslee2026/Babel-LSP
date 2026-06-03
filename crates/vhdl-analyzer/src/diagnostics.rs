@@ -2,7 +2,7 @@
 //!
 //! 基于文本的结构性诊断，不依赖外部工具。
 
-use thanosLSP_core::{
+use babel_lsp_core::{
     diagnostic::Diagnostic,
     symbol::{Location, Position},
 };
@@ -189,7 +189,7 @@ impl Default for VhdlDiagnostics {
 mod tests {
     use super::*;
     use crate::parser::VhdlParser;
-    use thanosLSP_core::diagnostic::DiagnosticSeverity;
+    use babel_lsp_core::diagnostic::DiagnosticSeverity;
 
     const FILE_URI: &str = "file:///test.vhd";
 

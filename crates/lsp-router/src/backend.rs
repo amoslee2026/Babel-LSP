@@ -5,7 +5,7 @@
 use std::sync::Arc;
 
 use dashmap::DashMap;
-use thanosLSP_core::{diagnostic::Diagnostic, file_store::FileStore, symbol::Symbol};
+use babel_lsp_core::{diagnostic::Diagnostic, file_store::FileStore, symbol::Symbol};
 use tokio::sync::Mutex;
 use tower_lsp::lsp_types::*;
 use tower_lsp::{Client, LanguageServer, LspService, Server};
@@ -80,7 +80,7 @@ impl ThanosLspBackend {
 /// 基本符号提取（不依赖外部工具）
 pub fn extract_symbols_basic(uri: &Url, content: &str) -> Vec<Symbol> {
     use smol_str::SmolStr;
-    use thanosLSP_core::symbol::{Location, Position, SymbolKind};
+    use babel_lsp_core::symbol::{Location, Position, SymbolKind};
 
     let mut symbols = Vec::new();
     for (line_idx, line) in content.lines().enumerate() {
@@ -114,7 +114,7 @@ pub fn extract_symbols_basic(uri: &Url, content: &str) -> Vec<Symbol> {
 
 /// 将内部 Diagnostic 转换为 LSP Diagnostic
 pub fn convert_diagnostics(diags: &[Diagnostic]) -> Vec<tower_lsp::lsp_types::Diagnostic> {
-    use thanosLSP_core::diagnostic::DiagnosticSeverity as DS;
+    use babel_lsp_core::diagnostic::DiagnosticSeverity as DS;
     diags
         .iter()
         .map(|d| {
@@ -387,8 +387,8 @@ pub async fn run_stdio() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use thanosLSP_core::diagnostic::Diagnostic as CoreDiag;
-    use thanosLSP_core::symbol::{Location, Position};
+    use babel_lsp_core::diagnostic::Diagnostic as CoreDiag;
+    use babel_lsp_core::symbol::{Location, Position};
 
     #[test]
     fn test_extract_symbols_basic() {
@@ -481,7 +481,7 @@ mod tests {
 
     #[test]
     fn test_convert_diagnostics_all_severities() {
-        use thanosLSP_core::diagnostic::DiagnosticSeverity as CoreSeverity;
+        use babel_lsp_core::diagnostic::DiagnosticSeverity as CoreSeverity;
         let loc = Location {
             uri: "file:///test.sv".to_string(),
             start: Position::new(0, 0),
