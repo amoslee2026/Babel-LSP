@@ -41,7 +41,7 @@ crates/
 ├── cell-library/      # 标准单元库 gate-level model 解析索引
 ├── lsp-router/        # LSP 协议处理层（tower-lsp stdio）
 ├── mcp-server/        # MCP 协议处理层（rmcp SSE localhost）
-└── thanosLSP/         # 可执行入口，组装运行
+└── babel-lsp/         # 可执行入口，组装运行
 ```
 
 ## 快速开始
