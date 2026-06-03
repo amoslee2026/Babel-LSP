@@ -263,7 +263,7 @@ if 'babel-lsp' not in cfg.get('mcpServers', {}):
             log_warn "无法解析 ${cc_config}，手动添加如下配置:"
             echo ""
             echo "  \"mcpServers\": {"
-            echo "    \"thanosLSP\": {"
+            echo "    \"babel-lsp\": {"
             echo "      \"command\": \"${INSTALL_DIR}/Babel-LSP\","
             echo '      "args": ["mcp", "--config", "'"${PROJECT_ROOT}"'/Babel-LSP.json"]'
             echo "    }"
@@ -292,7 +292,7 @@ shutil.copy('$tmpfile', '$cc_config')
             log_warn "无法解析 ${cc_config}，手动添加如下配置:"
             echo ""
             echo "  \"mcpServers\": {"
-            echo "    \"thanosLSP\": {"
+            echo "    \"babel-lsp\": {"
             echo "      \"command\": \"${INSTALL_DIR}/Babel-LSP\","
             echo '      "args": ["mcp", "--config", "'"${PROJECT_ROOT}"'/Babel-LSP.json"]'
             echo "    }"
