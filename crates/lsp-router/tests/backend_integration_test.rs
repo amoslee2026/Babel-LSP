@@ -1,6 +1,6 @@
 //! LSP Backend 集成测试
 //!
-//! 测试 ThanosLspBackend 的辅助函数和内部逻辑
+//! 测试 BabelLspBackend 的辅助函数和内部逻辑
 
 use babel_lsp_lsp::backend::{extract_symbols_basic, convert_diagnostics};
 use tower_lsp::lsp_types::*;

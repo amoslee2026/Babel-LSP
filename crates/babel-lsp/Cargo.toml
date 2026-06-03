@@ -10,9 +10,9 @@ name = "Babel-LSP"
 path = "src/main.rs"
 
 [dependencies]
-thanosLSP-core = { workspace = true }
-thanosLSP-lsp = { workspace = true }
-thanosLSP-mcp = { workspace = true }
+babel-lsp-core = { workspace = true }
+babel-lsp-lsp = { workspace = true }
+babel-lsp-mcp = { workspace = true }
 tokio = { workspace = true }
 tracing = { workspace = true }
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }

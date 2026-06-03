@@ -5,18 +5,18 @@
 use std::sync::Arc;
 use tower::Service;
 use tower_lsp::{LspService, lsp_types::*};
-use babel_lsp_lsp::backend::ThanosLspBackend;
+use babel_lsp_lsp::backend::BabelLspBackend;
 
 /// LSP 测试客户端
 pub struct LspTestClient {
-    service: Arc<tokio::sync::Mutex<LspService<ThanosLspBackend>>>,
+    service: Arc<tokio::sync::Mutex<LspService<BabelLspBackend>>>,
     request_id: std::sync::atomic::AtomicI64,
 }
 
 impl LspTestClient {
     /// 创建新的测试客户端
     pub fn new() -> Self {
-        let (service, _socket) = LspService::new(ThanosLspBackend::new);
+        let (service, _socket) = LspService::new(BabelLspBackend::new);
         Self {
             service: Arc::new(tokio::sync::Mutex::new(service)),
             request_id: std::sync::atomic::AtomicI64::new(1),

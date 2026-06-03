@@ -4,11 +4,11 @@
 use rmcp::handler::server::tool::Parameters;
 use babel_lsp_mcp::server::{
     CreateFileParams, GetCompletionsParams, GetDefinitionParams, RenameSymbolParams,
-    ReplaceLinesParams, SetLogLevelParams, ThanosMcpServer, UriParam,
+    ReplaceLinesParams, SetLogLevelParams, BabelMcpServer, UriParam,
 };
 
-fn make_server() -> ThanosMcpServer {
-    ThanosMcpServer::new()
+fn make_server() -> BabelMcpServer {
+    BabelMcpServer::new()
 }
 
 const SIMPLE_SV: &str = r#"module counter(

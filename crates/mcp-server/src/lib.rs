@@ -4,4 +4,4 @@
 pub mod server;
 pub mod tools;
 
-pub use server::{run_stdio, ThanosMcpServer};
+pub use server::{run_stdio, BabelMcpServer};

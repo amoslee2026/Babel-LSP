@@ -6,7 +6,7 @@ edition.workspace = true
 rust-version.workspace = true
 
 [dependencies]
-thanosLSP-core = { workspace = true }
+babel-lsp-core = { workspace = true }
 redb = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }

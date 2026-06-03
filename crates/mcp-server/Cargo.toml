@@ -6,11 +6,11 @@ edition.workspace = true
 rust-version.workspace = true
 
 [dependencies]
-thanosLSP-core = { workspace = true }
-thanosLSP-sv = { workspace = true }
-thanosLSP-vhdl = { workspace = true }
-thanosLSP-tcl = { workspace = true }
-thanosLSP-lsp = { workspace = true }
+babel-lsp-core = { workspace = true }
+babel-lsp-sv = { workspace = true }
+babel-lsp-vhdl = { workspace = true }
+babel-lsp-tcl = { workspace = true }
+babel-lsp-lsp = { workspace = true }
 rmcp = { workspace = true }
 tokio = { workspace = true }
 serde = { workspace = true }

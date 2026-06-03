@@ -4,4 +4,4 @@
 pub mod backend;
 pub mod handlers;
 
-pub use backend::ThanosLspBackend;
+pub use backend::BabelLspBackend;

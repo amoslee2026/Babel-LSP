@@ -6,7 +6,7 @@
 //!
 //! 日志输出：
 //!   - 默认写入文件：.thanos/logs/babel-lsp.log（按日轮转）
-//!   - THANOS_LOG=debug 启用 debug 级别
+//!   - BABEL_LOG=debug 启用 debug 级别
 //!   - --no-log-file 禁用文件日志，输出到 stderr
 
 use anyhow::Result;
@@ -39,9 +39,9 @@ struct Cli {
 }
 
 impl Cli {
-    /// 解析日志级别，环境变量 THANOS_LOG 优先
+    /// 解析日志级别，环境变量 BABEL_LOG 优先
     fn resolve_log_level(&self) -> String {
-        std::env::var("THANOS_LOG")
+        std::env::var("BABEL_LOG")
             .or_else(|_| std::env::var("RUST_LOG"))
             .unwrap_or_else(|_| self.log_level.clone())
     }

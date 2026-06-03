@@ -182,12 +182,12 @@ fn is_sv_keyword(name: &str) -> bool {
 // ─── Server 实现 ─────────────────────────────────────────────────────────────
 
 /// babel-lsp MCP Server
-pub struct ThanosMcpServer {
+pub struct BabelMcpServer {
     state: Arc<tokio::sync::Mutex<MpcState>>,
     tool_router: rmcp::handler::server::router::tool::ToolRouter<Self>,
 }
 
-impl ThanosMcpServer {
+impl BabelMcpServer {
     pub fn new() -> Self {
         Self {
             state: Arc::new(tokio::sync::Mutex::new(MpcState::new())),
@@ -281,7 +281,7 @@ impl ThanosMcpServer {
     }
 }
 
-impl Default for ThanosMcpServer {
+impl Default for BabelMcpServer {
     fn default() -> Self {
         Self::new()
     }
@@ -290,7 +290,7 @@ impl Default for ThanosMcpServer {
 // ─── Tool 方法 ───────────────────────────────────────────────────────────────
 
 #[tool_router]
-impl ThanosMcpServer {
+impl BabelMcpServer {
     /// 打开文件并加入 file store
     #[tool(description = "Open a file and load it into the language server's file store")]
     pub async fn open_file(
@@ -1132,7 +1132,7 @@ impl ThanosMcpServer {
 // ─── ServerHandler ───────────────────────────────────────────────────────────
 
 #[tool_handler]
-impl ServerHandler for ThanosMcpServer {
+impl ServerHandler for BabelMcpServer {
     fn get_info(&self) -> ServerInfo {
         ServerInfo {
             instructions: Some(
@@ -1151,7 +1151,7 @@ impl ServerHandler for ThanosMcpServer {
 
 /// 启动 MCP 服务（stdio 模式）
 pub async fn run_stdio() -> anyhow::Result<()> {
-    let server = ThanosMcpServer::new();
+    let server = BabelMcpServer::new();
     let transport = (tokio::io::stdin(), tokio::io::stdout());
     // 使用 tokio::spawn 隔离 panic（如收到 invalid JSON 时 rmcp 内部 panic 不会终止进程）
     let handle = tokio::spawn(async move {
@@ -1232,7 +1232,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_open_and_read_file() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         let result = server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.sv".to_string(),
@@ -1251,7 +1251,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_close_file() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.sv".to_string(),
@@ -1273,7 +1273,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_symbols() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.sv".to_string(),
@@ -1290,7 +1290,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_check_synthesizability() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///rtl.sv".to_string(),
@@ -1310,7 +1310,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_replace_content() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.sv".to_string(),
@@ -1335,7 +1335,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_search_for_pattern() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.sv".to_string(),
@@ -1353,7 +1353,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_project_memory() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///a.sv".to_string(),
@@ -1494,11 +1494,11 @@ mod tests {
     fn test_language_from_uri_sv_extensions() {
         use babel_lsp_core::document::Language;
         assert_eq!(
-            ThanosMcpServer::language_from_uri("file:///a.sv"),
+            BabelMcpServer::language_from_uri("file:///a.sv"),
             Language::SystemVerilog
         );
         assert_eq!(
-            ThanosMcpServer::language_from_uri("file:///a.svh"),
+            BabelMcpServer::language_from_uri("file:///a.svh"),
             Language::SystemVerilog
         );
     }
@@ -1507,11 +1507,11 @@ mod tests {
     fn test_language_from_uri_verilog_extensions() {
         use babel_lsp_core::document::Language;
         assert_eq!(
-            ThanosMcpServer::language_from_uri("file:///a.v"),
+            BabelMcpServer::language_from_uri("file:///a.v"),
             Language::Verilog
         );
         assert_eq!(
-            ThanosMcpServer::language_from_uri("file:///a.vh"),
+            BabelMcpServer::language_from_uri("file:///a.vh"),
             Language::Verilog
         );
     }
@@ -1520,11 +1520,11 @@ mod tests {
     fn test_language_from_uri_vhdl_extensions() {
         use babel_lsp_core::document::Language;
         assert_eq!(
-            ThanosMcpServer::language_from_uri("file:///a.vhd"),
+            BabelMcpServer::language_from_uri("file:///a.vhd"),
             Language::VHDL
         );
         assert_eq!(
-            ThanosMcpServer::language_from_uri("file:///a.vhdl"),
+            BabelMcpServer::language_from_uri("file:///a.vhdl"),
             Language::VHDL
         );
     }
@@ -1533,11 +1533,11 @@ mod tests {
     fn test_language_from_uri_tcl_extensions() {
         use babel_lsp_core::document::Language;
         assert_eq!(
-            ThanosMcpServer::language_from_uri("file:///a.tcl"),
+            BabelMcpServer::language_from_uri("file:///a.tcl"),
             Language::TCL
         );
         assert_eq!(
-            ThanosMcpServer::language_from_uri("file:///a.xdc"),
+            BabelMcpServer::language_from_uri("file:///a.xdc"),
             Language::TCL
         );
     }
@@ -1546,18 +1546,18 @@ mod tests {
     fn test_language_from_uri_unknown_defaults_to_sv() {
         use babel_lsp_core::document::Language;
         assert_eq!(
-            ThanosMcpServer::language_from_uri("file:///a.txt"),
+            BabelMcpServer::language_from_uri("file:///a.txt"),
             Language::SystemVerilog
         );
         assert_eq!(
-            ThanosMcpServer::language_from_uri("file:///no_ext"),
+            BabelMcpServer::language_from_uri("file:///no_ext"),
             Language::SystemVerilog
         );
     }
 
     #[test]
     fn test_extract_symbols_single_module() {
-        let syms = ThanosMcpServer::extract_symbols(
+        let syms = BabelMcpServer::extract_symbols(
             "file:///t.sv",
             "module counter;\nendmodule",
         );
@@ -1568,7 +1568,7 @@ mod tests {
     #[test]
     fn test_extract_symbols_multiple_modules() {
         let content = "module foo;\nendmodule\nmodule bar;\nendmodule";
-        let syms = ThanosMcpServer::extract_symbols("file:///t.sv", content);
+        let syms = BabelMcpServer::extract_symbols("file:///t.sv", content);
         assert_eq!(syms.len(), 2);
         let names: Vec<&str> = syms.iter().map(|s| s.name.as_str()).collect();
         assert!(names.contains(&"foo"));
@@ -1578,7 +1578,7 @@ mod tests {
     #[test]
     fn test_extract_symbols_no_modules_returns_empty() {
         let syms =
-            ThanosMcpServer::extract_symbols("file:///t.sv", "// comment\nwire clk;");
+            BabelMcpServer::extract_symbols("file:///t.sv", "// comment\nwire clk;");
         assert_eq!(syms.len(), 0);
     }
 
@@ -1586,14 +1586,14 @@ mod tests {
     fn test_extract_symbols_module_with_port_list() {
         let content =
             "module adder(\n  input logic a,\n  output logic b\n);\nendmodule";
-        let syms = ThanosMcpServer::extract_symbols("file:///t.sv", content);
+        let syms = BabelMcpServer::extract_symbols("file:///t.sv", content);
         assert_eq!(syms.len(), 1);
         assert_eq!(syms[0].name.as_str(), "adder");
     }
 
     #[test]
     fn test_diags_to_json_empty_list() {
-        let json = ThanosMcpServer::diags_to_json(&[]);
+        let json = BabelMcpServer::diags_to_json(&[]);
         let v: serde_json::Value = serde_json::from_str(&json).unwrap();
         assert!(v.is_array());
         assert_eq!(v.as_array().unwrap().len(), 0);
@@ -1611,7 +1611,7 @@ mod tests {
             end: Position::new(0, 5),
         };
         let d = Diagnostic::error(loc, "syntax error".to_string());
-        let json = ThanosMcpServer::diags_to_json(&[d]);
+        let json = BabelMcpServer::diags_to_json(&[d]);
         let v: serde_json::Value = serde_json::from_str(&json).unwrap();
         let arr = v.as_array().unwrap();
         assert_eq!(arr.len(), 1);
@@ -1631,7 +1631,7 @@ mod tests {
             end: Position::new(2, 10),
         };
         let d = Diagnostic::warning(loc, "unused variable".to_string());
-        let json = ThanosMcpServer::diags_to_json(&[d]);
+        let json = BabelMcpServer::diags_to_json(&[d]);
         let v: serde_json::Value = serde_json::from_str(&json).unwrap();
         let arr = v.as_array().unwrap();
         assert_eq!(arr.len(), 1);
@@ -1643,7 +1643,7 @@ mod tests {
 
     #[test]
     fn test_symbols_to_json_empty_list() {
-        let json = ThanosMcpServer::symbols_to_json(&[]);
+        let json = BabelMcpServer::symbols_to_json(&[]);
         let v: serde_json::Value = serde_json::from_str(&json).unwrap();
         assert!(v.is_array() && v.as_array().unwrap().is_empty());
     }
@@ -1658,7 +1658,7 @@ mod tests {
             end: Position::new(0, 15),
         };
         let s = Symbol::new(SmolStr::new("my_mod"), SymbolKind::Module, loc);
-        let json = ThanosMcpServer::symbols_to_json(&[s]);
+        let json = BabelMcpServer::symbols_to_json(&[s]);
         let v: serde_json::Value = serde_json::from_str(&json).unwrap();
         let arr = v.as_array().unwrap();
         assert_eq!(arr.len(), 1);
@@ -1669,7 +1669,7 @@ mod tests {
 
     #[test]
     fn test_build_symbol_hierarchy_empty() {
-        let h = ThanosMcpServer::build_symbol_hierarchy(vec![]);
+        let h = BabelMcpServer::build_symbol_hierarchy(vec![]);
         assert!(h.is_empty());
     }
 
@@ -1690,7 +1690,7 @@ mod tests {
             mk("clk", SymbolKind::Port, 1),
             mk("rst", SymbolKind::Port, 2),
         ];
-        let h = ThanosMcpServer::build_symbol_hierarchy(syms);
+        let h = BabelMcpServer::build_symbol_hierarchy(syms);
         assert!(!h.is_empty());
         let has_top = h.iter().any(|n| n["name"] == "top");
         assert!(has_top, "hierarchy should contain 'top' module: {h:?}");
@@ -1700,7 +1700,7 @@ mod tests {
     fn test_parse_module_instances_detects_instance() {
         let content = "module top;\n  sub_module u1(.clk(clk));\nendmodule";
         let insts =
-            ThanosMcpServer::parse_module_instances(content, "f.sv");
+            BabelMcpServer::parse_module_instances(content, "f.sv");
         let found = insts
             .iter()
             .any(|i| i.module_name == "sub_module" && i.instance_name == "u1");
@@ -1712,7 +1712,7 @@ mod tests {
         // Names that are SV keywords should be filtered from results
         let content = "always begin\n  if (x) y <= 1;\nend";
         let insts =
-            ThanosMcpServer::parse_module_instances(content, "f.sv");
+            BabelMcpServer::parse_module_instances(content, "f.sv");
         let bad = insts
             .iter()
             .any(|i| is_sv_keyword(&i.module_name) || is_sv_keyword(&i.instance_name));
@@ -1723,7 +1723,7 @@ mod tests {
     fn test_parse_module_instances_empty_for_leaf_module() {
         let content = "module leaf;\n  wire clk;\nendmodule";
         let insts =
-            ThanosMcpServer::parse_module_instances(content, "f.sv");
+            BabelMcpServer::parse_module_instances(content, "f.sv");
         assert!(insts.is_empty(), "no instantiations in leaf module");
     }
 
@@ -1743,7 +1743,7 @@ mod tests {
                 line: 6,
             },
         ];
-        let h = ThanosMcpServer::build_instance_hierarchy(insts);
+        let h = BabelMcpServer::build_instance_hierarchy(insts);
         assert_eq!(h.len(), 2);
         assert_eq!(h[0]["module"], "sub_a");
         assert_eq!(h[0]["instance"], "u_a");
@@ -1754,7 +1754,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_references_exact_count_with_word_boundary() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///t.sv".to_string(),
@@ -1778,7 +1778,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_hover_non_empty_for_module_name() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///hover_mod.sv".to_string(),
@@ -1800,7 +1800,7 @@ mod tests {
     async fn test_get_hover_returns_non_empty_response() {
         // word_at_position backtracks from non-ident chars to find adjacent identifiers,
         // so any position near text will return hover info. Just verify no panic.
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///hover_null.sv".to_string(),
@@ -1819,7 +1819,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_search_symbols_query_filters_results() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///ss.sv".to_string(),
@@ -1847,7 +1847,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_search_symbols_uri_filter_excludes_other_file() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///fa.sv".to_string(),
@@ -1878,7 +1878,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_set_log_level_invalid_returns_error() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         let result = server
             .set_log_level(Parameters(SetLogLevelParams {
                 level: "invalid_level_xyz".to_string(),
@@ -1892,7 +1892,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_replace_lines_out_of_bounds_does_not_panic() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///rl_bounds.sv".to_string(),
@@ -1913,7 +1913,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_rename_symbol_respects_word_boundary() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///rename_wb.sv".to_string(),
@@ -1941,7 +1941,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_replace_content_not_found_returns_error() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///rc_notfound.sv".to_string(),
@@ -1963,7 +1963,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_list_open_files_language_detection() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///lang.sv".to_string(),
@@ -1997,7 +1997,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_search_for_pattern_invalid_regex_returns_error() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///re_test.sv".to_string(),
@@ -2018,7 +2018,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_search_for_pattern_global_finds_all_open_files() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///ga.sv".to_string(),
@@ -2046,7 +2046,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_file_outline_sv_returns_json_array() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///outline.sv".to_string(),
@@ -2068,7 +2068,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_module_hierarchy_returns_json_array() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///hier.sv".to_string(),
@@ -2091,7 +2091,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_module_hierarchy_empty_for_leaf_module() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///leaf.sv".to_string(),
@@ -2112,7 +2112,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_file_outline_invalid_uri_returns_error() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         let result = server
             .get_file_outline(Parameters(UriParam {
                 uri: "!!!not_a_uri".to_string(),
@@ -2123,7 +2123,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_module_hierarchy_invalid_uri_returns_error() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         let result = server
             .get_module_hierarchy(Parameters(UriParam {
                 uri: "!!!not_a_uri".to_string(),
@@ -2134,7 +2134,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_module_hierarchy_not_open_returns_error() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         let result = server
             .get_module_hierarchy(Parameters(UriParam {
                 uri: "file:///never_opened.sv".to_string(),
@@ -2145,7 +2145,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_get_file_outline_unsupported_type_returns_error() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         server
             .open_file(Parameters(OpenFileParams {
                 uri: "file:///test.tcl".to_string(),
@@ -2167,7 +2167,7 @@ mod tests {
     async fn test_check_synthesizability_not_open_returns_clean() {
         // When file is not open, content is empty → checker finds no issues
         // (no error, just "no synthesizability issues found")
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         let result = server
             .check_synthesizability(Parameters(UriParam {
                 uri: "file:///not_opened.sv".to_string(),
@@ -2183,7 +2183,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_update_file_response_is_non_empty() {
-        let server = ThanosMcpServer::new();
+        let server = BabelMcpServer::new();
         // update_file on a file that was never opened
         let result = server
             .update_file(Parameters(UpdateFileParams {

@@ -5,11 +5,11 @@
 use rmcp::handler::server::tool::Parameters;
 use babel_lsp_mcp::server::{
     OpenFileParams, ReplaceContentParams, SearchPatternParams, SearchSymbolsParams,
-    ThanosMcpServer, UpdateFileParams, UriParam,
+    BabelMcpServer, UpdateFileParams, UriParam,
 };
 
-fn sv_test_server() -> ThanosMcpServer {
-    ThanosMcpServer::new()
+fn sv_test_server() -> BabelMcpServer {
+    BabelMcpServer::new()
 }
 
 const SIMPLE_SV: &str = r#"

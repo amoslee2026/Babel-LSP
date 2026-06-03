@@ -5,7 +5,7 @@
 
 use rmcp::handler::server::tool::Parameters;
 use std::time::Instant;
-use babel_lsp_mcp::server::{OpenFileParams, SearchSymbolsParams, ThanosMcpServer};
+use babel_lsp_mcp::server::{OpenFileParams, SearchSymbolsParams, BabelMcpServer};
 
 fn make_large_sv(module_count: usize) -> String {
     let mut buf = String::new();
@@ -20,7 +20,7 @@ fn make_large_sv(module_count: usize) -> String {
 /// MCP open_file + search_symbols 响应时间 < 100ms (已缓存)
 #[tokio::test]
 async fn perf_mcp_tool_response_under_100ms() {
-    let server = ThanosMcpServer::new();
+    let server = BabelMcpServer::new();
     let uri = "file:///perf_test.sv";
     let content = make_large_sv(20); // 20 modules
 
@@ -62,7 +62,7 @@ async fn perf_mcp_tool_response_under_100ms() {
 /// open_file 延迟（不含 slang 诊断，仅解析 + 索引）< 200ms
 #[tokio::test]
 async fn perf_open_file_latency_under_200ms() {
-    let server = ThanosMcpServer::new();
+    let server = BabelMcpServer::new();
     let content = make_large_sv(10); // ~10 modules, ~100 lines
 
     let start = Instant::now();

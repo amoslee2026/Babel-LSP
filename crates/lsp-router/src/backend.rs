@@ -43,12 +43,12 @@ impl SharedState {
 }
 
 /// babel-lsp LSP Backend
-pub struct ThanosLspBackend {
+pub struct BabelLspBackend {
     client: Client,
     state: Arc<Mutex<SharedState>>,
 }
 
-impl ThanosLspBackend {
+impl BabelLspBackend {
     pub fn new(client: Client) -> Self {
         Self {
             client,
@@ -146,7 +146,7 @@ pub fn convert_diagnostics(diags: &[Diagnostic]) -> Vec<tower_lsp::lsp_types::Di
 }
 
 #[tower_lsp::async_trait]
-impl LanguageServer for ThanosLspBackend {
+impl LanguageServer for BabelLspBackend {
     async fn initialize(
         &self,
         _params: InitializeParams,
@@ -380,7 +380,7 @@ pub async fn run_stdio() {
     let stdin = tokio::io::stdin();
     let stdout = tokio::io::stdout();
 
-    let (service, socket) = LspService::new(ThanosLspBackend::new);
+    let (service, socket) = LspService::new(BabelLspBackend::new);
     Server::new(stdin, stdout, socket).serve(service).await;
 }
 
@@ -550,7 +550,7 @@ mod tests {
         // but we can at least verify the new function compiles correctly
         // by checking the struct size
         use std::mem::size_of;
-        let backend_size = size_of::<ThanosLspBackend>();
+        let backend_size = size_of::<BabelLspBackend>();
         assert!(backend_size > 0);
     }
 }
