@@ -162,11 +162,11 @@ impl LanguageServer for ThanosLspBackend {
     }
 
     async fn initialized(&self, _: InitializedParams) {
-        info!("thanosLSP initialized");
+        info!("babel-lsp initialized");
     }
 
     async fn shutdown(&self) -> tower_lsp::jsonrpc::Result<()> {
-        info!("thanosLSP shutting down");
+        info!("babel-lsp shutting down");
         Ok(())
     }
 

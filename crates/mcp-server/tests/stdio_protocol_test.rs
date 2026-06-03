@@ -1,6 +1,6 @@
 //! Binary-level MCP stdio 协议集成测试
 //!
-//! 启动真实 thanosLSP binary（--mcp 模式），通过 stdin/stdout 发送/接收
+//! 启动真实 babel-lsp binary（--mcp 模式），通过 stdin/stdout 发送/接收
 //! JSON-RPC 2.0 消息，验证协议合规性和 Bug 回归。
 //!
 //! MCP 握手流程：
@@ -14,7 +14,7 @@ use std::process::{Command, Stdio};
 
 // ─── helper: binary path ───────────────────────────────────────────────────
 
-/// 定位 thanosLSP binary。优先 debug，其次 release。
+/// 定位 babel-lsp binary。优先 debug，其次 release。
 fn binary_path() -> PathBuf {
     let manifest = std::env::var("CARGO_MANIFEST_DIR")
         .expect("CARGO_MANIFEST_DIR not set");
@@ -23,11 +23,11 @@ fn binary_path() -> PathBuf {
         .parent().unwrap() // project root
         .to_path_buf();
 
-    let debug = root.join("target/debug/thanosLSP");
+    let debug = root.join("target/debug/babel-lsp");
     if debug.exists() {
         return debug;
     }
-    let release = root.join("target/release/thanosLSP");
+    let release = root.join("target/release/babel-lsp");
     if release.exists() {
         return release;
     }
@@ -79,7 +79,7 @@ fn test_mcp_binary_exists() {
     let path = binary_path();
     assert!(
         path.exists(),
-        "thanosLSP binary not found at {path:?}. Run `cargo build` first."
+        "babel-lsp binary not found at {path:?}. Run `cargo build` first."
     );
 }
 

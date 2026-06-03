@@ -1,8 +1,8 @@
-//! thanosLSP 主入口
+//! babel-lsp 主入口
 //!
 //! 根据命令行参数选择运行模式：
-//!   thanosLSP           — LSP stdio 模式（默认，供编辑器使用）
-//!   thanosLSP --mcp     — MCP stdio 模式（供 Claude Code 使用）
+//!   babel-lsp           — LSP stdio 模式（默认，供编辑器使用）
+//!   babel-lsp --mcp     — MCP stdio 模式（供 Claude Code 使用）
 //!
 //! 日志输出：
 //!   - 默认写入文件：.thanos/logs/babel-lsp.log（按日轮转）
