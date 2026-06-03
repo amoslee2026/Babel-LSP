@@ -58,7 +58,7 @@ impl Cli {
         }
 
         // 默认：当前目录下的 .babel/logs/
-        let default_dir = PathBuf::from(".thanos/logs");
+        let default_dir = PathBuf::from(".babel/logs");
         if let Err(e) = std::fs::create_dir_all(&default_dir) {
             eprintln!("无法创建日志目录 {:?}: {}", default_dir, e);
             return None;
