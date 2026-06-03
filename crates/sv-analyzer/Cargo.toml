@@ -1,5 +1,5 @@
 [package]
-name = "thanosLSP-sv"
+name = "babel-lsp-sv"
 description = "SystemVerilog/Verilog 语言分析器（slang 驱动）"
 version.workspace = true
 edition.workspace = true

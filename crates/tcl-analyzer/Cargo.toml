@@ -1,5 +1,5 @@
 [package]
-name = "thanosLSP-tcl"
+name = "babel-lsp-tcl"
 description = "TCL 语言分析器（tree-sitter + EDA 命令补全）"
 version.workspace = true
 edition.workspace = true

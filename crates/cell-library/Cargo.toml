@@ -1,5 +1,5 @@
 [package]
-name = "thanosLSP-cell"
+name = "babel-lsp-cell"
 description = "标准单元库 Verilog gate-level model 解析索引"
 version.workspace = true
 edition.workspace = true

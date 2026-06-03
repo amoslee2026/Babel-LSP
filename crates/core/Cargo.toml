@@ -1,5 +1,5 @@
 [package]
-name = "thanosLSP-core"
+name = "babel-lsp-core"
 description = "核心共享层：配置、文档状态、符号类型、诊断、文件存储、项目索引"
 version.workspace = true
 edition.workspace = true

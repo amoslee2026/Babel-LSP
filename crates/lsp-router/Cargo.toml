@@ -1,5 +1,5 @@
 [package]
-name = "thanosLSP-lsp"
+name = "babel-lsp-lsp"
 description = "LSP 协议处理层（tower-lsp）"
 version.workspace = true
 edition.workspace = true

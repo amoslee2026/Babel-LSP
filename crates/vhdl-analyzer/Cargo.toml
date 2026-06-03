@@ -1,5 +1,5 @@
 [package]
-name = "thanosLSP-vhdl"
+name = "babel-lsp-vhdl"
 description = "VHDL 语言分析器（基于 vhdl_lang）"
 version.workspace = true
 edition.workspace = true

@@ -1,5 +1,5 @@
 [package]
-name = "thanosLSP-filelist"
+name = "babel-lsp-filelist"
 description = "Synopsys .f / Cadence filelist 解析器"
 version.workspace = true
 edition.workspace = true

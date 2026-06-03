@@ -9,7 +9,7 @@ members = [
     "crates/cell-library",
     "crates/lsp-router",
     "crates/mcp-server",
-    "crates/thanosLSP",
+    "crates/babel-lsp",
 ]
 
 [workspace.package]
@@ -19,14 +19,14 @@ rust-version = "1.80"
 
 [workspace.dependencies]
 # internal crates
-thanosLSP-core = { path = "crates/core" }
-thanosLSP-sv = { path = "crates/sv-analyzer" }
-thanosLSP-vhdl = { path = "crates/vhdl-analyzer" }
-thanosLSP-tcl = { path = "crates/tcl-analyzer" }
-thanosLSP-filelist = { path = "crates/filelist-parser" }
-thanosLSP-cell = { path = "crates/cell-library" }
-thanosLSP-lsp = { path = "crates/lsp-router" }
-thanosLSP-mcp = { path = "crates/mcp-server" }
+babel-lsp-core = { path = "crates/core" }
+babel-lsp-sv = { path = "crates/sv-analyzer" }
+babel-lsp-vhdl = { path = "crates/vhdl-analyzer" }
+babel-lsp-tcl = { path = "crates/tcl-analyzer" }
+babel-lsp-filelist = { path = "crates/filelist-parser" }
+babel-lsp-cell = { path = "crates/cell-library" }
+babel-lsp-lsp = { path = "crates/lsp-router" }
+babel-lsp-mcp = { path = "crates/mcp-server" }
 
 # external crates — versions locked per spec re-review RR-01/02/03
 serde = { version = "1", features = ["derive"] }

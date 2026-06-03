@@ -1,5 +1,5 @@
 [package]
-name = "thanosLSP-mcp"
+name = "babel-lsp-mcp"
 description = "MCP 协议处理层（rmcp SSE）"
 version.workspace = true
 edition.workspace = true

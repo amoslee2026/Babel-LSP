@@ -1,5 +1,5 @@
 [package]
-name = "thanosLSP"
+name = "babel-lsp"
 description = "HDL Language Server (VHDL/SV/TCL) — dual LSP + MCP"
 version.workspace = true
 edition.workspace = true
