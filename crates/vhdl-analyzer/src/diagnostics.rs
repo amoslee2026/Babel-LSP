@@ -59,7 +59,7 @@ impl VhdlDiagnostics {
                             ),
                         )
                         .with_code("VHD-E-001".to_string())
-                        .with_source("thanosLSP-vhdl".to_string()),
+                        .with_source("babel-lsp-vhdl".to_string()),
                     );
                 }
             }
@@ -96,7 +96,7 @@ impl VhdlDiagnostics {
                             ),
                         )
                         .with_code("VHD-W-002".to_string())
-                        .with_source("thanosLSP-vhdl".to_string()),
+                        .with_source("babel-lsp-vhdl".to_string()),
                     );
                 }
             }
@@ -137,7 +137,7 @@ impl VhdlDiagnostics {
                             ),
                         )
                         .with_code("VHD-W-001".to_string())
-                        .with_source("thanosLSP-vhdl".to_string()),
+                        .with_source("babel-lsp-vhdl".to_string()),
                     );
                 }
             }
@@ -168,7 +168,7 @@ impl VhdlDiagnostics {
                         ),
                     )
                     .with_code("VHD-W-003".to_string())
-                    .with_source("thanosLSP-vhdl".to_string()),
+                    .with_source("babel-lsp-vhdl".to_string()),
                 );
             }
         }

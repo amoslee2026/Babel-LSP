@@ -93,10 +93,10 @@ async fn main() -> Result<()> {
     init_logging(&logging_config)?;
 
     if cli.mcp {
-        tracing::info!("thanosLSP starting in MCP mode");
+        tracing::info!("babel-lsp starting in MCP mode");
         babel_lsp_mcp::run_stdio().await?;
     } else {
-        tracing::info!("thanosLSP starting in LSP stdio mode");
+        tracing::info!("babel-lsp starting in LSP stdio mode");
         babel_lsp_lsp::backend::run_stdio().await;
     }
 

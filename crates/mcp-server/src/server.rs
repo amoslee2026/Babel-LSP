@@ -1,4 +1,4 @@
-//! thanosLSP MCP Server 核心实现
+//! babel-lsp MCP Server 核心实现
 //!
 //! 使用 rmcp crate 实现 Model Context Protocol server，
 //! 通过 stdio 或 SSE 与 Claude Code 通信。
@@ -181,7 +181,7 @@ fn is_sv_keyword(name: &str) -> bool {
 
 // ─── Server 实现 ─────────────────────────────────────────────────────────────
 
-/// thanosLSP MCP Server
+/// babel-lsp MCP Server
 pub struct ThanosMcpServer {
     state: Arc<tokio::sync::Mutex<MpcState>>,
     tool_router: rmcp::handler::server::router::tool::ToolRouter<Self>,
@@ -1136,7 +1136,7 @@ impl ServerHandler for ThanosMcpServer {
     fn get_info(&self) -> ServerInfo {
         ServerInfo {
             instructions: Some(
-                "thanosLSP: HDL Language Server (SV/VHDL/TCL). \
+                "babel-lsp: HDL Language Server (SV/VHDL/TCL). \
                  Provides diagnostics, symbols, completions, definitions, references, \
                  hover, formatting, and synthesizability checking for chip design workflows."
                     .into(),

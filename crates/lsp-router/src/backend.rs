@@ -42,7 +42,7 @@ impl SharedState {
     }
 }
 
-/// thanosLSP LSP Backend
+/// babel-lsp LSP Backend
 pub struct ThanosLspBackend {
     client: Client,
     state: Arc<Mutex<SharedState>>,
@@ -151,7 +151,7 @@ impl LanguageServer for ThanosLspBackend {
         &self,
         _params: InitializeParams,
     ) -> tower_lsp::jsonrpc::Result<InitializeResult> {
-        info!("thanosLSP initializing");
+        info!("babel-lsp initializing");
         Ok(InitializeResult {
             capabilities: build_server_capabilities(),
             server_info: Some(ServerInfo {
