@@ -117,7 +117,7 @@ build_project() {
     cd "$PROJECT_ROOT"
     cargo build --release
     mkdir -p "$INSTALL_DIR"
-    cp target/release/thanosLSP "$INSTALL_DIR/Babel-LSP"
+    cp target/release/babel-lsp "$INSTALL_DIR/Babel-LSP"
     log_info "二进制已安装到: ${INSTALL_DIR}/Babel-LSP"
 }
 
@@ -207,7 +207,7 @@ configure_mcp() {
     local mcp_entry
     mcp_entry=$(cat <<EOF
 {
-      "thanosLSP": {
+      "babel-lsp": {
         "command": "${INSTALL_DIR}/Babel-LSP",
         "args": ["mcp", "--config", "${PROJECT_ROOT}/Babel-LSP.json"]
       }
@@ -215,8 +215,8 @@ configure_mcp() {
 EOF
 )
 
-    if [ -f "$cc_config" ] && grep -q '"thanosLSP"' "$cc_config" 2>/dev/null; then
-        log_info "Claude Code MCP 已配置 thanosLSP，跳过"
+    if [ -f "$cc_config" ] && grep -q '"babel-lsp"' "$cc_config" 2>/dev/null; then
+        log_info "Claude Code MCP 已配置 babel-lsp，跳过"
         return
     fi
 
@@ -248,8 +248,8 @@ with open('$cc_config') as f:
 
 # simple merge: insert into mcpServers dict
 cfg = json.loads(content)
-if 'thanosLSP' not in cfg.get('mcpServers', {}):
-    cfg.setdefault('mcpServers', {})['thanosLSP'] = {
+if 'babel-lsp' not in cfg.get('mcpServers', {}):
+    cfg.setdefault('mcpServers', {})['babel-lsp'] = {
         'command': '${INSTALL_DIR}/Babel-LSP',
         'args': ['mcp', '--config', '${PROJECT_ROOT}/Babel-LSP.json']
     }
@@ -278,7 +278,7 @@ if 'thanosLSP' not in cfg.get('mcpServers', {}):
 import json
 with open('$cc_config') as f:
     cfg = json.load(f)
-cfg.setdefault('mcpServers', {})['thanosLSP'] = {
+cfg.setdefault('mcpServers', {})['babel-lsp'] = {
     'command': '${INSTALL_DIR}/Babel-LSP',
     'args': ['mcp', '--config', '${PROJECT_ROOT}/Babel-LSP.json']
 }
@@ -350,7 +350,7 @@ main() {
     echo "  Babel-LSP daemon --config ./Babel-LSP.json"
     echo "  Babel-LSP status"
     echo ""
-    log_info "Claude Code 重启后即可使用 MCP 工具（thanosLSP）"
+    log_info "Claude Code 重启后即可使用 MCP 工具（babel-lsp）"
 }
 
 main "$@"
