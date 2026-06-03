@@ -78,7 +78,7 @@ cargo build --release
 ```json
 {
   "mcpServers": {
-    "thanosLSP": {
+    "babel-lsp": {
       "command": "babel-lsp",
       "args": ["--mode", "mcp"]
     }
