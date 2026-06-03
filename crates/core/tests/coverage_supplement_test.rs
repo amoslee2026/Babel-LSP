@@ -130,7 +130,7 @@ fn test_config_from_file_valid_json() {
         "server": {"lsp_port": 6030, "mcp_port": 3000},
         "synth": {"enabled": true, "rules": ["all"]},
         "logging": {"level": "info", "file": null},
-        "memory": {"scan_interval_secs": 300, "persist_path": "/tmp/.thanos"}
+        "memory": {"scan_interval_secs": 300, "persist_path": "/tmp/.babel"}
     }"#;
 
     let path = PathBuf::from("/tmp/babel_lsp_test_config.json");

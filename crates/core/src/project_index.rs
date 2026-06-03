@@ -18,7 +18,7 @@ pub struct ProjectIndex {
 impl ProjectIndex {
     /// 创建项目索引
     pub fn new(root: PathBuf) -> anyhow::Result<Self> {
-        let db_path = root.join(".thanos").join("index.redb");
+        let db_path = root.join(".babel").join("index.redb");
         let db_parent = db_path
             .parent()
             .ok_or_else(|| anyhow::anyhow!("Invalid db path"))?;
@@ -191,7 +191,7 @@ mod tests {
 
         // 目录不存在时应该自动创建
         let index = ProjectIndex::new(root.clone()).unwrap();
-        assert!(root.join(".thanos").exists());
+        assert!(root.join(".babel").exists());
         let _ = index;
     }
 }

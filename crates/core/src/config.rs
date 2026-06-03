@@ -151,7 +151,7 @@ impl ProjectConfig {
             },
             memory: MemoryConfig {
                 scan_interval_secs: 300,
-                persist_path: root.join(".thanos"),
+                persist_path: root.join(".babel"),
             },
         })
     }

@@ -545,7 +545,7 @@ mod tests {
     }
 
     #[test]
-    fn test_thanos_lsp_backend_new() {
+    fn test_babel_lsp_backend_new() {
         // We can't easily create a Client without a full LSP setup,
         // but we can at least verify the new function compiles correctly
         // by checking the struct size

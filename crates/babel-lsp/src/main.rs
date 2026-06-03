@@ -5,7 +5,7 @@
 //!   babel-lsp --mcp     — MCP stdio 模式（供 Claude Code 使用）
 //!
 //! 日志输出：
-//!   - 默认写入文件：.thanos/logs/babel-lsp.log（按日轮转）
+//!   - 默认写入文件：.babel/logs/babel-lsp.log（按日轮转）
 //!   - BABEL_LOG=debug 启用 debug 级别
 //!   - --no-log-file 禁用文件日志，输出到 stderr
 
@@ -29,7 +29,7 @@ struct Cli {
     #[arg(long, default_value = "info")]
     log_level: String,
 
-    /// 日志文件目录（默认：.thanos/logs/）
+    /// 日志文件目录（默认：.babel/logs/）
     #[arg(long)]
     log_dir: Option<PathBuf>,
 
@@ -57,7 +57,7 @@ impl Cli {
             return Some(dir.clone());
         }
 
-        // 默认：当前目录下的 .thanos/logs/
+        // 默认：当前目录下的 .babel/logs/
         let default_dir = PathBuf::from(".thanos/logs");
         if let Err(e) = std::fs::create_dir_all(&default_dir) {
             eprintln!("无法创建日志目录 {:?}: {}", default_dir, e);
